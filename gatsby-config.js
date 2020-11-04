@@ -16,7 +16,9 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: `http://localhost:1337`,
+        apiURL: process.env.DEPLOY_URL
+          ? "https://negoscan-database.herokuapp.com"
+          : "http://localhost:1337",
         contentTypes: [`negosite`, `user`],
         queryLimit: 1000,
       },

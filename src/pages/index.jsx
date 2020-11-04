@@ -1,4 +1,5 @@
 import React from "react"
+import Reactmarkdown from "react-markdown"
 import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
 
@@ -18,7 +19,7 @@ const IndexPage = ({ data }) => (
           <h2>
             <Link to={`/${document.node.id}`}>{document.node.profiel}</Link>
           </h2>
-          <p>{document.node.biografie}</p>
+          <Reactmarkdown source={document.node.biografie} />
           <Img fixed={document.node.avatar.childImageSharp.fixed} />
         </li>
       ))}

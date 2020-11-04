@@ -1,7 +1,10 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import Reactmarkdown from "react-markdown"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
+
+import "../styles/global.scss"
 
 const NegositeTemplate = ({ data }) => (
   <Layout>
@@ -13,7 +16,11 @@ const NegositeTemplate = ({ data }) => (
       </Link>
     </p>
     <Img fluid={data.strapiNegosite.avatar.childImageSharp.fluid} />
-    <p>{data.strapiNegosite.biografie}</p>
+    <Reactmarkdown
+      source={data.strapiNegosite.biografie}
+      className="paginaIndex"
+      escapeHtml={false}
+    />
   </Layout>
 )
 

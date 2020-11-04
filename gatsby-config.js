@@ -20,9 +20,16 @@ module.exports = {
           ? "https://negoscan-database.herokuapp.com"
           : "http://localhost:1337",
         contentTypes: [`negosite`, `user`],
+        markdownImages: {
+          typesToParse: {
+            negosite: ["biografie"],
+          },
+        },
         queryLimit: 1000,
       },
     },
+    `gatsby-plugin-netlify`,
+    `gatsby-plugin-sass`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

@@ -53,32 +53,32 @@ exports.createPages = ({ actions, graphql }) => {
     })
   })
 
-  const getGebruiker = makeRequest(
-    graphql,
-    `
-    {
-      allStrapiUser {
-        edges {
-          node {
-            id
-          }
-        }
-      }
-    }
-    `
-  ).then(result => {
-    // Create pages for each user.
-    result.data.allStrapiUser.edges.forEach(({ node }) => {
-      createPage({
-        path: `/gebruiker/${node.id}`,
-        component: path.resolve(`src/templates/gebruiker.jsx`),
-        context: {
-          id: node.id,
-        },
-      })
-    })
-  })
+  // const getGebruiker = makeRequest(
+  //   graphql,
+  //   `
+  //   {
+  //     allStrapiUser {
+  //       edges {
+  //         node {
+  //           id
+  //         }
+  //       }
+  //     }
+  //   }
+  //   `
+  // ).then(result => {
+  //   // Create pages for each user.
+  //   result.data.allStrapiUser.edges.forEach(({ node }) => {
+  //     createPage({
+  //       path: `/gebruiker/${node.id}`,
+  //       component: path.resolve(`src/templates/gebruiker.jsx`),
+  //       context: {
+  //         id: node.id,
+  //       },
+  //     })
+  //   })
+  // }) , getGebruiker | hier beneden toevoegen bij Promise.all
 
   // Queries for articles and authors nodes to use in creating pages.
-  return Promise.all([getNegosites, getGebruiker])
+  return Promise.all([getNegosites])
 }

@@ -9,15 +9,6 @@ import ProfLayout from "../components/proflayout"
 import "../styles/global.scss"
 
 const NegositeTemplate = ({ data }) => {
-  // let attribute = document.getElementsByClassName("links")
-  // for (let i = 0; i < attribute.length; i++) {
-  //   let impDiv = attribute[i]
-  //   let value = impDiv.innerHTML.trim()
-  //   if (value === "" || value === "") {
-  //     impDiv.style.display = "none"
-  //   }
-  // }
-
   return (
     <ProfLayout>
       <Img
@@ -58,13 +49,13 @@ const NegositeTemplate = ({ data }) => {
         </p>
         <p className="links">{data.strapiNegosite.sociallinks.facebook}</p>
         <p className="links">{data.strapiNegosite.sociallinks.twitter}</p>
-
+        {/* 
         <p>
           by{" "}
-          <Link to={`/gebruiker/User_${data.strapiNegosite.medium.id}`}>
-            {data.strapiNegosite.medium.username}
+          <Link to={`/gebruiker/User_${data.strapiNegosite.website.id}`}>
+            {data.strapiNegosite.website.username}
           </Link>
-        </p>
+        </p> */}
       </div>
     </ProfLayout>
   )
@@ -97,7 +88,7 @@ export const query = graphql`
           }
         }
       }
-      medium {
+      website {
         id
         username
       }

@@ -28,6 +28,10 @@ module.exports = {
         queryLimit: 1000,
       },
     },
+    {
+      resolve: `gatsby-plugin-create-client-paths`,
+      options: { prefixes: [`/admin/*`] },
+    },
     `gatsby-plugin-netlify`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-sass`,

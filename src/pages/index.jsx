@@ -1,6 +1,8 @@
 import React from "react"
 import Reactmarkdown from "react-markdown"
 import { Link, graphql } from "gatsby"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 import Img from "gatsby-image"
 
 import Layout from "../components/layout"
@@ -10,6 +12,7 @@ import SEO from "../components/seo"
 const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
+    <FontAwesomeIcon icon="coffee" size="2x" color="#FFCC00" />
     <h1>Hi people</h1>
     <p>Welcome to your new Gatsby site.</p>
     <p>Now go build something great.</p>
@@ -27,7 +30,7 @@ const IndexPage = ({ data }) => (
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
       <Image />
     </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
+    <Link to="/admin/login/">Inloggen / Registreren</Link> <br />
     <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
   </Layout>
 )

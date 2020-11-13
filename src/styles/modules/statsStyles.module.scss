@@ -1,0 +1,21 @@
+@import "../customs/utilities";
+
+.stats {
+  padding-top: 100px;
+
+  &-heading {
+    max-width: 500px;
+    margin: auto !important;
+  }
+
+  .grid {
+    h3 {
+      font-size: 35px;
+    }
+
+    p {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+}

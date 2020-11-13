@@ -1,0 +1,26 @@
+@import "../customs/colors";
+@import "../customs/utilities";
+
+.navbar {
+  background-color: $primary-color;
+  height: 70px;
+  color: #fff;
+
+  ul {
+    display: flex;
+  }
+
+  a {
+    color: #fff;
+    padding: 10px;
+    margin: 0 5px;
+
+    &:hover {
+      border-bottom: 2px #fff solid;
+    }
+  }
+
+  .flex {
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,6 @@
+@import "../customs/colors";
+@import "../customs/utilities";
+
+.cloud .grid {
+  grid-template-columns: 4fr 3fr;
+}

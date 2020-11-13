@@ -1,0 +1,22 @@
+@import "../customs/utilities";
+
+.languages {
+  .flex {
+    flex-wrap: wrap;
+  }
+
+  .card {
+    text-align: center;
+    margin: 10px 10px 40px;
+    transition: transform 0.2s ease-in;
+
+    h4 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    &:hover {
+      transform: translateY(-15px);
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import Reactmarkdown from "react-markdown"
 import Img from "gatsby-image"
 

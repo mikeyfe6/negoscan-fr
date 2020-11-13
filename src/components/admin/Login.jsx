@@ -12,8 +12,6 @@ import servImage from "../../images/server.png"
 const ErrorMessage = ({ text }) => {
   return (
     <div className={loginStyles.logerror}>
-      <title>info icon</title>
-
       <span>{text}</span>
     </div>
   )
@@ -36,7 +34,7 @@ export default () => {
       setError(null)
       navigate("/admin/account")
     } catch {
-      setError("Errorr MF'er")
+      setError("Verkeerde invoer, probeer 't opnieuw")
     }
   }
 
@@ -60,7 +58,7 @@ export default () => {
 
       <form
         onSubmit={handleSubmit}
-        className={`${loginStyles.container} ${loginStyles.p5} ${loginStyles.negoform}`}
+        className={`${loginStyles.container} ${loginStyles.negoform}`}
       >
         <fieldset>
           <legend className={`${loginStyles.p1}`}>
@@ -74,7 +72,6 @@ export default () => {
                 type="text"
                 name="username"
                 id="username"
-                size="50"
                 className={loginStyles.negoinput}
               />
             </label>
@@ -87,7 +84,6 @@ export default () => {
                 type="password"
                 name="password"
                 id="password"
-                size="50"
                 className={loginStyles.negoinput}
               />
             </label>

@@ -6,13 +6,15 @@ label {
 }
 
 legend {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: bolder;
 }
 
 .negoform {
   display: table;
-  min-width: 30%;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  width: 30%;
 }
 
 .negoinput {
@@ -20,6 +22,7 @@ legend {
   margin-bottom: 1.25rem;
   border: none;
   border-bottom: solid 3px $light-color;
+  width: 100%;
 
   &:focus {
     outline: none;
@@ -33,7 +36,15 @@ fieldset {
 }
 
 .logerror {
-  background-color: red;
+  background-color: #ff0102;
+  font-weight: bold;
+  color: white;
+  padding: 0.3rem 0.7rem;
+  display: table;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 768px) {
@@ -43,6 +54,11 @@ fieldset {
     img {
       justify-self: center;
     }
+  }
+
+  .negoform {
+    display: table;
+    width: 100%;
   }
 }
 

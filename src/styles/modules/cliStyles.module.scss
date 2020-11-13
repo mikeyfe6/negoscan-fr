@@ -9,3 +9,15 @@
     grid-row: 1 / span 2;
   }
 }
+
+// --> MQ: Tablet !
+@media (max-width: 768px) {
+  .cli .grid > *:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+
+// --> MQ: Mobile !
+@media (max-width: 500px) {
+}

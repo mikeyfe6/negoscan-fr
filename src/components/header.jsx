@@ -14,10 +14,10 @@ const Header = ({ siteTitle }) => (
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/">Over ons</Link>
+            <Link to="/docs">Docs</Link>
           </li>
           <li>
-            <Link to="/">Login/Register</Link>
+            <Link to="/admin/login">Login / Register</Link>
           </li>
         </ul>
       </nav>

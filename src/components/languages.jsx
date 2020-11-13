@@ -19,7 +19,7 @@ const Languages = () => (
     <h2
       className={`${languagesStyles.md} ${languagesStyles.textCenter} ${languagesStyles.my2}`}
     >
-      Supported Languages
+      Join the club!
     </h2>
     <div className={`${languagesStyles.container} ${languagesStyles.flex}`}>
       <div className={languagesStyles.card}>

@@ -5,7 +5,7 @@ import footerStyles from "../styles/modules/footerStyles.module.scss"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-const Cloud = () => (
+const Footer = () => (
   <footer
     className={`${footerStyles.footer} ${footerStyles.bgDark} ${footerStyles.py5}`}
   >
@@ -22,10 +22,10 @@ const Cloud = () => (
             <Link to="/">Home</Link>{" "}
           </li>
           <li>
-            <Link to="/">Over</Link>{" "}
+            <Link to="/docs">Docs</Link>{" "}
           </li>
           <li>
-            <Link to="/">Inloggen/Registeren</Link>{" "}
+            <Link to="/admin/login">Inloggen/Registeren</Link>{" "}
           </li>
         </ul>
       </nav>
@@ -51,4 +51,4 @@ const Cloud = () => (
   </footer>
 )
 
-export default Cloud
+export default Footer

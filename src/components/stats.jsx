@@ -23,17 +23,19 @@ const Stats = () => (
         <div>
           <FontAwesomeIcon icon="coffee" size="3x" color="#72be72" />
           <h3>10,349,405</h3>
-          <p className={statsStyles.textSecondary}>Deploymentssss</p>
+          <p className={statsStyles.textSecondary}>Profielen</p>
         </div>
         <div>
           <FontAwesomeIcon icon="coffee" size="3x" color="#72be72" />
-          <h3>987 TB</h3>
-          <p className={statsStyles.textSecondary}>Pubished</p>
+          <h3>5 sec geleden...</h3>
+          <p className={statsStyles.textSecondary}>
+            Laatste profiel aangemaakt
+          </p>
         </div>
         <div>
           <FontAwesomeIcon icon="coffee" size="3x" color="#72be72" />
-          <h3>2,434,123</h3>
-          <p className={statsStyles.textSecondary}>Projects</p>
+          <h3>122,434,123</h3>
+          <p className={statsStyles.textSecondary}>Algemene paginahits</p>
         </div>
       </div>
     </div>

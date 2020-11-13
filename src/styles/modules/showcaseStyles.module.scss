@@ -60,3 +60,28 @@
     transform: skewY(-3deg);
   }
 }
+
+// --> MQ: Tablet !
+@media (max-width: 768px) {
+  .showcase {
+    height: auto;
+
+    &-text {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    &-form {
+      justify-self: center;
+      margin: auto;
+    }
+
+    p {
+      margin: 20px;
+    }
+  }
+}
+
+// --> MQ: Mobile !
+@media (max-width: 500px) {
+}

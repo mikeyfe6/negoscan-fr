@@ -5,9 +5,13 @@ import { navigate } from "@reach/router"
 import SEO from "../seo"
 import { setUser } from "../../services/auth"
 
+import loginStyles from "../../styles/modules/loginStyles.module.scss"
+
+import servImage from "../../images/server.png"
+
 const ErrorMessage = ({ text }) => {
   return (
-    <div>
+    <div className={loginStyles.logerror}>
       <title>info icon</title>
 
       <span>{text}</span>
@@ -37,45 +41,71 @@ export default () => {
   }
 
   return (
-    <main>
+    <div>
       <SEO title="Login" />
-      {error && <ErrorMessage text={error} />}
-      <form onSubmit={handleSubmit}>
-        <fieldset>
-          <legend>Loginsysteem</legend>
+      <section
+        className={`${loginStyles.docsHead} ${loginStyles.bgPrimary} ${loginStyles.py3}`}
+      >
+        <div className={`${loginStyles.container} ${loginStyles.grid}`}>
           <div>
+            <h1 className={loginStyles.xl}>Login / Register</h1>
+            <p className={loginStyles.lead}>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quo
+              quae assumenda.
+            </p>
+          </div>
+          <img src={servImage} alt="" />
+        </div>
+      </section>
+
+      <form
+        onSubmit={handleSubmit}
+        className={`${loginStyles.container} ${loginStyles.p5} ${loginStyles.negoform}`}
+      >
+        <fieldset>
+          <legend className={`${loginStyles.p1}`}>
+            Vul hier je gegevens in...
+          </legend>
+          <div className={`${loginStyles.formControl} ${loginStyles.p1}`}>
             <label htmlFor="username">
-              Username
+              Username <br />
               <input
                 ref={usernameRef}
                 type="text"
                 name="username"
                 id="username"
+                size="50"
+                className={loginStyles.negoinput}
               />
             </label>
           </div>
-          <div>
+          <div className={`${loginStyles.formControl} ${loginStyles.p1}`}>
             <label htmlFor="password">
-              Password
+              Password <br />
               <input
                 ref={passwordRef}
                 type="password"
                 name="password"
                 id="password"
+                size="50"
+                className={loginStyles.negoinput}
               />
             </label>
           </div>
+          {error && <ErrorMessage text={error} />}
         </fieldset>
+        <br />
         <div>
-          <input type="submit" value="Login" />
-        </div>
-        <div>
-          <p>Weet niet wat dit betekent, maar denk inloggen..</p>
+          <input
+            type="submit"
+            value="Login"
+            className={`${loginStyles.btn} ${loginStyles.btnPrimary}`}
+          />
         </div>
         <div>
           <p>Nog geen account, klik hier om aan te melden..</p>
         </div>
       </form>
-    </main>
+    </div>
   )
 }

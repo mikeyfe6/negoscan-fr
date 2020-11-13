@@ -1,0 +1,51 @@
+@import "../customs/colors";
+@import "../customs/utilities";
+
+label {
+  font-weight: bold;
+}
+
+legend {
+  font-size: 1.6rem;
+  font-weight: bolder;
+}
+
+.negoform {
+  display: table;
+  min-width: 30%;
+}
+
+.negoinput {
+  padding: 0.5rem 0;
+  margin-bottom: 1.25rem;
+  border: none;
+  border-bottom: solid 3px $light-color;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+fieldset {
+  border-color: $primary-color;
+  border-radius: 3px;
+  padding: 10px 30px;
+}
+
+.logerror {
+  background-color: red;
+}
+
+@media (max-width: 768px) {
+  .docs-head {
+    text-align: center;
+
+    img {
+      justify-self: center;
+    }
+  }
+}
+
+// --> MQ: Mobile !
+@media (max-width: 500px) {
+}

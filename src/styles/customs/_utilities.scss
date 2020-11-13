@@ -56,6 +56,16 @@
   margin: 10px;
 }
 
+// --> IMAGES !
+
+.docs-head,
+.login-head {
+  img {
+    width: 200px;
+    justify-self: flex-end;
+  }
+}
+
 // --> MARGINS & PADDINGS !
 
 .my {
@@ -151,7 +161,7 @@
 
   &-outline {
     background-color: transparent;
-    border: 1px #72be72 solid;
+    border: 1px #fff solid;
   }
 }
 
@@ -170,7 +180,7 @@
 .bg-light,
 .btn-light {
   background-color: #d8e6d8;
-  color: #fff;
+  color: #333;
 }
 
 .bg-dark,
@@ -183,11 +193,48 @@
 .btn-primary,
 .bg-secondary,
 .btn-secondary,
-.bg-light,
-.btn-light,
 .bg-dark,
 .btn-dark {
   a {
     color: #fff;
   }
+}
+
+// --> MQ: Alert !
+.alert {
+  background-color: #d8e6d8;
+  padding: 10px 20px;
+  font-weight: bold;
+  margin: 15px 0;
+
+  &-success {
+    background-color: #3fbd3f;
+    color: #fff;
+  }
+
+  &-error {
+    background-color: #d9534f;
+    color: #fff;
+  }
+
+  i {
+    margin-right: 10px;
+  }
+}
+
+// --> MQ: Tablet !
+@media (max-width: 768px) {
+  .grid,
+  .showcase .grid,
+  .stats .grid,
+  .cli .grid,
+  .cloud .grid,
+  .docs-main .grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr !important;
+  }
+}
+
+// --> MQ: Mobile !
+@media (max-width: 500px) {
 }

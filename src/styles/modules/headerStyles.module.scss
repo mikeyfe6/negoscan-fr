@@ -24,3 +24,23 @@
     justify-content: space-between;
   }
 }
+
+// --> MQ: Tablet !
+@media (max-width: 768px) {
+}
+
+// --> MQ: Mobile !
+@media (max-width: 500px) {
+  .navbar {
+    height: 110px;
+
+    .flex {
+      flex-direction: column;
+    }
+
+    ul {
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+}

@@ -8,14 +8,14 @@ const Showcase = () => (
     <div className={`${showcaseStyles.container} ${showcaseStyles.grid}`}>
       {" "}
       <div className={showcaseStyles.showcaseText}>
-        <h1>Makkelijk deployen</h1>
+        <h1>Jouw profiel zo online!</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid quia
           culpa dolor cupiditate nemo vitae et ipsam error quo placeat, est in,
           sequi veniam enim ullam quibusdam maiores saepe sint?
         </p>
         <Link
-          to="/over"
+          to="/docs"
           className={`${showcaseStyles.btn} ${showcaseStyles.btnOutline}`}
         >
           Lees Meer

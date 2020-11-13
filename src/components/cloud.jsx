@@ -11,7 +11,7 @@ const Cloud = () => (
   >
     <div className={`${cloudStyles.container} ${cloudStyles.grid}`}>
       <div className={cloudStyles.textCenter}>
-        <h2 className={cloudStyles.lg}>Extreme Cloud Hosting</h2>
+        <h2 className={cloudStyles.lg}>Go Online!</h2>
         <p className={`${cloudStyles.lead} ${cloudStyles.my1}`}>
           {" "}
           Lorem ipsum dolor sit amet, consectetur adipisicing elit.

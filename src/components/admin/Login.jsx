@@ -9,6 +9,8 @@ import loginStyles from "../../styles/modules/loginStyles.module.scss"
 
 import servImage from "../../images/server.png"
 
+const apiURL = process.env.GATSBY_BASE_URL
+
 const ErrorMessage = ({ text }) => {
   return (
     <div className={loginStyles.logerror}>
@@ -26,7 +28,7 @@ export default () => {
     e.preventDefault()
 
     try {
-      const { data } = await axios.post("http://localhost:1337/auth/local", {
+      const { data } = await axios.post(`${apiURL}/auth/local`, {
         identifier: usernameRef.current.value,
         password: passwordRef.current.value,
       })

@@ -3,11 +3,12 @@ import React from "react"
 import { Link } from "gatsby"
 
 import headerStyles from "../styles/modules/headerStyles.module.scss"
+import negoLogo from "../../static/Negoscan-logo.png"
 
-const Header = ({ siteTitle }) => (
+const Header = () => (
   <header className={headerStyles.navbar}>
     <div className={`${headerStyles.container} ${headerStyles.flex}`}>
-      <h1 className={headerStyles.logo}>{siteTitle}</h1>
+      <img src={negoLogo} alt="" style={{ width: "100px" }} />
       <nav>
         <ul>
           <li>

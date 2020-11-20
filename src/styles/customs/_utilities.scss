@@ -1,5 +1,7 @@
 // --> CUSTOMS !
 
+@import "./colors";
+
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -48,8 +50,8 @@
 // --> CARDS !
 
 .card {
-  color: #333;
-  background-color: #fff;
+  color: $dark-color;
+  background-color: $white-color;
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
@@ -150,8 +152,8 @@
   display: inline-block;
   padding: 10px;
   cursor: pointer;
-  background: #72be72;
-  color: #fff;
+  background: $primary-color;
+  color: $white-color;
   border: none;
   border-radius: 5px;
 
@@ -161,32 +163,32 @@
 
   &-outline {
     background-color: transparent;
-    border: 1px #fff solid;
+    border: 1px $white-color solid;
   }
 }
 
 .bg-primary,
 .btn-primary {
-  background-color: #72be72;
-  color: #fff;
+  background-color: $primary-color;
+  color: $white-color;
 }
 
 .bg-secondary,
 .btn-secondary {
-  background-color: #4e8c4e;
-  color: #fff;
+  background-color: $secondary-color;
+  color: $white-color;
 }
 
 .bg-light,
 .btn-light {
-  background-color: #d8e6d8;
-  color: #333;
+  background-color: $light-color;
+  color: $dark-color;
 }
 
 .bg-dark,
 .btn-dark {
-  background-color: #2d382d;
-  color: #fff;
+  background-color: $dark-color;
+  color: $white-color;
 }
 
 .bg-primary,
@@ -196,25 +198,25 @@
 .bg-dark,
 .btn-dark {
   a {
-    color: #fff;
+    color: $white-color;
   }
 }
 
 // --> MQ: Alert !
 .alert {
-  background-color: #d8e6d8;
+  background-color: $light-color;
   padding: 10px 20px;
   font-weight: bold;
   margin: 15px 0;
 
   &-success {
-    background-color: #3fbd3f;
-    color: #fff;
+    background-color: $success-color;
+    color: $white-color;
   }
 
   &-error {
-    background-color: #d9534f;
-    color: #fff;
+    background-color: $error-color;
+    color: $white-color;
   }
 
   i {

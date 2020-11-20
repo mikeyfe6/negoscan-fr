@@ -3,12 +3,20 @@ import { graphql } from "gatsby"
 import Reactmarkdown from "react-markdown"
 import Img from "gatsby-image"
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 // NEGO TEMPLATE
 import ProfLayout from "../components/proflayout"
 
-import "../styles/global.scss"
+import profStyles from "../styles/modules/profStyles.module.scss"
 
 const NegositeTemplate = ({ data }) => {
+  // function hideDiv(elem) {
+  //   if (elem.href == "")
+  //     document.getElementById("hideDiv").style.display = "none"
+  //   else document.getElementById("hideDiv").style.display = "block"
+  // }
+
   return (
     <ProfLayout>
       <Img
@@ -28,27 +36,93 @@ const NegositeTemplate = ({ data }) => {
           // opacity: 0.1,
         }}
       />
-      <div className="centeriteven" style={{ zIndex: 2, position: "relative" }}>
+      <div
+        className={profStyles.profCenter}
+        style={{ zIndex: 2, position: "relative" }}
+      >
         <Img
           fixed={data.strapiNegosite.avatar.childImageSharp.fixed}
-          style={{ borderRadius: "50%" }}
+          className={profStyles.avatar}
         />
 
         <h1>{data.strapiNegosite.profiel}</h1>
         <Reactmarkdown
           source={data.strapiNegosite.biografie}
-          className="profiel-content"
+          className={profStyles.profielContent}
           escapeHtml={false}
         />
+        <ul className={profStyles.profLinks}>
+          <li
+            style={{
+              border: `3px solid ${data.strapiNegosite.linklook}`,
+              padding: "1rem 10rem",
+              borderRadius: "20px",
+              marginBottom: "2rem",
+            }}
+          >
+            <a
+              href={`https://${data.strapiNegosite.sociallinks.instagram}`}
+              rel="noopener noreferrer"
+              target="_blank"
+              className="proflink"
+            >
+              {data.strapiNegosite.sociallinks.instagram}
+            </a>
+          </li>
 
-        <p
-          className="links"
-          style={{ border: `1px solid ${data.strapiNegosite.linklook}` }}
+          <li
+            style={{
+              border: `3px solid ${data.strapiNegosite.linklook}`,
+              padding: "1rem 10rem",
+              borderRadius: "20px",
+              marginBottom: "2rem",
+            }}
+          >
+            <a
+              href={`https://${data.strapiNegosite.sociallinks.facebook}`}
+              rel="noopener noreferrer"
+              target="_blank"
+              className="proflink"
+            >
+              {data.strapiNegosite.sociallinks.facebook}
+            </a>
+          </li>
+
+          <li
+            style={{
+              border: `3px solid ${data.strapiNegosite.linklook}`,
+              padding: "1rem 10rem",
+              borderRadius: "20px",
+              marginBottom: "2rem",
+            }}
+          >
+            <a
+              href={`https://${data.strapiNegosite.sociallinks.twitter}`}
+              rel="noopener noreferrer"
+              target="_blank"
+              className="proflink"
+            >
+              {data.strapiNegosite.sociallinks.twitter}
+            </a>
+          </li>
+        </ul>
+        <ul
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          {data.strapiNegosite.sociallinks.instagram}{" "}
-        </p>
-        <p className="links">{data.strapiNegosite.sociallinks.facebook}</p>
-        <p className="links">{data.strapiNegosite.sociallinks.twitter}</p>
+          <li>
+            <FontAwesomeIcon icon="coffee" size="3x" color="#72be72" />
+          </li>
+          <li>
+            <FontAwesomeIcon icon="coffee" size="3x" color="#72be72" />
+          </li>
+          <li>
+            <FontAwesomeIcon icon="coffee" size="3x" color="#72be72" />
+          </li>
+        </ul>
         {/* 
         <p>
           by{" "}
@@ -83,7 +157,7 @@ export const query = graphql`
       }
       avatar {
         childImageSharp {
-          fixed(width: 100) {
+          fixed(width: 125, height: 125) {
             ...GatsbyImageSharpFixed
           }
         }

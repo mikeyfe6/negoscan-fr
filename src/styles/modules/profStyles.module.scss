@@ -1,0 +1,21 @@
+@import "../customs/colors";
+@import "../customs/utilities";
+
+.prof-center {
+  display: table;
+  margin: 10rem auto !important;
+  text-align: center !important;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.profiel-content {
+}
+
+.prof-links {
+  margin-top: 2rem;
+  padding: 15px;
+  font-weight: bold;
+}

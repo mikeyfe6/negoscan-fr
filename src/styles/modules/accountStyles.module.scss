@@ -1,12 +1,121 @@
 @import "../customs/colors";
 @import "../customs/utilities";
 
-.checkums {
-  color: white !important;
-  background-color: red !important;
+.grid-container {
+  display: grid;
+  min-height: calc(100vh - 290px);
+  grid-template-columns: 0.5fr 2.6fr 0.1fr 1.5fr;
+  grid-template-rows: 0.2fr 0.1fr 2.7fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "Sidebar Navigation Navigation Link"
+    "Sidebar Dashboard Dashboard Preview"
+    "Sidebar Dashboard Dashboard Preview";
+}
+.Sidebar {
+  grid-area: Sidebar;
+}
+.Navigation {
+  grid-area: Navigation;
+}
+.Preview {
+  grid-area: Preview;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.Dashboard {
+  grid-area: Dashboard;
+}
+.Link {
+  grid-area: Link;
 }
 
-.textings {
-  color: white !important;
-  background-color: red !important;
+.iphone {
+  &-frame {
+    position: absolute;
+    overflow: hidden;
+    height: 600px;
+    width: 275px;
+    background: black;
+    border-radius: 50px;
+    border: solid #333 10px;
+  }
+
+  // &-bg {
+  //   position: relative;
+  //   width: 100vh;
+  //   height: 100%;
+  //   z-index: 1;
+  // }
+
+  &-background {
+    position: relative;
+    width: 100vh;
+    height: 100%;
+    z-index: 1;
+  }
+
+  &-avatar {
+    position: absolute;
+    top: 15%;
+    left: 30%;
+    width: 100px;
+    height: 100px;
+    z-index: 2;
+    border-radius: 50%;
+    display: inline-block;
+    object-fit: cover;
+  }
+}
+
+#heading {
+  background-color: red;
+  padding: 1rem;
+  width: 50%;
+  height: 150px;
+  margin: auto;
+}
+
+.avatar-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: white;
+  margin-right: 50px;
+}
+
+.progress {
+  margin: 1rem 0;
+  background-color: red;
+
+  &-seek {
+    background-color: green;
+    height: 3px;
+  }
+}
+
+.yellowstyle {
+  background: linear-gradient(to bottom, yellow, black);
+}
+.redstyle {
+  background: linear-gradient(to bottom, red, blue);
+}
+.brownstyle {
+  background: linear-gradient(to bottom, brown, white);
+}
+.graystyle {
+  background: linear-gradient(to bottom, grey, white);
+}
+.blackstyle {
+  background: linear-gradient(to bottom, black, grey);
+}
+.pinkstyle {
+  background: linear-gradient(to bottom, pink, grey);
+}
+
+.choose-color {
 }

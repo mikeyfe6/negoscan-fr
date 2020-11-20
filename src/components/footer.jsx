@@ -32,19 +32,19 @@ const Footer = () => (
       <div className={footerStyles.social}>
         <Link to="#">
           {" "}
-          <FontAwesomeIcon icon="coffee" size="2x" color="#72be72" />
+          <FontAwesomeIcon icon="coffee" size="2x" color="#16b7f2" />
         </Link>
         <Link to="#">
           {" "}
-          <FontAwesomeIcon icon="coffee" size="2x" color="#72be72" />
+          <FontAwesomeIcon icon="coffee" size="2x" color="#16b7f2" />
         </Link>
         <Link to="#">
           {" "}
-          <FontAwesomeIcon icon="coffee" size="2x" color="#72be72" />
+          <FontAwesomeIcon icon="coffee" size="2x" color="#16b7f2" />
         </Link>
         <Link to="#">
           {" "}
-          <FontAwesomeIcon icon="coffee" size="2x" color="#72be72" />
+          <FontAwesomeIcon icon="coffee" size="2x" color="#16b7f2" />
         </Link>
       </div>
     </div>

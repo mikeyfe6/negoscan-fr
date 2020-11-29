@@ -15,19 +15,28 @@ export default () => {
   const apiImage = gatsbyUser.user.gebruiker.avatar.url
   console.log(gatsbyUser)
 
-  // AVATAR CHANGE
   const [image, setImage] = useState()
   const [preview, setPreview] = useState(apiImage)
+
   const [loading, setLoading] = useState(false)
+
   const fileInputRef = useRef()
+
   const [color, setColor] = useState()
 
+  const linkTitle = useRef()
+  const [links, setLinks] = useState([])
+
+  const token = gatsbyUser.jwt
+
+  // AVATAR CHANGE - BEGIN
   function removeHeading() {
     document.getElementById("avatar-image").src = noavatar
     document.getElementById("iphone-avatar").src = noavatar
   }
+  // AVATAR CHANGE - EIND
 
-  // SEND AVATAR
+  // SEND AVATAR - BEGIN
   const handleSubmit = async e => {
     e.preventDefault()
 
@@ -52,14 +61,6 @@ export default () => {
     }
   }
 
-  const onRadioChange = e => {
-    setColor({
-      color: e.target.value,
-    })
-  }
-
-  console.log(color)
-
   useEffect(() => {
     if (image) {
       const reader = new FileReader()
@@ -71,16 +72,69 @@ export default () => {
       // setPreview(apiImage)
     }
   }, [image, apiImage])
+  // SEND AVATAR - EIND
 
-  // CHANGE BACKGROUND
+  // CREATE LINKS - BEGIN
+  const getLinks = async () => {
+    const res = await axios.get(`${apiURL}/connections`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    setLinks(res.data)
+  }
+
+  useEffect(() => {
+    getLinks()
+  }, [])
+
+  const createLink = async () => {
+    const params = {
+      title: linkTitle.current.value,
+    }
+    const res = await axios.post(`${apiURL}/connections`, params, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    const newLinks = [...links, res.data]
+    setLinks(newLinks)
+  }
+
+  const toggleLink = async (link, checked) => {
+    const params = {
+      visible: checked,
+    }
+    const res = await axios.put(`${apiURL}/connections/${link.id}`, params)
+
+    const newLinks = links.map(l => {
+      if (l.id === link.id) {
+        return res.data
+      }
+      return l
+    })
+    setLinks(newLinks)
+  }
+  // CREATE LINKS - EIND
+
+  // CHANGE BACKGROUND - BEGIN
   function changeHeadingBg(klasse) {
     document.getElementById("iphone-bg").className = klasse
   }
 
+  const onRadioChange = e => {
+    setColor({
+      color: e.target.value,
+    })
+  }
+
+  console.log(color)
+  // CHANGE BACKGROUND - EIND
+
   return (
     <div className={`${accountStyles.gridContainer} ${accountStyles.card}`}>
       {/* SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR */}
-
       <div
         className={`${accountStyles.Sidebar} ${accountStyles.card}`}
         style={{
@@ -138,6 +192,19 @@ export default () => {
               zindex: 1,
             }}
           />
+          <div>
+            <ul className={accountStyles.iphoneLinks}>
+              {links.map(link => (
+                <li
+                  key={link.id}
+                  style={{ background: "red" }}
+                  className={accountStyles.iphoneLink}
+                >
+                  {link.title}
+                </li>
+              ))}
+            </ul>
+          </div>
           {/* <img
             src={gatsbyUser.user.gebruiker.background.url}
             alt=""
@@ -154,10 +221,11 @@ export default () => {
         <div
           style={{
             position: "relative",
+            display: "flex",
           }}
         >
           {loading && (
-            <div style={{ color: "white" }}>Profielavatar Geupload</div>
+            <div style={{ color: "green" }}>Profielavatar Geupload</div>
           )}
           <img
             src={preview}
@@ -165,10 +233,16 @@ export default () => {
             className={accountStyles.avatarImage}
             id="avatar-image"
           />
-          <form onSubmit={handleSubmit}>
+          <form
+            onSubmit={handleSubmit}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             {" "}
             <button
-              className={accountStyles.btn}
+              className={`${accountStyles.btn} ${accountStyles.addBtn}`}
               onClick={event => {
                 event.preventDefault()
                 fileInputRef.current.click()
@@ -178,7 +252,7 @@ export default () => {
               Add image
             </button>
             <button
-              className={accountStyles.btn}
+              className={`${accountStyles.btn} ${accountStyles.resetBtn}`}
               type="reset"
               onClick={event => {
                 removeHeading()
@@ -201,7 +275,10 @@ export default () => {
                 }
               }}
             />
-            <button className={accountStyles.btn} type="submit">
+            <button
+              className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+              type="submit"
+            >
               Submit
             </button>
             <br />
@@ -229,6 +306,37 @@ export default () => {
           {" "}
           <b>EMAIL :</b> {gatsbyUser.user.email}
         </p>
+        <br />
+
+        <div>
+          <h2>Link list:</h2>
+          <ul>
+            {links.map(link => (
+              <li key={link.id} className={accountStyles.card}>
+                <input
+                  type="checkbox"
+                  checked={link.visible}
+                  onChange={e => toggleLink(link, e.target.checked)}
+                />
+                {link.title}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <input type="text" placeholder="title" ref={linkTitle} />
+          <button
+            onClick={event => {
+              createLink()
+              event.preventDefault()
+            }}
+          >
+            Create a link
+          </button>
+        </div>
+
+        <br />
         <br />
         <ul
           style={{ display: "flex", justifyContent: "space-around" }}

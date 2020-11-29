@@ -69,6 +69,18 @@
     display: inline-block;
     object-fit: cover;
   }
+
+  &-links {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+  }
+
+  &-link {
+    margin: 10px 0;
+  }
 }
 
 #heading {
@@ -117,5 +129,14 @@
   background: linear-gradient(to bottom, pink, grey);
 }
 
-.choose-color {
+.add-btn {
+  margin: 5px;
+}
+
+.reset-btn {
+  margin: 5px;
+}
+
+.submit-btn {
+  margin: 5px;
 }

@@ -47,6 +47,18 @@ fieldset {
   margin-bottom: 1rem;
 }
 
+.loadingmsg {
+  background-color: green;
+  font-weight: bold;
+  color: white;
+  padding: 0.3rem 0.7rem;
+  display: table;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
 @media (max-width: 768px) {
   .docs-head {
     text-align: center;

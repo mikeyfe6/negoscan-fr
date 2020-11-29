@@ -19,8 +19,17 @@ const ErrorMessage = ({ text }) => {
   )
 }
 
+const LoadingMessage = ({ text }) => {
+  return (
+    <div className={loginStyles.loadingmsg}>
+      <span>{text}</span>
+    </div>
+  )
+}
+
 export default () => {
   const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(null)
   const usernameRef = useRef()
   const passwordRef = useRef()
 
@@ -33,10 +42,13 @@ export default () => {
         password: passwordRef.current.value,
       })
       setUser(data)
+      setLoading("Aan het laden")
       setError(null)
       navigate("/admin/account")
     } catch {
+      setLoading(null)
       setError("Verkeerde invoer, probeer 't opnieuw")
+      setTimeout(() => setError(null), 5000)
     }
   }
 
@@ -91,6 +103,7 @@ export default () => {
             </label>
           </div>
           {error && <ErrorMessage text={error} />}
+          {loading && <LoadingMessage text={loading} />}
         </fieldset>
         <br />
         <div>

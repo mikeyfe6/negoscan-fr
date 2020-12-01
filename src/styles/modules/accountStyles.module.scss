@@ -12,12 +12,18 @@
     "Sidebar Dashboard Dashboard Preview"
     "Sidebar Dashboard Dashboard Preview";
 }
+
+// SIDEBAR
 .Sidebar {
   grid-area: Sidebar;
 }
+
+// NAVIGATION
 .Navigation {
   grid-area: Navigation;
 }
+
+// PREVIEW
 .Preview {
   grid-area: Preview;
 
@@ -25,96 +31,140 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+
+  .iphone {
+    &-frame {
+      position: absolute;
+      overflow: hidden;
+      height: 600px;
+      width: 275px;
+      background: black;
+      border-radius: 50px;
+      border: solid #333 10px;
+    }
+
+    // &-bg {
+    //   position: relative;
+    //   width: 100vh;
+    //   height: 100%;
+    //   z-index: 1;
+    // }
+
+    &-background {
+      position: relative;
+      width: 100vh;
+      height: 100%;
+      z-index: 1;
+    }
+
+    &-avatar {
+      position: absolute;
+      top: 15%;
+      left: 30%;
+      width: 100px;
+      height: 100px;
+      z-index: 2;
+      border-radius: 50%;
+      display: inline-block;
+      object-fit: cover;
+    }
+
+    &-links {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+    }
+
+    &-link {
+      margin: 5px 0;
+    }
+  }
 }
+
+// DASHBOARD
 .Dashboard {
   grid-area: Dashboard;
-}
-.Link {
-  grid-area: Link;
-}
 
-.iphone {
-  &-frame {
-    position: absolute;
-    overflow: hidden;
-    height: 600px;
-    width: 275px;
-    background: black;
-    border-radius: 50px;
-    border: solid #333 10px;
+  .avatarformcont {
+    display: flex;
+    padding-left: 5%;
+    padding-bottom: 5%;
+    border-bottom: 3px dotted lightgray;
   }
 
-  // &-bg {
-  //   position: relative;
-  //   width: 100vh;
-  //   height: 100%;
-  //   z-index: 1;
-  // }
-
-  &-background {
-    position: relative;
-    width: 100vh;
-    height: 100%;
-    z-index: 1;
-  }
-
-  &-avatar {
-    position: absolute;
-    top: 15%;
-    left: 30%;
-    width: 100px;
-    height: 100px;
-    z-index: 2;
+  .avatar-image {
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    display: inline-block;
     object-fit: cover;
+    background: white;
+    margin-right: 10%;
   }
 
-  &-links {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
+  .progress {
+    margin: 1rem 0;
+    background-color: red;
+
+    &-seek {
+      background-color: green;
+      height: 3px;
+    }
   }
 
-  &-link {
-    margin: 10px 0;
+  .formavatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .add-btn {
+      margin: 5px;
+      width: 100px;
+    }
+
+    .reset-btn {
+      margin: 5px;
+      width: 100px;
+    }
+
+    .submit-btn {
+      margin: 5px;
+      width: 100px;
+    }
   }
-}
 
-#heading {
-  background-color: red;
-  padding: 1rem;
-  width: 50%;
-  height: 150px;
-  margin: auto;
-}
+  .profile-info {
+    flex: 1;
+    padding-left: 7.5%;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+  }
 
-.avatar-image {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: white;
-  margin-right: 50px;
-}
+  .logerror {
+    background-color: #ff0102;
+    font-weight: bold;
+    color: white;
+    padding: 0.3rem 0.7rem;
+    display: table;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
 
-.progress {
-  margin: 1rem 0;
-  background-color: red;
-
-  &-seek {
-    background-color: green;
-    height: 3px;
+  .profile-input {
+    padding: 3% 1%;
+    opacity: 0.75;
+    outline: none;
+    border: none;
+    margin-right: 5%;
   }
 }
 
 .yellowstyle {
   background: linear-gradient(to bottom, yellow, black);
-}
-.redstyle {
-  background: linear-gradient(to bottom, red, blue);
 }
 .brownstyle {
   background: linear-gradient(to bottom, brown, white);
@@ -129,14 +179,7 @@
   background: linear-gradient(to bottom, pink, grey);
 }
 
-.add-btn {
-  margin: 5px;
-}
-
-.reset-btn {
-  margin: 5px;
-}
-
-.submit-btn {
-  margin: 5px;
+// LINK
+.Link {
+  grid-area: Link;
 }

@@ -21,21 +21,22 @@ const ErrorMessage = ({ text }) => {
 
 export default () => {
   const gatsbyUser = getUser()
-  const apiImage = gatsbyUser.user.gebruiker.avatar.url
 
   const [image, setImage] = useState()
-  const [preview, setPreview] = useState(apiImage)
+  const [preview, setPreview] = useState()
   const fileInputRef = useRef()
   const [loading, setLoading] = useState(false)
 
   const linkTitle = useRef()
+  const [newLink, setNewLink] = useState()
+
   const [links, setLinks] = useState([])
 
   const [error, setError] = useState(null)
 
-  const [username, setUsername] = useState()
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const [disabledUsername, setDisabledUsername] = useState(true)
   const [disabledEmail, setDisabledEmail] = useState(true)
@@ -45,13 +46,13 @@ export default () => {
 
   const token = gatsbyUser.jwt
 
-  // AVATAR CHANGE - BEGIN
+  // AVATAR CHANGE
   function removeHeading() {
     document.getElementById("avatar-image").src = noavatar
     document.getElementById("iphone-avatar").src = noavatar
   }
 
-  // SEND AVATAR - BEGIN
+  // SEND AVATAR
   const handleSubmit = async e => {
     e.preventDefault()
 
@@ -64,13 +65,14 @@ export default () => {
       data.append("refId", gatsbyUser.user.id) // optional, you need it if you want to link the image to an entry
       data.append("field", "avatar") // optional, you need it if you want to link the image to an entry
 
-      const upload_res = await axios.post(`${apiURL}/upload`, data, {
+      const res = await axios.post(`${apiURL}/upload`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
-      console.log("Geupload!", upload_res)
+      console.log("Geupload!", res)
       setTimeout(() => setLoading(false), 5000)
+      setPreview(image)
     } catch (error) {
       console.log("Niet gelukt!", error)
     }
@@ -83,27 +85,25 @@ export default () => {
         setPreview(reader.result)
       }
       reader.readAsDataURL(image)
-    } else {
-      // setPreview(apiImage)
     }
-  }, [image, apiImage])
-
-  // UPDATE PROFILE - USERNAME
-  const getUsername = async () => {
-    const res = await axios.get(
-      `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    setUsername(res.data.profiel)
-  }
+  }, [image])
 
   useEffect(() => {
-    getUsername()
-  }, [])
+    const getAvatarImage = async () => {
+      const res = await axios.get(
+        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      setPreview(res.data.avatar.url)
+    }
+    getAvatarImage()
+  }, [gatsbyUser.user.gebruiker.id, token])
+
+  // UPDATE PROFILE - USERNAME
 
   const setUsernameHandler = e => {
     setUsername(e.target.value)
@@ -133,22 +133,22 @@ export default () => {
     }
   }
 
-  // UPDATE PROFILE - EMAIL
-  const getEmail = async () => {
-    const res = await axios.get(
-      `${apiURL}/users/${gatsbyUser.user.gebruiker.id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    setEmail(res.data.email)
-  }
-
   useEffect(() => {
-    getEmail()
-  }, [])
+    const getUsername = async () => {
+      const res = await axios.get(
+        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      setUsername(res.data.profiel)
+    }
+    getUsername()
+  }, [gatsbyUser.user.gebruiker.id, token])
+
+  // UPDATE PROFILE - EMAIL
 
   const setEmailHandler = e => {
     setEmail(e.target.value)
@@ -170,12 +170,27 @@ export default () => {
           },
         }
       )
-      setUsername(res.data.email)
+      setEmail(res.data.email)
     } catch (err) {
       console.log(err.message)
       // setTimeout(() => setError(null), 5000)
     }
   }
+
+  useEffect(() => {
+    const getEmail = async () => {
+      const res = await axios.get(
+        `${apiURL}/users/${gatsbyUser.user.gebruiker.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      setEmail(res.data.email)
+    }
+    getEmail()
+  }, [gatsbyUser.user.gebruiker.id, token])
 
   // UPDATE PROFILE - PASSWORD
   const setPasswordHandler = e => {
@@ -205,20 +220,7 @@ export default () => {
     }
   }
 
-  // CREATE LINKS - BEGIN
-  useEffect(() => {
-    getLinks()
-  }, [])
-
-  const getLinks = async () => {
-    const res = await axios.get(`${apiURL}/connections`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    setLinks(res.data)
-  }
-
+  // CREATE LINKS
   const createLink = async () => {
     const params = {
       title: linkTitle.current.value,
@@ -239,20 +241,58 @@ export default () => {
     }
     const res = await axios.put(`${apiURL}/connections/${link.id}`, params)
 
-    const newLinks = links.map(l => {
-      if (l.id === link.id) {
+    const newLinks = links.map(el => {
+      if (el.id === link.id) {
         return res.data
       }
-      return l
+      return el
     })
     setLinks(newLinks)
   }
 
-  // CHANGE BACKGROUND - BEGIN
-  // function changeHeadingBg(klasse) {
-  //   document.getElementById("iphone-bg").className = klasse
+  const deleteLink = async link => {
+    await axios.delete(`${apiURL}/connections/${link.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    setLinks(links.filter(el => el.id !== link.id))
+  }
+
+  // const handleNewLinkChange = e => {
   // }
 
+  const handleNewLink = link => {
+    setNewLink(link)
+  }
+
+  const editLink = async (e, link) => {
+    // console.log("shows newlinks", newLinks)
+    // const params = {
+    //   title: editlinkTitle.current.value,
+    // }
+    // const res = await axios.put(`${apiURL}/connections/${link.id}`, params, {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // })
+    // console.log(res)
+    // setLinks(res.data.title)
+  }
+
+  useEffect(() => {
+    const getLinks = async () => {
+      const res = await axios.get(`${apiURL}/connections`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      setLinks(res.data)
+    }
+    getLinks()
+  }, [token])
+
+  // CHANGE BACKGROUND
   const onRadioChange = async e => {
     setColor(e.target.value)
 
@@ -274,47 +314,66 @@ export default () => {
   }
 
   function changeHeadingBg(color) {
+    var c = document.getElementById("iphone-linklook").children
+    var i
     switch (color) {
       case "geel":
         document.getElementById("iphone-bg").className =
           accountStyles.yellowstyle
+        for (i = 0; i < c.length; i++) {
+          c[i].className = accountStyles.yellowstyleLinks
+        }
         break
       case "grijs":
         document.getElementById("iphone-bg").className = accountStyles.graystyle
+        for (i = 0; i < c.length; i++) {
+          c[i].className = accountStyles.graystyleLinks
+        }
         break
       case "roze":
         document.getElementById("iphone-bg").className = accountStyles.pinkstyle
+        for (i = 0; i < c.length; i++) {
+          c[i].className = accountStyles.pinkstyleLinks
+        }
         break
       case "zwart":
         document.getElementById("iphone-bg").className =
           accountStyles.blackstyle
+        for (i = 0; i < c.length; i++) {
+          c[i].className = accountStyles.blackstyleLinks
+        }
         break
       case "bruin":
         document.getElementById("iphone-bg").className =
           accountStyles.brownstyle
+        for (i = 0; i < c.length; i++) {
+          c[i].className = accountStyles.brownstyleLinks
+        }
         break
       default:
     }
   }
 
   useEffect(() => {
+    const getColor = async () => {
+      const res = await axios.get(
+        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      setColor(res.data.bgfree)
+      changeHeadingBg(res.data.bgfree)
+    }
     getColor()
-  }, [])
+    changeHeadingBg()
+  }, [gatsbyUser.user.gebruiker.id, token, links])
 
-  const getColor = async () => {
-    const res = await axios.get(
-      `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    setColor(res.data.bgfree)
-    changeHeadingBg(res.data.bgfree)
-  }
-
-  console.log("bgfreecolor", color)
+  // function changeHeadingBg(klasse) {
+  //   document.getElementById("iphone-bg").className = klasse
+  // }
 
   return (
     <div className={`${accountStyles.gridContainer} ${accountStyles.card}`}>
@@ -378,13 +437,9 @@ export default () => {
             }}
           />
           <div>
-            <ul className={accountStyles.iphoneLinks}>
+            <ul className={accountStyles.iphoneLinks} id="iphone-linklook">
               {links.map(link => (
-                <li
-                  key={link.id}
-                  style={{ background: "red" }}
-                  className={accountStyles.iphoneLink}
-                >
+                <li key={link.id} className={accountStyles.iphoneLink}>
                   {link.title}
                 </li>
               ))}
@@ -404,18 +459,22 @@ export default () => {
       >
         <br />
         <div className={accountStyles.avatarformcont}>
-          {loading && (
-            <div style={{ color: "green" }}>Profielavatar Geupload</div>
-          )}
-
           <form onSubmit={handleSubmit} className={accountStyles.formavatar}>
-            <img
-              src={preview}
-              alt=""
-              className={accountStyles.avatarImage}
-              id="avatar-image"
-            />{" "}
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div>
+              <img
+                src={preview}
+                alt=""
+                className={accountStyles.avatarImage}
+                id="avatar-image"
+              />{" "}
+              {loading && (
+                <div className={accountStyles.loadingComplete}>
+                  Profielavatar Geupload
+                </div>
+              )}
+            </div>
+
+            <div className={accountStyles.buttonsenzo}>
               <button
                 className={`${accountStyles.btn} ${accountStyles.addBtn}`}
                 onClick={event => {
@@ -461,59 +520,57 @@ export default () => {
 
           <div className={accountStyles.profileInfo}>
             <form onSubmit={submitUsername}>
-              <p>
-                <label htmlFor="username">
-                  <FaUser
-                    size="1.25em"
-                    style={{
-                      position: "relative",
-                      top: "7.5px",
-                      right: "5px",
-                      marginRight: "5px",
-                    }}
-                  />
-                  <input
-                    onChange={setUsernameHandler}
-                    value={username}
-                    type="text"
-                    disabled={disabledUsername}
-                    name="username"
-                    id="username"
-                    className={accountStyles.profileInput}
-                  />
-                </label>
-                <button
+              <label htmlFor="username">
+                <FaUser
+                  size="1.5em"
                   style={{
+                    position: "relative",
+                    top: "7.5px",
+                    right: "5px",
                     marginRight: "5px",
-                    paddingTop: "7.5px",
-                    paddingBottom: "7.5px",
                   }}
-                  className={`${accountStyles.btn} ${accountStyles.btnLight}`}
-                  type="button"
-                  onClick={() => setDisabledUsername(false)}
-                >
-                  Edit
-                </button>
-                <button
-                  className={`${accountStyles.btn} ${accountStyles.btnSecondary}`}
-                  type="submit"
-                  style={{
-                    paddingTop: "7.5px",
-                    paddingBottom: "7.5px",
-                  }}
-                >
-                  Save Username
-                </button>
+                />
+                <input
+                  onChange={setUsernameHandler}
+                  value={username}
+                  type="text"
+                  disabled={disabledUsername}
+                  name="username"
+                  id="username"
+                  className={accountStyles.profileInput}
+                />
+              </label>
+              <button
+                style={{
+                  marginRight: "5px",
+                  paddingTop: "7.5px",
+                  paddingBottom: "7.5px",
+                }}
+                className={`${accountStyles.btn} ${accountStyles.btnLight}`}
+                type="button"
+                onClick={() => setDisabledUsername(false)}
+              >
+                Edit
+              </button>
+              <button
+                className={`${accountStyles.btn} ${accountStyles.btnSecondary}`}
+                type="submit"
+                style={{
+                  paddingTop: "7.5px",
+                  paddingBottom: "7.5px",
+                }}
+              >
+                Save Username
+              </button>
 
-                {error && <ErrorMessage text={error} />}
-              </p>
+              {error && <ErrorMessage text={error} />}
             </form>
 
             <form onSubmit={submitEmail}>
               <p>
                 <label htmlFor="email">
                   <FaAt
-                    size="1.25em"
+                    size="1.5em"
                     style={{
                       position: "relative",
                       top: "7.5px",
@@ -561,7 +618,7 @@ export default () => {
               <div>
                 <label htmlFor="password">
                   <FaLock
-                    size="1.25em"
+                    size="1.5em"
                     style={{
                       position: "relative",
                       top: "7.5px",
@@ -626,21 +683,13 @@ export default () => {
         <br />
         <div>
           <h2>Link list:</h2>
-          <ul>
-            {links.map(link => (
-              <li key={link.id} className={accountStyles.card}>
-                <input
-                  type="checkbox"
-                  checked={link.visible}
-                  onChange={e => toggleLink(link, e.target.checked)}
-                />
-                {link.title}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <input type="text" placeholder="title" ref={linkTitle} />
+          <input
+            type="text"
+            placeholder="title"
+            ref={linkTitle}
+            minLength="5"
+            required
+          />
           <button
             onClick={event => {
               createLink()
@@ -649,6 +698,53 @@ export default () => {
           >
             Create a link
           </button>
+          <ul>
+            {links.map(link => (
+              <li
+                key={link.id}
+                className={`${accountStyles.linkContainer} ${accountStyles.card}`}
+              >
+                <input
+                  type="checkbox"
+                  checked={link.visible}
+                  onChange={e => toggleLink(link, e.target.checked)}
+                />
+                <p> {link.title}</p>
+                <div>
+                  <input
+                    id={link.id}
+                    key={link.id}
+                    type="text"
+                    value={newLink}
+                    onChange={e => {
+                      handleNewLink(e.target.value[link])
+                      console.log(e.target.value)
+                    }}
+                    placeholder="edit title"
+                    minLength="5"
+                    required
+                  />
+                  <button
+                    onClick={event => {
+                      editLink(link)
+                      console.log(newLink)
+                      event.preventDefault()
+                    }}
+                  >
+                    Edit Link {link.id}
+                  </button>
+                  <button
+                    onClick={event => {
+                      deleteLink(link)
+                      event.preventDefault()
+                    }}
+                  >
+                    Delete Link {link.id}
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
         <br />
         <br />
@@ -656,31 +752,6 @@ export default () => {
           style={{ display: "flex", justifyContent: "space-around" }}
           className={accountStyles.pickColor}
         >
-          {/* <li>
-            <label>
-              <input
-                type="radio"
-                value="roze"
-                checked={color === "roze"}
-                onChange={onRadioChange}
-                onClick={event => {
-                  changeHeadingBg(accountStyles.redstyle)
-                  event.preventDefault()
-                }}
-                style={{ display: "none" }}
-              />
-              <div
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  background: "red",
-                  border: "solid 1px black",
-                  borderRadius: "10px",
-                }}
-              ></div>
-            </label>
-          </li> */}
-
           <li className={accountStyles.chooseColor}>
             <label>
               <input
@@ -694,15 +765,11 @@ export default () => {
                 }}
                 style={{ display: "none" }}
               />
-              <div
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  background: "yellow",
-                  border: "solid 1px black",
-                  borderRadius: "10px",
-                }}
-              ></div>
+              <div className={accountStyles.yellowtheme}>
+                <div className={accountStyles.yellowlinks} />
+                <div className={accountStyles.yellowlinks} />
+                <div className={accountStyles.yellowlinks} />
+              </div>
             </label>
           </li>
 
@@ -719,15 +786,11 @@ export default () => {
                 }}
                 style={{ display: "none" }}
               />
-              <div
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  background: "gray",
-                  border: "solid 1px black",
-                  borderRadius: "10px",
-                }}
-              ></div>
+              <div className={accountStyles.graytheme}>
+                <div className={accountStyles.graylinks} />
+                <div className={accountStyles.graylinks} />
+                <div className={accountStyles.graylinks} />
+              </div>
             </label>
           </li>
 
@@ -744,15 +807,11 @@ export default () => {
                 }}
                 style={{ display: "none" }}
               />
-              <div
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  background: "pink",
-                  border: "solid 1px black",
-                  borderRadius: "10px",
-                }}
-              ></div>
+              <div className={accountStyles.pinktheme}>
+                <div className={accountStyles.pinklinks} />
+                <div className={accountStyles.pinklinks} />
+                <div className={accountStyles.pinklinks} />
+              </div>
             </label>
           </li>
 
@@ -769,15 +828,11 @@ export default () => {
                 }}
                 style={{ display: "none" }}
               />
-              <div
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  background: "black",
-                  border: "solid 1px black",
-                  borderRadius: "10px",
-                }}
-              ></div>
+              <div className={accountStyles.blacktheme}>
+                <div className={accountStyles.blacklinks} />
+                <div className={accountStyles.blacklinks} />
+                <div className={accountStyles.blacklinks} />
+              </div>
             </label>
           </li>
 
@@ -794,15 +849,11 @@ export default () => {
                 }}
                 style={{ display: "none" }}
               />
-              <div
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  background: "brown",
-                  border: "solid 1px black",
-                  borderRadius: "10px",
-                }}
-              ></div>
+              <div className={accountStyles.browntheme}>
+                <div className={accountStyles.brownlinks} />
+                <div className={accountStyles.brownlinks} />
+                <div className={accountStyles.brownlinks} />
+              </div>
             </label>
           </li>
         </ul>

@@ -1,0 +1,86 @@
+@mixin fullBG {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.theme {
+  &-geel {
+    background: linear-gradient(to bottom, yellow, black);
+    @include fullBG;
+
+    &-links {
+      background: #5e5d0d;
+      padding: 10px 100px;
+      color: white;
+      margin: 15px 0;
+      border: 1px solid white;
+      border-radius: 3px;
+      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+    }
+  }
+
+  &-grijs {
+    background: linear-gradient(to bottom, grey, white);
+    @include fullBG;
+
+    &-links {
+      background: rgba(255, 255, 255, 0.797);
+      padding: 10px 100px;
+      color: #878787;
+      margin: 15px 0;
+      border: 1px solid #878787;
+      border-radius: 3px;
+      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+    }
+  }
+
+  &-roze {
+    background: linear-gradient(to bottom, pink, grey);
+    @include fullBG;
+
+    &-links {
+      background: #878787;
+      padding: 10px 100px;
+      color: white;
+      margin: 15px 0;
+      border: 1px solid #878787;
+      border-radius: 3px;
+      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+    }
+  }
+
+  &-zwart {
+    background: linear-gradient(to bottom, black, grey);
+    @include fullBG;
+
+    &-links {
+      background: #878787;
+      padding: 10px 100px;
+      color: black;
+      margin: 15px 0;
+      border: 1px solid white;
+      border-radius: 3px;
+      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+    }
+  }
+
+  &-bruin {
+    background: linear-gradient(to bottom, brown, white);
+    @include fullBG;
+
+    &-links {
+      background: white;
+      padding: 10px 100px;
+      color: brown;
+      margin: 15px 0;
+      border: 1px solid brown;
+      border-radius: 3px;
+      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+    }
+  }
+}

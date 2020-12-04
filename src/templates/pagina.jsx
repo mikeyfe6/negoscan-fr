@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 import Reactmarkdown from "react-markdown"
+import axios from "axios"
+
 import Img from "gatsby-image"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -9,6 +11,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import ProfLayout from "../components/proflayout"
 
 import profStyles from "../styles/modules/profStyles.module.scss"
+
+import "../styles/themes.scss"
+
+const apiURL = process.env.GATSBY_BASE_URL
 
 const NegositeTemplate = ({ data }) => {
   // useEffect(() => {
@@ -20,9 +26,24 @@ const NegositeTemplate = ({ data }) => {
   //   hideDiv()
   // }, [])
 
+  const [links, setLinks] = useState([])
+  const [color, setColor] = useState("")
+
+  useEffect(() => {
+    const getLinks = async () => {
+      const res = await axios.get(
+        `${apiURL}/users/${data.strapiNegosite.website.id}`
+      )
+      setColor(res.data.gebruiker.bgfree)
+      setLinks(res.data.connections)
+      console.log(res)
+    }
+    getLinks()
+  }, [data.strapiNegosite.website.id])
+
   return (
     <ProfLayout>
-      <Img
+      {/* <Img
         fluid={data.strapiNegosite.background.childImageSharp.fluid}
         style={{
           width: "100vw",
@@ -38,24 +59,34 @@ const NegositeTemplate = ({ data }) => {
           textAlign: "center",
           // opacity: 0.1,
         }}
-      />
-      <div
-        className={profStyles.profCenter}
-        style={{ zIndex: 2, position: "relative" }}
-      >
-        <Img
-          fixed={data.strapiNegosite.avatar.childImageSharp.fixed}
-          className={profStyles.avatar}
-        />
+      /> */}
 
-        <h1>{data.strapiNegosite.profiel}</h1>
-        <Reactmarkdown
-          source={data.strapiNegosite.biografie}
-          className={profStyles.profielContent}
-          escapeHtml={false}
-        />
-        <ul className={profStyles.profLinks}>
-          <li
+      <div className={`theme-${color}`}>
+        <div
+          className={profStyles.profCenter}
+          style={{ zIndex: 2, position: "relative" }}
+        >
+          <Img
+            fixed={data.strapiNegosite.avatar.childImageSharp.fixed}
+            className={profStyles.avatar}
+          />
+
+          <h1>{data.strapiNegosite.profiel}</h1>
+          <Reactmarkdown
+            source={data.strapiNegosite.biografie}
+            className={profStyles.profielContent}
+            escapeHtml={false}
+          />
+
+          <ul>
+            {links.map(document => (
+              <li key={document.id} className={`theme-${color}-links`}>
+                {document.title}
+              </li>
+            ))}
+          </ul>
+
+          {/* <li
             style={{
               border: `3px solid ${data.strapiNegosite.linklook}`,
               padding: "1rem 10rem",
@@ -71,68 +102,33 @@ const NegositeTemplate = ({ data }) => {
             >
               {data.strapiNegosite.sociallinks.instagram}
             </a>
-          </li>
+          </li> */}
 
-          <li
+          <ul
             style={{
-              border: `3px solid ${data.strapiNegosite.linklook}`,
-              padding: "1rem 10rem",
-              borderRadius: "20px",
-              marginBottom: "2rem",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            <a
-              href={`https://${data.strapiNegosite.sociallinks.facebook}`}
-              rel="noopener noreferrer"
-              target="_blank"
-              className="proflink"
-            >
-              {data.strapiNegosite.sociallinks.facebook}
-            </a>
-          </li>
+            <li>
+              <FontAwesomeIcon icon="coffee" size="3x" color="#72be72" />
+            </li>
+            <li>
+              <FontAwesomeIcon icon="coffee" size="3x" color="#72be72" />
+            </li>
+            <li>
+              <FontAwesomeIcon icon="coffee" size="3x" color="#72be72" />
+            </li>
+          </ul>
 
-          <li
-            style={{
-              border: `3px solid ${data.strapiNegosite.linklook}`,
-              padding: "1rem 10rem",
-              borderRadius: "20px",
-              marginBottom: "2rem",
-            }}
-          >
-            <a
-              href={`https://${data.strapiNegosite.sociallinks.twitter}`}
-              rel="noopener noreferrer"
-              target="_blank"
-              className="proflink"
-            >
-              {data.strapiNegosite.sociallinks.twitter}
-            </a>
-          </li>
-        </ul>
-        <ul
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <li>
-            <FontAwesomeIcon icon="coffee" size="3x" color="#72be72" />
-          </li>
-          <li>
-            <FontAwesomeIcon icon="coffee" size="3x" color="#72be72" />
-          </li>
-          <li>
-            <FontAwesomeIcon icon="coffee" size="3x" color="#72be72" />
-          </li>
-        </ul>
-        {/* 
-        <p>
-          by{" "}
-          <Link to={`/gebruiker/User_${data.strapiNegosite.website.id}`}>
-            {data.strapiNegosite.website.username}
-          </Link>
-        </p> */}
+          {/* <p>
+            by{" "}
+            <Link to={`/gebruiker/User_${data.strapiNegosite.website.id}`}>
+              {data.strapiNegosite.website.username}
+            </Link>
+          </p> */}
+        </div>
       </div>
     </ProfLayout>
   )

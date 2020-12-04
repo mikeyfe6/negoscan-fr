@@ -28,7 +28,7 @@ export default () => {
   const [loading, setLoading] = useState(false)
 
   const linkTitle = useRef()
-  const [newLink, setNewLink] = useState()
+  const [newLink, setNewLink] = useState("")
 
   const [links, setLinks] = useState([])
 
@@ -259,25 +259,28 @@ export default () => {
     setLinks(links.filter(el => el.id !== link.id))
   }
 
-  // const handleNewLinkChange = e => {
-  // }
-
-  const handleNewLink = link => {
-    setNewLink(link)
+  const handleNewLink = async e => {
+    setNewLink(e.target.value)
   }
 
-  const editLink = async (e, link) => {
-    // console.log("shows newlinks", newLinks)
-    // const params = {
-    //   title: editlinkTitle.current.value,
-    // }
-    // const res = await axios.put(`${apiURL}/connections/${link.id}`, params, {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // })
-    // console.log(res)
-    // setLinks(res.data.title)
+  const editLink = async link => {
+    const params = {
+      title: newLink,
+    }
+    const res = await axios.put(`${apiURL}/connections/${link.id}`, params, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    const newLinks = links.map(el => {
+      if (el.id === link.id) {
+        return res.data
+      }
+      return el
+    })
+    setLinks(newLinks)
+    setNewLink("")
   }
 
   useEffect(() => {
@@ -709,31 +712,33 @@ export default () => {
                   checked={link.visible}
                   onChange={e => toggleLink(link, e.target.checked)}
                 />
-                <p> {link.title}</p>
+                <p>{link.title}</p>
                 <div>
                   <input
+                    className={accountStyles.editInput}
                     id={link.id}
                     key={link.id}
                     type="text"
-                    value={newLink}
-                    onChange={e => {
-                      handleNewLink(e.target.value[link])
-                      console.log(e.target.value)
-                    }}
+                    value={newLink[link]}
+                    onChange={handleNewLink}
                     placeholder="edit title"
                     minLength="5"
                     required
                   />
                   <button
+                    className={`${accountStyles.btn} ${accountStyles.btnLight}`}
                     onClick={event => {
-                      editLink(link)
-                      console.log(newLink)
+                      editLink({
+                        id: link.id,
+                        value: newLink,
+                      })
                       event.preventDefault()
                     }}
                   >
                     Edit Link {link.id}
                   </button>
                   <button
+                    className={`${accountStyles.btn} ${accountStyles.btnSecondary}`}
                     onClick={event => {
                       deleteLink(link)
                       event.preventDefault()

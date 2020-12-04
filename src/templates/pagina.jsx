@@ -11,11 +11,14 @@ import ProfLayout from "../components/proflayout"
 import profStyles from "../styles/modules/profStyles.module.scss"
 
 const NegositeTemplate = ({ data }) => {
-  // function hideDiv(elem) {
-  //   if (elem.href == "")
-  //     document.getElementById("hideDiv").style.display = "none"
-  //   else document.getElementById("hideDiv").style.display = "block"
-  // }
+  // useEffect(() => {
+  //   function hideDiv(elem) {
+  //     if (elem.href === "")
+  //       document.getElementById("hideDiv").style.display = "none"
+  //     else document.getElementById("hideDiv").style.display = "block"
+  //   }
+  //   hideDiv()
+  // }, [])
 
   return (
     <ProfLayout>

@@ -152,6 +152,17 @@
     }
   }
 
+  .edit-input {
+    border: 0;
+    border-bottom: 1px solid #b4becb;
+    padding: 3px;
+    font-size: 16px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
   .profile-info {
     flex: 0.75;
     margin-left: 10%;

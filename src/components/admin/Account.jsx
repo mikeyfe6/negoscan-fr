@@ -412,7 +412,11 @@ export default () => {
     const params = {
       visible: checked,
     }
-    const res = await axios.put(`${apiURL}/connections/${link.id}`, params)
+    const res = await axios.put(`${apiURL}/connections/${link.id}`, params, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
 
     const newLinks = links.map(el => {
       if (el.id === link.id) {
@@ -468,7 +472,7 @@ export default () => {
   }
 
   const editTheHyperLink = async link => {
-    if (!editLink || /^\s*$/.test(editLink)) {
+    if (!editHyperLink || /^\s*$/.test(editHyperLink)) {
       return [
         setLinkError("hoooooo maar"),
         setTimeout(() => setLinkError(null), 5000),

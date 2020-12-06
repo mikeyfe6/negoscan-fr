@@ -141,12 +141,6 @@ export const query = graphql`
     strapiNegosite(id: { eq: $id }) {
       profiel
       biografie
-      linklook
-      sociallinks {
-        facebook
-        twitter
-        instagram
-      }
       background {
         childImageSharp {
           fluid(maxWidth: 1200) {

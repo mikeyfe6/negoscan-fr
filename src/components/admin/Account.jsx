@@ -1,6 +1,13 @@
 import React, { useState, useRef, useEffect } from "react"
 import axios from "axios"
-import { FaLock, FaAt, FaUser } from "react-icons/fa"
+import {
+  FaLock,
+  FaAt,
+  FaUser,
+  FaFacebookF,
+  FaInstagramSquare,
+  FaTwitter,
+} from "react-icons/fa"
 
 import { navigate } from "@reach/router"
 import { getUser, logout } from "../../services/auth"
@@ -19,20 +26,25 @@ const ErrorMessage = ({ text }) => {
   )
 }
 
+const DoThis = ({ text }) => {
+  return (
+    <div className={accountStyles.logerror}>
+      <span>{text}</span>
+    </div>
+  )
+}
+
 export default () => {
   const gatsbyUser = getUser()
 
   const [image, setImage] = useState()
   const [preview, setPreview] = useState()
   const fileInputRef = useRef()
+
   const [loading, setLoading] = useState(false)
-
-  const linkTitle = useRef()
-  const [newLink, setNewLink] = useState("")
-
-  const [links, setLinks] = useState([])
-
   const [error, setError] = useState(null)
+
+  const [linkError, setLinkError] = useState(null)
 
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
@@ -42,17 +54,32 @@ export default () => {
   const [disabledEmail, setDisabledEmail] = useState(true)
   const [disabledPassword, setDisabledPassword] = useState(true)
 
+  const [fbLink, setFbLink] = useState("")
+  const [twLink, setTwLink] = useState("")
+  const [igLink, setIgLink] = useState("")
+
+  const [disabledFbLink, setDisabledFbLink] = useState(true)
+  const [disabledTwLink, setDisabledTwLink] = useState(true)
+  const [disabledIgLink, setDisabledIgLink] = useState(true)
+
+  const linkTitle = useRef()
+  const hyperLink = useRef()
+  const [links, setLinks] = useState([])
+
+  const [editLink, setEditLink] = useState("")
+  const [editHyperLink, setEditHyperLink] = useState("")
+
   const [color, setColor] = useState()
 
   const token = gatsbyUser.jwt
 
-  // AVATAR CHANGE
+  // AVATAR CHANGE <--------------------------------------------------------------------------------> AVATAR CHANGE //
   function removeHeading() {
     document.getElementById("avatar-image").src = noavatar
     document.getElementById("iphone-avatar").src = noavatar
   }
 
-  // SEND AVATAR
+  // SEND AVATAR <--------------------------------------------------------------------------------> SEND AVATAR //
   const handleSubmit = async e => {
     e.preventDefault()
 
@@ -103,7 +130,7 @@ export default () => {
     getAvatarImage()
   }, [gatsbyUser.user.gebruiker.id, token])
 
-  // UPDATE PROFILE - USERNAME
+  // UPDATE USERNAME <--------------------------------------------------------------------------------> UPDATE USERNAME //
 
   const setUsernameHandler = e => {
     setUsername(e.target.value)
@@ -125,10 +152,12 @@ export default () => {
           },
         }
       )
+      setError(null)
       setUsername(res.data.profiel)
+      setDisabledUsername(true)
     } catch (err) {
       console.log(err.message)
-      setError("Errorrrr")
+      setError("Errorrrr B")
       setTimeout(() => setError(null), 5000)
     }
   }
@@ -148,8 +177,7 @@ export default () => {
     getUsername()
   }, [gatsbyUser.user.gebruiker.id, token])
 
-  // UPDATE PROFILE - EMAIL
-
+  // UPDATE EMAIL <--------------------------------------------------------------------------------> UPDATE EMAIL //
   const setEmailHandler = e => {
     setEmail(e.target.value)
   }
@@ -171,6 +199,7 @@ export default () => {
         }
       )
       setEmail(res.data.email)
+      setDisabledEmail(true)
     } catch (err) {
       console.log(err.message)
       // setTimeout(() => setError(null), 5000)
@@ -192,7 +221,139 @@ export default () => {
     getEmail()
   }, [gatsbyUser.user.gebruiker.id, token])
 
-  // UPDATE PROFILE - PASSWORD
+  // UPDATE FBLINK <--------------------------------------------------------------------------------> UPDATE FBLINK //
+  const setFbHandler = e => {
+    setFbLink(e.target.value)
+  }
+
+  const submitFB = async e => {
+    e.preventDefault()
+
+    const params = {
+      facebooklink: fbLink,
+    }
+    try {
+      const res = await axios.put(
+        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
+        params,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      setFbLink(res.data.facebooklink)
+      setDisabledFbLink(true)
+    } catch (err) {
+      console.log(err.message)
+      // setTimeout(() => setError(null), 5000)
+    }
+  }
+
+  useEffect(() => {
+    const getFbLink = async () => {
+      const res = await axios.get(
+        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      setFbLink(res.data.facebooklink)
+    }
+    getFbLink()
+  }, [gatsbyUser.user.gebruiker.id, token])
+
+  // UPDATE TWLINK <--------------------------------------------------------------------------------> UPDATE TWLINK //
+  const setTwHandler = e => {
+    setTwLink(e.target.value)
+  }
+
+  const submitTW = async e => {
+    e.preventDefault()
+
+    const params = {
+      twitterlink: twLink,
+    }
+    try {
+      const res = await axios.put(
+        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
+        params,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      setTwLink(res.data.twitterlink)
+      setDisabledTwLink(true)
+    } catch (err) {
+      console.log(err.message)
+      // setTimeout(() => setError(null), 5000)
+    }
+  }
+
+  useEffect(() => {
+    const getTwLink = async () => {
+      const res = await axios.get(
+        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      setTwLink(res.data.twitterlink)
+    }
+    getTwLink()
+  }, [gatsbyUser.user.gebruiker.id, token])
+
+  // UPDATE IGLINK <--------------------------------------------------------------------------------> UPDATE IGLINK //
+  const setIgHandler = e => {
+    setIgLink(e.target.value)
+  }
+
+  const submitIG = async e => {
+    e.preventDefault()
+
+    const params = {
+      instagramlink: igLink,
+    }
+    try {
+      const res = await axios.put(
+        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
+        params,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      setIgLink(res.data.instagramlink)
+      setDisabledIgLink(true)
+    } catch (err) {
+      console.log(err.message)
+      // setTimeout(() => setError(null), 5000)
+    }
+  }
+
+  useEffect(() => {
+    const getIgLink = async () => {
+      const res = await axios.get(
+        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      setIgLink(res.data.instagramlink)
+    }
+    getIgLink()
+  }, [gatsbyUser.user.gebruiker.id, token])
+
+  // UPDATE PASSWORD <--------------------------------------------------------------------------------> UPDATE PASSWORD //
   const setPasswordHandler = e => {
     setPassword(e.target.value)
   }
@@ -214,16 +375,28 @@ export default () => {
         }
       )
       console.log(res)
+      setDisabledPassword(true)
     } catch (err) {
       console.log(err.message)
       // setTimeout(() => setError(null), 5000)
     }
   }
 
-  // CREATE LINKS
+  // CREATE LINKS <--------------------------------------------------------------------------------> CREATE LINKS //
   const createLink = async () => {
+    if (
+      (!linkTitle.current.value && !hyperLink.current.value) ||
+      /^\s*$/.test(linkTitle.current.value && hyperLink.current.value)
+    ) {
+      return [
+        setLinkError("hoooooo maar"),
+        setTimeout(() => setLinkError(null), 5000),
+      ]
+    }
+
     const params = {
       title: linkTitle.current.value,
+      hyperlink: hyperLink.current.value,
     }
     const res = await axios.post(`${apiURL}/connections`, params, {
       headers: {
@@ -259,13 +432,24 @@ export default () => {
     setLinks(links.filter(el => el.id !== link.id))
   }
 
-  const handleNewLink = async e => {
-    setNewLink(e.target.value)
+  const handleEditLink = async e => {
+    setEditLink(e.target.value)
   }
 
-  const editLink = async link => {
+  const handleEditHyperLink = async e => {
+    setEditHyperLink(e.target.value)
+  }
+
+  const editTheLink = async link => {
+    if (!editLink || /^\s*$/.test(editLink)) {
+      return [
+        setLinkError("hoooooo maar"),
+        setTimeout(() => setLinkError(null), 5000),
+      ]
+    }
+
     const params = {
-      title: newLink,
+      title: editLink,
     }
     const res = await axios.put(`${apiURL}/connections/${link.id}`, params, {
       headers: {
@@ -280,7 +464,34 @@ export default () => {
       return el
     })
     setLinks(newLinks)
-    setNewLink("")
+    setEditLink("")
+  }
+
+  const editTheHyperLink = async link => {
+    if (!editLink || /^\s*$/.test(editLink)) {
+      return [
+        setLinkError("hoooooo maar"),
+        setTimeout(() => setLinkError(null), 5000),
+      ]
+    }
+
+    const params = {
+      hyperlink: editHyperLink,
+    }
+    const res = await axios.put(`${apiURL}/connections/${link.id}`, params, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    const newLinks = links.map(el => {
+      if (el.id === link.id) {
+        return res.data
+      }
+      return el
+    })
+    setLinks(newLinks)
+    setEditHyperLink("")
   }
 
   useEffect(() => {
@@ -295,7 +506,7 @@ export default () => {
     getLinks()
   }, [token])
 
-  // CHANGE BACKGROUND
+  // CHANGE BACKGROUND <--------------------------------------------------------------------------------> CHANGE BACKGROUND //
   const onRadioChange = async e => {
     setColor(e.target.value)
 
@@ -316,7 +527,7 @@ export default () => {
       })
   }
 
-  function changeHeadingBg(color) {
+  const changeHeadingBg = color => {
     var c = document.getElementById("iphone-linklook").children
     var i
     switch (color) {
@@ -380,7 +591,7 @@ export default () => {
 
   return (
     <div className={`${accountStyles.gridContainer} ${accountStyles.card}`}>
-      {/* SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR */}
+      {/* SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR <--------------------------------------------------------------------------------> SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR */}
 
       <div
         className={`${accountStyles.Sidebar} ${accountStyles.card}`}
@@ -413,13 +624,13 @@ export default () => {
         </button>
       </div>
 
-      {/* NAVIGATION NAVIGATION NAVIGATION NAVIGATION NAVIGATION*/}
+      {/* NAVIGATION NAVIGATION NAVIGATION NAVIGATION NAVIGATION <--------------------------------------------------------------------------------> NAVIGATION NAVIGATION NAVIGATION NAVIGATION NAVIGATION */}
       <div className={`${accountStyles.Navigation} ${accountStyles.card}`}>
         {" "}
         NAVIGATION
       </div>
 
-      {/* PREVIEW PREVIEW PREVIEW PREVIEW PREVIEW */}
+      {/* PREVIEW PREVIEW PREVIEW PREVIEW PREVIEW <--------------------------------------------------------------------------------> PREVIEW PREVIEW PREVIEW PREVIEW PREVIEW */}
       <div className={`${accountStyles.Preview} ${accountStyles.card}`}>
         <div className={accountStyles.iphoneFrame}>
           {" "}
@@ -442,7 +653,7 @@ export default () => {
           <div>
             <ul className={accountStyles.iphoneLinks} id="iphone-linklook">
               {links.map(link => (
-                <li key={link.id} className={accountStyles.iphoneLink}>
+                <li key={link.id} id={`link${link.id}`} hidden={!link.visible}>
                   {link.title}
                 </li>
               ))}
@@ -456,7 +667,7 @@ export default () => {
         </div>
       </div>
 
-      {/* DASHBOARD DASHBOARD DASHBOARD DASHBOARD DASHBOARD */}
+      {/* DASHBOARD DASHBOARD DASHBOARD DASHBOARD DASHBOARD <--------------------------------------------------------------------------------> DASHBOARD DASHBOARD DASHBOARD DASHBOARD DASHBOARD */}
       <div
         className={`${accountStyles.Dashboard} ${accountStyles.p3} ${accountStyles.card}`}
       >
@@ -670,19 +881,144 @@ export default () => {
           <br />
         </div>
         <br /> <br /> <br />
-        <p>
-          <b>COLOR BORDERS :</b> {gatsbyUser.user.gebruiker.linklook}
-        </p>
-        <p>
-          <b>FACEBOOK :</b> {gatsbyUser.user.gebruiker.sociallinks.facebook}
-        </p>
-        <p>
-          <b>TWITTER :</b> {gatsbyUser.user.gebruiker.sociallinks.twitter}
-        </p>
-        <p>
-          {" "}
-          <b>INSTAGRAM :</b> {gatsbyUser.user.gebruiker.sociallinks.instagram}
-        </p>
+        <form onSubmit={submitFB}>
+          <p>
+            <label htmlFor="fblink">
+              <FaFacebookF
+                size="1.5em"
+                style={{
+                  position: "relative",
+                  top: "7.5px",
+                  right: "5px",
+                }}
+              />
+              <input
+                onChange={setFbHandler}
+                value={fbLink}
+                type="text"
+                disabled={disabledFbLink}
+                name="fblink"
+                id="fblink"
+                className={accountStyles.profileInput}
+              />
+            </label>
+            <button
+              style={{
+                marginRight: "5px",
+                paddingTop: "7.5px",
+                paddingBottom: "7.5px",
+              }}
+              className={`${accountStyles.btn} ${accountStyles.btnLight}`}
+              type="button"
+              onClick={() => setDisabledFbLink(false)}
+            >
+              Edit
+            </button>
+            <button
+              className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+              type="submit"
+              style={{
+                paddingTop: "7.5px",
+                paddingBottom: "7.5px",
+              }}
+            >
+              Save Facebook
+            </button>
+            {error && <ErrorMessage text={error} />}
+          </p>
+        </form>
+        <form onSubmit={submitTW}>
+          <p>
+            <label htmlFor="twlink">
+              <FaTwitter
+                size="1.5em"
+                style={{
+                  position: "relative",
+                  top: "7.5px",
+                  right: "5px",
+                }}
+              />
+              <input
+                onChange={setTwHandler}
+                value={twLink}
+                type="text"
+                disabled={disabledTwLink}
+                name="twlink"
+                id="twlink"
+                className={accountStyles.profileInput}
+              />
+            </label>
+            <button
+              style={{
+                marginRight: "5px",
+                paddingTop: "7.5px",
+                paddingBottom: "7.5px",
+              }}
+              className={`${accountStyles.btn} ${accountStyles.btnLight}`}
+              type="button"
+              onClick={() => setDisabledTwLink(false)}
+            >
+              Edit
+            </button>
+            <button
+              className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+              type="submit"
+              style={{
+                paddingTop: "7.5px",
+                paddingBottom: "7.5px",
+              }}
+            >
+              Save Twitter
+            </button>
+            {error && <ErrorMessage text={error} />}
+          </p>
+        </form>
+        <form onSubmit={submitIG}>
+          <p>
+            <label htmlFor="iglink">
+              <FaInstagramSquare
+                size="1.5em"
+                style={{
+                  position: "relative",
+                  top: "7.5px",
+                  right: "5px",
+                }}
+              />
+              <input
+                onChange={setIgHandler}
+                value={igLink}
+                type="text"
+                disabled={disabledIgLink}
+                name="iglink"
+                id="iglink"
+                className={accountStyles.profileInput}
+              />
+            </label>
+            <button
+              style={{
+                marginRight: "5px",
+                paddingTop: "7.5px",
+                paddingBottom: "7.5px",
+              }}
+              className={`${accountStyles.btn} ${accountStyles.btnLight}`}
+              type="button"
+              onClick={() => setDisabledIgLink(false)}
+            >
+              Edit
+            </button>
+            <button
+              className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+              type="submit"
+              style={{
+                paddingTop: "7.5px",
+                paddingBottom: "7.5px",
+              }}
+            >
+              Save Instagram
+            </button>
+            {error && <ErrorMessage text={error} />}
+          </p>
+        </form>
         <br />
         <div>
           <h2>Link list:</h2>
@@ -690,6 +1026,14 @@ export default () => {
             type="text"
             placeholder="title"
             ref={linkTitle}
+            minLength="5"
+            required
+          />
+          <h2>Hyperlink:</h2>
+          <input
+            type="url"
+            placeholder="hyperlink"
+            ref={hyperLink}
             minLength="5"
             required
           />
@@ -701,6 +1045,7 @@ export default () => {
           >
             Create a link
           </button>
+          {linkError && <DoThis text={linkError} />}
           <ul>
             {links.map(link => (
               <li
@@ -709,33 +1054,60 @@ export default () => {
               >
                 <input
                   type="checkbox"
+                  id={`checkbox${link.id}`}
                   checked={link.visible}
                   onChange={e => toggleLink(link, e.target.checked)}
                 />
-                <p>{link.title}</p>
+                <div>
+                  {" "}
+                  <p style={{ color: "green" }}>{link.title}</p>
+                  <p style={{ color: "red" }}>{link.hyperlink}</p>
+                </div>
+
                 <div>
                   <input
                     className={accountStyles.editInput}
-                    id={link.id}
-                    key={link.id}
+                    id={`editlink${link.id}`}
                     type="text"
-                    value={newLink[link]}
-                    onChange={handleNewLink}
+                    value={editLink[link]}
+                    onChange={handleEditLink}
                     placeholder="edit title"
+                    minLength="5"
+                    required
+                  />
+                  <input
+                    className={accountStyles.editInput}
+                    id={`hyperlink${link.id}`}
+                    type="url"
+                    value={editHyperLink[link]}
+                    onChange={handleEditHyperLink}
+                    placeholder="edit hyperlink"
                     minLength="5"
                     required
                   />
                   <button
                     className={`${accountStyles.btn} ${accountStyles.btnLight}`}
                     onClick={event => {
-                      editLink({
+                      editTheLink({
                         id: link.id,
-                        value: newLink,
+                        value: editLink,
                       })
                       event.preventDefault()
                     }}
                   >
                     Edit Link {link.id}
+                  </button>
+                  <button
+                    className={`${accountStyles.btn} ${accountStyles.btnLight}`}
+                    onClick={event => {
+                      editTheHyperLink({
+                        id: link.id,
+                        value: editHyperLink,
+                      })
+                      event.preventDefault()
+                    }}
+                  >
+                    Edit Hyperlink {link.id}
                   </button>
                   <button
                     className={`${accountStyles.btn} ${accountStyles.btnSecondary}`}
@@ -864,7 +1236,7 @@ export default () => {
         </ul>
       </div>
 
-      {/* LINK LINK LINK LINK LINK */}
+      {/* LINK LINK LINK LINK LINK <--------------------------------------------------------------------------------> LINK LINK LINK LINK LINK */}
 
       <div className={`${accountStyles.Link} ${accountStyles.card}`}>LINK</div>
     </div>

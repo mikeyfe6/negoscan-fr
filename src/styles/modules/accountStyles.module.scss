@@ -76,8 +76,19 @@
       width: 200px;
     }
 
+    &-socials {
+      display: flex;
+      position: absolute;
+      top: 82.5%;
+      left: 27.5%;
+    }
+
     &-link {
       margin: 5px 0;
+    }
+
+    &-icons {
+      margin: 7.5px;
     }
   }
 }
@@ -89,9 +100,8 @@
   .avatarformcont {
     display: flex;
     position: relative;
-    padding-bottom: 5%;
+    padding-bottom: 2.5%;
     margin-left: 2.5%;
-    border-bottom: 3px dotted lightgray;
 
     .loading-complete {
       color: white;
@@ -161,6 +171,10 @@
     &:focus {
       outline: none;
     }
+
+    &::placeholder {
+      font-size: 0.75em;
+    }
   }
 
   .profile-info {
@@ -193,11 +207,61 @@
     border: none;
     margin-right: 5%;
   }
+
+  .link-cont {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+
+    .link-input {
+      padding: 10px;
+      font-size: 14px;
+      opacity: 0.75;
+      outline: none;
+      border: none;
+
+      &::placeholder {
+        font-size: 1em;
+      }
+    }
+  }
+
+  .social-cont {
+    display: flex;
+    margin-left: 5%;
+    margin-right: 1%;
+    justify-content: space-between;
+
+    .social-form {
+      flex-wrap: wrap;
+    }
+
+    .social-icons {
+      position: relative;
+      top: 7.5px;
+      right: 5px;
+      margin-left: 10px;
+    }
+
+    .social-input {
+      padding: 10px;
+      opacity: 0.75;
+      outline: none;
+      border: none;
+    }
+
+    .social-buttons {
+      margin-top: 10px;
+    }
+  }
 }
 
-.link-container {
+.links-cont {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  align-content: center;
 }
 
 .yellowstyle {
@@ -212,7 +276,19 @@
     border-radius: 3px;
     box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
   }
+
+  &-icons {
+    display: flex;
+    position: absolute;
+    top: 82.5%;
+    left: 31.5%;
+
+    &:nth-child(n) {
+      color: yellow;
+    }
+  }
 }
+
 .yellowtheme {
   width: 125px;
   height: 200px;
@@ -245,6 +321,17 @@
     border: 1px solid #878787;
     border-radius: 3px;
     box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+  }
+
+  &-icons {
+    display: flex;
+    position: absolute;
+    top: 82.5%;
+    left: 31.5%;
+
+    &:nth-child(n) {
+      color: grey;
+    }
   }
 }
 .graytheme {
@@ -280,6 +367,17 @@
     border-radius: 3px;
     box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
   }
+
+  &-icons {
+    display: flex;
+    position: absolute;
+    top: 82.5%;
+    left: 31.5%;
+
+    &:nth-child(n) {
+      color: pink;
+    }
+  }
 }
 .pinktheme {
   width: 125px;
@@ -314,6 +412,17 @@
     border-radius: 3px;
     box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
   }
+
+  &-icons {
+    display: flex;
+    position: absolute;
+    top: 82.5%;
+    left: 31.5%;
+
+    &:nth-child(n) {
+      color: white;
+    }
+  }
 }
 .blacktheme {
   width: 125px;
@@ -347,6 +456,17 @@
     border: 1px solid brown;
     border-radius: 3px;
     box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+  }
+
+  &-icons {
+    display: flex;
+    position: absolute;
+    top: 82.5%;
+    left: 31.5%;
+
+    &:nth-child(n) {
+      color: brown;
+    }
   }
 }
 .browntheme {

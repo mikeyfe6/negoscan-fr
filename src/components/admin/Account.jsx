@@ -5,7 +5,7 @@ import {
   FaAt,
   FaUser,
   FaFacebookF,
-  FaInstagramSquare,
+  FaInstagram,
   FaTwitter,
 } from "react-icons/fa"
 
@@ -74,7 +74,7 @@ export default () => {
   const token = gatsbyUser.jwt
 
   // AVATAR CHANGE <--------------------------------------------------------------------------------> AVATAR CHANGE //
-  function removeHeading() {
+  const removeHeading = () => {
     document.getElementById("avatar-image").src = noavatar
     document.getElementById("iphone-avatar").src = noavatar
   }
@@ -534,8 +534,11 @@ export default () => {
   const changeHeadingBg = color => {
     var c = document.getElementById("iphone-linklook").children
     var i
+
     switch (color) {
       case "geel":
+        document.getElementById("iphone-iconlook").className =
+          accountStyles.yellowstyleIcons
         document.getElementById("iphone-bg").className =
           accountStyles.yellowstyle
         for (i = 0; i < c.length; i++) {
@@ -543,18 +546,24 @@ export default () => {
         }
         break
       case "grijs":
+        document.getElementById("iphone-iconlook").className =
+          accountStyles.graystyleIcons
         document.getElementById("iphone-bg").className = accountStyles.graystyle
         for (i = 0; i < c.length; i++) {
           c[i].className = accountStyles.graystyleLinks
         }
         break
       case "roze":
+        document.getElementById("iphone-iconlook").className =
+          accountStyles.pinkstyleIcons
         document.getElementById("iphone-bg").className = accountStyles.pinkstyle
         for (i = 0; i < c.length; i++) {
           c[i].className = accountStyles.pinkstyleLinks
         }
         break
       case "zwart":
+        document.getElementById("iphone-iconlook").className =
+          accountStyles.blackstyleIcons
         document.getElementById("iphone-bg").className =
           accountStyles.blackstyle
         for (i = 0; i < c.length; i++) {
@@ -562,6 +571,8 @@ export default () => {
         }
         break
       case "bruin":
+        document.getElementById("iphone-iconlook").className =
+          accountStyles.brownstyleIcons
         document.getElementById("iphone-bg").className =
           accountStyles.brownstyle
         for (i = 0; i < c.length; i++) {
@@ -662,6 +673,13 @@ export default () => {
                 </li>
               ))}
             </ul>
+          </div>
+          <div className={accountStyles.iphoneSocials} id="iphone-iconlook">
+            <FaFacebookF size="1.5em" />
+            &nbsp;&nbsp;&nbsp;
+            <FaTwitter size="1.5em" />
+            &nbsp;&nbsp;&nbsp;
+            <FaInstagram size="1.5em" />
           </div>
           {/* <img
             src={gatsbyUser.user.gebruiker.background.url}
@@ -884,191 +902,184 @@ export default () => {
 
           <br />
         </div>
-        <br /> <br /> <br />
-        <form onSubmit={submitFB}>
-          <p>
-            <label htmlFor="fblink">
-              <FaFacebookF
-                size="1.5em"
+        <br />
+        <div className={accountStyles.socialCont}>
+          <form onSubmit={submitFB} className={accountStyles.socialForm}>
+            <div>
+              <label htmlFor="fblink">
+                <FaFacebookF
+                  size="1.5em"
+                  className={accountStyles.socialIcons}
+                />
+                <input
+                  onChange={setFbHandler}
+                  value={fbLink}
+                  type="text"
+                  disabled={disabledFbLink}
+                  name="fblink"
+                  id="fblink"
+                  className={accountStyles.socialInput}
+                />
+              </label>
+            </div>
+            <div className={accountStyles.socialButtons}>
+              <button
                 style={{
-                  position: "relative",
-                  top: "7.5px",
-                  right: "5px",
+                  marginRight: "7.5px",
+                  paddingTop: "7.5px",
+                  paddingBottom: "7.5px",
                 }}
-              />
-              <input
-                onChange={setFbHandler}
-                value={fbLink}
-                type="text"
-                disabled={disabledFbLink}
-                name="fblink"
-                id="fblink"
-                className={accountStyles.profileInput}
-              />
-            </label>
-            <button
-              style={{
-                marginRight: "5px",
-                paddingTop: "7.5px",
-                paddingBottom: "7.5px",
-              }}
-              className={`${accountStyles.btn} ${accountStyles.btnLight}`}
-              type="button"
-              onClick={() => setDisabledFbLink(false)}
-            >
-              Edit
-            </button>
-            <button
-              className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
-              type="submit"
-              style={{
-                paddingTop: "7.5px",
-                paddingBottom: "7.5px",
-              }}
-            >
-              Save Facebook
-            </button>
-            {error && <ErrorMessage text={error} />}
-          </p>
-        </form>
-        <form onSubmit={submitTW}>
-          <p>
-            <label htmlFor="twlink">
-              <FaTwitter
-                size="1.5em"
+                className={`${accountStyles.btn} ${accountStyles.btnLight}`}
+                type="button"
+                onClick={() => setDisabledFbLink(false)}
+              >
+                Edit
+              </button>
+              <button
+                className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+                type="submit"
                 style={{
-                  position: "relative",
-                  top: "7.5px",
-                  right: "5px",
+                  paddingTop: "7.5px",
+                  paddingBottom: "7.5px",
                 }}
-              />
-              <input
-                onChange={setTwHandler}
-                value={twLink}
-                type="text"
-                disabled={disabledTwLink}
-                name="twlink"
-                id="twlink"
-                className={accountStyles.profileInput}
-              />
-            </label>
-            <button
-              style={{
-                marginRight: "5px",
-                paddingTop: "7.5px",
-                paddingBottom: "7.5px",
-              }}
-              className={`${accountStyles.btn} ${accountStyles.btnLight}`}
-              type="button"
-              onClick={() => setDisabledTwLink(false)}
-            >
-              Edit
-            </button>
-            <button
-              className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
-              type="submit"
-              style={{
-                paddingTop: "7.5px",
-                paddingBottom: "7.5px",
-              }}
-            >
-              Save Twitter
-            </button>
+              >
+                Save Facebook
+              </button>
+            </div>
             {error && <ErrorMessage text={error} />}
-          </p>
-        </form>
-        <form onSubmit={submitIG}>
-          <p>
-            <label htmlFor="iglink">
-              <FaInstagramSquare
-                size="1.5em"
+          </form>
+          <form onSubmit={submitTW} className={accountStyles.socialForm}>
+            <div>
+              <label htmlFor="twlink">
+                <FaTwitter size="1.5em" className={accountStyles.socialIcons} />
+                <input
+                  onChange={setTwHandler}
+                  value={twLink}
+                  type="text"
+                  disabled={disabledTwLink}
+                  name="twlink"
+                  id="twlink"
+                  className={accountStyles.socialInput}
+                />
+              </label>
+            </div>
+            <div className={accountStyles.socialButtons}>
+              <button
                 style={{
-                  position: "relative",
-                  top: "7.5px",
-                  right: "5px",
+                  marginRight: "7.5px",
+                  paddingTop: "7.5px",
+                  paddingBottom: "7.5px",
                 }}
-              />
-              <input
-                onChange={setIgHandler}
-                value={igLink}
-                type="text"
-                disabled={disabledIgLink}
-                name="iglink"
-                id="iglink"
-                className={accountStyles.profileInput}
-              />
-            </label>
-            <button
-              style={{
-                marginRight: "5px",
-                paddingTop: "7.5px",
-                paddingBottom: "7.5px",
-              }}
-              className={`${accountStyles.btn} ${accountStyles.btnLight}`}
-              type="button"
-              onClick={() => setDisabledIgLink(false)}
-            >
-              Edit
-            </button>
-            <button
-              className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
-              type="submit"
-              style={{
-                paddingTop: "7.5px",
-                paddingBottom: "7.5px",
-              }}
-            >
-              Save Instagram
-            </button>
+                className={`${accountStyles.btn} ${accountStyles.btnLight}`}
+                type="button"
+                onClick={() => setDisabledTwLink(false)}
+              >
+                Edit
+              </button>
+              <button
+                className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+                type="submit"
+                style={{
+                  paddingTop: "7.5px",
+                  paddingBottom: "7.5px",
+                }}
+              >
+                Save Twitter
+              </button>
+            </div>
             {error && <ErrorMessage text={error} />}
-          </p>
-        </form>
+          </form>
+          <form onSubmit={submitIG} className={accountStyles.socialForm}>
+            <div>
+              <label htmlFor="iglink">
+                <FaInstagram
+                  size="1.5em"
+                  className={accountStyles.socialIcons}
+                />
+                <input
+                  onChange={setIgHandler}
+                  value={igLink}
+                  type="text"
+                  disabled={disabledIgLink}
+                  name="iglink"
+                  id="iglink"
+                  className={accountStyles.socialInput}
+                />
+              </label>
+            </div>
+            <div className={accountStyles.socialButtons}>
+              <button
+                style={{
+                  marginRight: "7.5px",
+                  paddingTop: "7.5px",
+                  paddingBottom: "7.5px",
+                }}
+                className={`${accountStyles.btn} ${accountStyles.btnLight}`}
+                type="button"
+                onClick={() => setDisabledIgLink(false)}
+              >
+                Edit
+              </button>
+              <button
+                className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+                type="submit"
+                style={{
+                  paddingTop: "7.5px",
+                  paddingBottom: "7.5px",
+                }}
+              >
+                Save Instagram
+              </button>
+            </div>
+            {error && <ErrorMessage text={error} />}
+          </form>
+        </div>
+        <br />
+        <br />
+        <hr />
+        <br />
+        <br />
         <br />
         <div>
-          <h2>Link list:</h2>
-          <input
-            type="text"
-            placeholder="title"
-            ref={linkTitle}
-            minLength="5"
-            required
-          />
-          <h2>Hyperlink:</h2>
-          <input
-            type="url"
-            placeholder="hyperlink"
-            ref={hyperLink}
-            minLength="5"
-            required
-          />
-          <button
-            onClick={event => {
-              createLink()
-              event.preventDefault()
-            }}
-          >
-            Create a link
-          </button>
+          <div className={accountStyles.linkCont}>
+            <h3>Title:</h3>
+            <input
+              className={accountStyles.linkInput}
+              type="text"
+              placeholder="vul titel in"
+              ref={linkTitle}
+              minLength="5"
+              required
+            />
+            <h3>Hyperlink:</h3>
+            <input
+              className={accountStyles.linkInput}
+              type="url"
+              placeholder="voer hyperlink in"
+              ref={hyperLink}
+              minLength="5"
+              required
+            />
+            <button
+              className={accountStyles.btn}
+              onClick={event => {
+                createLink()
+                event.preventDefault()
+              }}
+            >
+              Create a link
+            </button>
+          </div>
           {linkError && <DoThis text={linkError} />}
+          <br />
           <ul>
             {links.map(link => (
               <li
                 key={link.id}
-                className={`${accountStyles.linkContainer} ${accountStyles.card}`}
+                className={`${accountStyles.linksCont} ${accountStyles.card}`}
               >
-                <input
-                  type="checkbox"
-                  id={`checkbox${link.id}`}
-                  checked={link.visible}
-                  onChange={e => toggleLink(link, e.target.checked)}
-                />
                 <div>
-                  {" "}
                   <p style={{ color: "green" }}>{link.title}</p>
-                  <p style={{ color: "red" }}>{link.hyperlink}</p>
-                </div>
-
-                <div>
                   <input
                     className={accountStyles.editInput}
                     id={`editlink${link.id}`}
@@ -1079,6 +1090,21 @@ export default () => {
                     minLength="5"
                     required
                   />
+                </div>
+                <button
+                  className={`${accountStyles.btn} ${accountStyles.btnLight}`}
+                  onClick={event => {
+                    editTheLink({
+                      id: link.id,
+                      value: editLink,
+                    })
+                    event.preventDefault()
+                  }}
+                >
+                  Update Link
+                </button>
+                <div>
+                  <p style={{ color: "red" }}>{link.hyperlink}</p>
                   <input
                     className={accountStyles.editInput}
                     id={`hyperlink${link.id}`}
@@ -1089,44 +1115,43 @@ export default () => {
                     minLength="5"
                     required
                   />
-                  <button
-                    className={`${accountStyles.btn} ${accountStyles.btnLight}`}
-                    onClick={event => {
-                      editTheLink({
-                        id: link.id,
-                        value: editLink,
-                      })
-                      event.preventDefault()
-                    }}
-                  >
-                    Edit Link {link.id}
-                  </button>
-                  <button
-                    className={`${accountStyles.btn} ${accountStyles.btnLight}`}
-                    onClick={event => {
-                      editTheHyperLink({
-                        id: link.id,
-                        value: editHyperLink,
-                      })
-                      event.preventDefault()
-                    }}
-                  >
-                    Edit Hyperlink {link.id}
-                  </button>
-                  <button
-                    className={`${accountStyles.btn} ${accountStyles.btnSecondary}`}
-                    onClick={event => {
-                      deleteLink(link)
-                      event.preventDefault()
-                    }}
-                  >
-                    Delete Link {link.id}
-                  </button>
                 </div>
+                <button
+                  className={`${accountStyles.btn} ${accountStyles.btnLight}`}
+                  onClick={event => {
+                    editTheHyperLink({
+                      id: link.id,
+                      value: editHyperLink,
+                    })
+                    event.preventDefault()
+                  }}
+                >
+                  Update Hyperlink
+                </button>
+                <button
+                  className={`${accountStyles.btn} ${accountStyles.btnSecondary}`}
+                  onClick={event => {
+                    deleteLink(link)
+                    event.preventDefault()
+                  }}
+                >
+                  Delete Link
+                </button>
+                <input
+                  type="checkbox"
+                  id={`checkbox${link.id}`}
+                  checked={link.visible}
+                  onChange={e => toggleLink(link, e.target.checked)}
+                />
               </li>
             ))}
           </ul>
         </div>
+        <br />
+        <br />
+        <h2 style={{ textAlign: "center" }}>
+          <u>Kies Thema</u>
+        </h2>
         <br />
         <br />
         <ul

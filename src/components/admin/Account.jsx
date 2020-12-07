@@ -732,7 +732,7 @@ export default () => {
               />{" "}
               {loading && (
                 <div className={accountStyles.loadingComplete}>
-                  Profielavatar Geupload
+                  Profielfoto Geupload
                 </div>
               )}
             </div>

@@ -7,6 +7,8 @@ import {
   FaFacebookF,
   FaInstagram,
   FaTwitter,
+  FaTrash,
+  FaRegEdit,
 } from "react-icons/fa"
 
 import { navigate } from "@reach/router"
@@ -28,7 +30,7 @@ const ErrorMessage = ({ text }) => {
 
 const DoThis = ({ text }) => {
   return (
-    <div className={accountStyles.logerror}>
+    <div className={accountStyles.linkErrorStyle}>
       <span>{text}</span>
     </div>
   )
@@ -389,7 +391,7 @@ export default () => {
       /^\s*$/.test(linkTitle.current.value && hyperLink.current.value)
     ) {
       return [
-        setLinkError("hoooooo maar"),
+        setLinkError("Posten mislukt, voer de titel of link correct door.."),
         setTimeout(() => setLinkError(null), 5000),
       ]
     }
@@ -447,7 +449,7 @@ export default () => {
   const editTheLink = async link => {
     if (!editLink || /^\s*$/.test(editLink)) {
       return [
-        setLinkError("hoooooo maar"),
+        setLinkError("Updaten mislukt, voer de titel correct door.."),
         setTimeout(() => setLinkError(null), 5000),
       ]
     }
@@ -474,7 +476,7 @@ export default () => {
   const editTheHyperLink = async link => {
     if (!editHyperLink || /^\s*$/.test(editHyperLink)) {
       return [
-        setLinkError("hoooooo maar"),
+        setLinkError("Updaten mislukt, voer de link correct door.."),
         setTimeout(() => setLinkError(null), 5000),
       ]
     }
@@ -614,13 +616,14 @@ export default () => {
           position: "relative",
         }}
       >
-        <p
+        <h5
           style={{
             textAlign: "center",
+            fontSize: "0.9em",
           }}
         >
           Welkom {gatsbyUser.user.username}!
-        </p>
+        </h5>
 
         <button
           style={{
@@ -667,19 +670,43 @@ export default () => {
           />
           <div>
             <ul className={accountStyles.iphoneLinks} id="iphone-linklook">
-              {links.map(link => (
+              {links.slice(0, 5).map(link => (
                 <li key={link.id} id={`link${link.id}`} hidden={!link.visible}>
-                  {link.title}
+                  <a
+                    href={`https://${link.hyperlink}`}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {link.title}
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
           <div className={accountStyles.iphoneSocials} id="iphone-iconlook">
-            <FaFacebookF size="1.5em" />
-            &nbsp;&nbsp;&nbsp;
-            <FaTwitter size="1.5em" />
-            &nbsp;&nbsp;&nbsp;
-            <FaInstagram size="1.5em" />
+            <a
+              href={`https://${fbLink}`}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <FaFacebookF size="1.75em" />
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a
+              href={`https://${twLink}`}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <FaTwitter size="1.75em" />
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a
+              href={`https://${igLink}`}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <FaInstagram size="1.75em" />
+            </a>
           </div>
           {/* <img
             src={gatsbyUser.user.gebruiker.background.url}
@@ -776,18 +803,16 @@ export default () => {
                   className={accountStyles.profileInput}
                 />
               </label>
-              <button
+              <FaRegEdit
+                size="1.1em"
                 style={{
-                  marginRight: "5px",
-                  paddingTop: "7.5px",
-                  paddingBottom: "7.5px",
+                  position: "relative",
+                  top: "5px",
+                  right: "10px",
+                  cursor: "pointer",
                 }}
-                className={`${accountStyles.btn} ${accountStyles.btnLight}`}
-                type="button"
                 onClick={() => setDisabledUsername(false)}
-              >
-                Edit
-              </button>
+              />
               <button
                 className={`${accountStyles.btn} ${accountStyles.btnSecondary}`}
                 type="submit"
@@ -824,18 +849,16 @@ export default () => {
                     className={accountStyles.profileInput}
                   />
                 </label>
-                <button
+                <FaRegEdit
+                  size="1.1em"
                   style={{
-                    marginRight: "5px",
-                    paddingTop: "7.5px",
-                    paddingBottom: "7.5px",
+                    position: "relative",
+                    top: "5px",
+                    right: "10px",
+                    cursor: "pointer",
                   }}
-                  className={`${accountStyles.btn} ${accountStyles.btnLight}`}
-                  type="button"
                   onClick={() => setDisabledEmail(false)}
-                >
-                  Edit
-                </button>
+                />
                 <button
                   className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
                   type="submit"
@@ -873,18 +896,16 @@ export default () => {
                     className={accountStyles.profileInput}
                   />
                 </label>
-                <button
+                <FaRegEdit
+                  size="1.1em"
                   style={{
-                    marginRight: "5px",
-                    paddingTop: "7.5px",
-                    paddingBottom: "7.5px",
+                    position: "relative",
+                    top: "5px",
+                    right: "10px",
+                    cursor: "pointer",
                   }}
-                  className={`${accountStyles.btn} ${accountStyles.btnLight}`}
-                  type="button"
                   onClick={() => setDisabledPassword(false)}
-                >
-                  Edit
-                </button>
+                />
                 <button
                   className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
                   type="submit"
@@ -903,14 +924,24 @@ export default () => {
           <br />
         </div>
         <br />
+        <br />
+        <hr
+          style={{
+            border: "1px solid #223f49",
+            opacity: "0.5",
+          }}
+        />
+        <br />
+        <br />
         <div className={accountStyles.socialCont}>
           <form onSubmit={submitFB} className={accountStyles.socialForm}>
             <div>
               <label htmlFor="fblink">
                 <FaFacebookF
-                  size="1.5em"
+                  size="1.1em"
                   className={accountStyles.socialIcons}
                 />
+                :
                 <input
                   onChange={setFbHandler}
                   value={fbLink}
@@ -924,34 +955,35 @@ export default () => {
             </div>
             <div className={accountStyles.socialButtons}>
               <button
-                style={{
-                  marginRight: "7.5px",
-                  paddingTop: "7.5px",
-                  paddingBottom: "7.5px",
-                }}
-                className={`${accountStyles.btn} ${accountStyles.btnLight}`}
-                type="button"
-                onClick={() => setDisabledFbLink(false)}
-              >
-                Edit
-              </button>
-              <button
                 className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
                 type="submit"
                 style={{
                   paddingTop: "7.5px",
                   paddingBottom: "7.5px",
+                  paddingLeft: "20px",
+                  paddingRight: "20px",
                 }}
               >
                 Save Facebook
               </button>
+              <FaRegEdit
+                size="1.1em"
+                style={{
+                  position: "relative",
+                  top: "5px",
+                  left: "10px",
+                  cursor: "pointer",
+                }}
+                onClick={() => setDisabledFbLink(false)}
+              />
             </div>
             {error && <ErrorMessage text={error} />}
           </form>
           <form onSubmit={submitTW} className={accountStyles.socialForm}>
             <div>
               <label htmlFor="twlink">
-                <FaTwitter size="1.5em" className={accountStyles.socialIcons} />
+                <FaTwitter size="1.1em" className={accountStyles.socialIcons} />
+                :
                 <input
                   onChange={setTwHandler}
                   value={twLink}
@@ -965,27 +997,27 @@ export default () => {
             </div>
             <div className={accountStyles.socialButtons}>
               <button
-                style={{
-                  marginRight: "7.5px",
-                  paddingTop: "7.5px",
-                  paddingBottom: "7.5px",
-                }}
-                className={`${accountStyles.btn} ${accountStyles.btnLight}`}
-                type="button"
-                onClick={() => setDisabledTwLink(false)}
-              >
-                Edit
-              </button>
-              <button
                 className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
                 type="submit"
                 style={{
                   paddingTop: "7.5px",
                   paddingBottom: "7.5px",
+                  paddingLeft: "20px",
+                  paddingRight: "20px",
                 }}
               >
                 Save Twitter
               </button>
+              <FaRegEdit
+                size="1.1em"
+                style={{
+                  position: "relative",
+                  top: "5px",
+                  left: "10px",
+                  cursor: "pointer",
+                }}
+                onClick={() => setDisabledTwLink(false)}
+              />
             </div>
             {error && <ErrorMessage text={error} />}
           </form>
@@ -993,9 +1025,10 @@ export default () => {
             <div>
               <label htmlFor="iglink">
                 <FaInstagram
-                  size="1.5em"
+                  size="1.1em"
                   className={accountStyles.socialIcons}
                 />
+                :
                 <input
                   onChange={setIgHandler}
                   value={igLink}
@@ -1009,34 +1042,36 @@ export default () => {
             </div>
             <div className={accountStyles.socialButtons}>
               <button
-                style={{
-                  marginRight: "7.5px",
-                  paddingTop: "7.5px",
-                  paddingBottom: "7.5px",
-                }}
-                className={`${accountStyles.btn} ${accountStyles.btnLight}`}
-                type="button"
-                onClick={() => setDisabledIgLink(false)}
-              >
-                Edit
-              </button>
-              <button
                 className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
                 type="submit"
                 style={{
                   paddingTop: "7.5px",
                   paddingBottom: "7.5px",
+                  paddingLeft: "20px",
+                  paddingRight: "20px",
                 }}
               >
                 Save Instagram
               </button>
+              <FaRegEdit
+                size="1.1em"
+                style={{
+                  position: "relative",
+                  top: "5px",
+                  left: "10px",
+                  cursor: "pointer",
+                }}
+                onClick={() => setDisabledIgLink(false)}
+              />
             </div>
             {error && <ErrorMessage text={error} />}
           </form>
         </div>
         <br />
         <br />
-        <hr />
+        <br />
+        <hr style={{ border: "1px solid #35748d", opacity: "0.5" }} />
+        <br />
         <br />
         <br />
         <br />
@@ -1046,6 +1081,7 @@ export default () => {
             <input
               className={accountStyles.linkInput}
               type="text"
+              size="35"
               placeholder="vul titel in"
               ref={linkTitle}
               minLength="5"
@@ -1055,6 +1091,7 @@ export default () => {
             <input
               className={accountStyles.linkInput}
               type="url"
+              size="35"
               placeholder="voer hyperlink in"
               ref={hyperLink}
               minLength="5"
@@ -1069,8 +1106,20 @@ export default () => {
             >
               Create a link
             </button>
+            <button
+              className={accountStyles.btn}
+              style={{ background: "red" }}
+              onClick={event => {
+                linkTitle.current.value = ""
+                hyperLink.current.value = ""
+                event.preventDefault()
+              }}
+            >
+              Clear
+            </button>
           </div>
           {linkError && <DoThis text={linkError} />}
+          <br />
           <br />
           <ul>
             {links.map(link => (
@@ -1079,11 +1128,12 @@ export default () => {
                 className={`${accountStyles.linksCont} ${accountStyles.card}`}
               >
                 <div>
-                  <p style={{ color: "green" }}>{link.title}</p>
+                  <p className={accountStyles.updateLinkShow}>{link.title}</p>
                   <input
                     className={accountStyles.editInput}
                     id={`editlink${link.id}`}
                     type="text"
+                    size="30"
                     value={editLink[link]}
                     onChange={handleEditLink}
                     placeholder="edit title"
@@ -1092,7 +1142,7 @@ export default () => {
                   />
                 </div>
                 <button
-                  className={`${accountStyles.btn} ${accountStyles.btnLight}`}
+                  className={accountStyles.updateLink}
                   onClick={event => {
                     editTheLink({
                       id: link.id,
@@ -1104,11 +1154,16 @@ export default () => {
                   Update Link
                 </button>
                 <div>
-                  <p style={{ color: "red" }}>{link.hyperlink}</p>
+                  <b>
+                    <p className={accountStyles.updateUpdateLinkShow}>
+                      {link.hyperlink}
+                    </p>{" "}
+                  </b>
                   <input
                     className={accountStyles.editInput}
                     id={`hyperlink${link.id}`}
                     type="url"
+                    size="30"
                     value={editHyperLink[link]}
                     onChange={handleEditHyperLink}
                     placeholder="edit hyperlink"
@@ -1117,7 +1172,7 @@ export default () => {
                   />
                 </div>
                 <button
-                  className={`${accountStyles.btn} ${accountStyles.btnLight}`}
+                  className={accountStyles.updateLink}
                   onClick={event => {
                     editTheHyperLink({
                       id: link.id,
@@ -1128,32 +1183,45 @@ export default () => {
                 >
                   Update Hyperlink
                 </button>
-                <button
-                  className={`${accountStyles.btn} ${accountStyles.btnSecondary}`}
+                <FaTrash
+                  style={{ cursor: "pointer" }}
                   onClick={event => {
                     deleteLink(link)
                     event.preventDefault()
                   }}
                 >
                   Delete Link
-                </button>
-                <input
-                  type="checkbox"
-                  id={`checkbox${link.id}`}
-                  checked={link.visible}
-                  onChange={e => toggleLink(link, e.target.checked)}
-                />
+                </FaTrash>
+                <div className={accountStyles.inputCont}>
+                  <input
+                    type="checkbox"
+                    id={`checkbox${link.id}`}
+                    checked={link.visible}
+                    onChange={e => toggleLink(link, e.target.checked)}
+                  />
+                  <span className={accountStyles.checkmark}></span>
+                </div>
               </li>
             ))}
           </ul>
         </div>
         <br />
         <br />
+        <br />
         <h2 style={{ textAlign: "center" }}>
-          <u>Kies Thema</u>
+          <b>
+            <u
+              style={{
+                textDecoration: "underline",
+                textDecorationColor: "#35748d",
+              }}
+            >
+              Kies Thema
+            </u>
+          </b>
         </h2>
         <br />
-        <br />
+
         <ul
           style={{ display: "flex", justifyContent: "space-around" }}
           className={accountStyles.pickColor}
@@ -1263,6 +1331,8 @@ export default () => {
             </label>
           </li>
         </ul>
+        <br />
+        <br />
       </div>
 
       {/* LINK LINK LINK LINK LINK <--------------------------------------------------------------------------------> LINK LINK LINK LINK LINK */}

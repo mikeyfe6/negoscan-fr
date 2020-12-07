@@ -1,21 +1,54 @@
 @import "../customs/colors";
 @import "../customs/utilities";
 
+@mixin chooseDisplay {
+  border-radius: 12.5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 125px;
+  height: 200px;
+  border: solid 5px #424242;
+  cursor: pointer;
+}
+
+@mixin chooseIcon {
+  display: flex;
+  position: absolute;
+  top: 82.5%;
+  left: 31.5%;
+}
+
+@mixin chooseLinks {
+  display: inline-block;
+  width: 100%;
+  padding: 5px 25px;
+}
+
+@mixin chooseStrokes {
+  width: 50px;
+  height: 12.5px;
+  margin: 10px 0;
+}
+
 .grid-container {
   display: grid;
   min-height: calc(100vh - 290px);
   grid-template-columns: 0.5fr 2.6fr 0.1fr 1.5fr;
-  grid-template-rows: 0.2fr 0.1fr 2.7fr;
+  grid-template-rows: 0.1fr 0.1fr 2.8fr;
   gap: 0px 0px;
   grid-template-areas:
     "Sidebar Navigation Navigation Link"
     "Sidebar Dashboard Dashboard Preview"
     "Sidebar Dashboard Dashboard Preview";
+  background: linear-gradient(to top, white, #ededed);
 }
 
 // SIDEBAR
 .Sidebar {
   grid-area: Sidebar;
+  background: linear-gradient(to bottom, white, #ededed);
 }
 
 // NAVIGATION
@@ -26,20 +59,22 @@
 // PREVIEW
 .Preview {
   grid-area: Preview;
+  background: linear-gradient(to bottom, white, #ededed);
 
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
 
   .iphone {
     &-frame {
-      position: absolute;
+      position: sticky;
       overflow: hidden;
-      height: 600px;
-      width: 275px;
+      height: 675px;
+      width: 325px;
       border-radius: 50px;
       border: solid #333 10px;
+      top: 10%;
+      bottom: 10%;
     }
 
     // &-bg {
@@ -51,7 +86,6 @@
 
     &-background {
       position: relative;
-      width: 100vh;
       height: 100%;
       z-index: 1;
     }
@@ -60,8 +94,8 @@
       position: absolute;
       top: 15%;
       left: 30%;
-      width: 100px;
-      height: 100px;
+      width: 125px;
+      height: 125px;
       z-index: 2;
       border-radius: 50%;
       display: inline-block;
@@ -70,17 +104,17 @@
 
     &-links {
       position: absolute;
-      top: 60%;
+      top: 57.5%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 200px;
+      width: 250px;
     }
 
     &-socials {
       display: flex;
       position: absolute;
       top: 82.5%;
-      left: 27.5%;
+      left: 25%;
     }
 
     &-link {
@@ -96,6 +130,7 @@
 // DASHBOARD
 .Dashboard {
   grid-area: Dashboard;
+  background: linear-gradient(to bottom, white, #ededed);
 
   .avatarformcont {
     display: flex;
@@ -121,6 +156,7 @@
     border-radius: 50%;
     object-fit: cover;
     background: white;
+    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
   }
 
   .progress {
@@ -166,7 +202,7 @@
     border: 0;
     border-bottom: 1px solid #b4becb;
     padding: 3px;
-    font-size: 16px;
+    font-size: 14px;
 
     &:focus {
       outline: none;
@@ -177,8 +213,36 @@
     }
   }
 
+  .link-input {
+    border-bottom: 1px solid $secondary-color !important;
+  }
+
+  .updateLink {
+    outline: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: $primary-color;
+  }
+
+  .updateLinkShow {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: $secondary-color;
+  }
+
+  .updateUpdateLinkShow {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: $secondary-color;
+  }
+
   .profile-info {
-    flex: 0.75;
+    flex: 0.6;
     margin-left: 10%;
     display: flex;
     justify-content: flex-end;
@@ -188,7 +252,8 @@
   }
 
   .logerror {
-    background-color: #ff0102;
+    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+    background-color: red;
     font-weight: bold;
     color: white;
     padding: 0.3rem 0.7rem;
@@ -197,6 +262,26 @@
     text-align: center;
     border-radius: 10px;
     margin-bottom: 1rem;
+  }
+
+  .linkErrorStyle {
+    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+    display: inline-block;
+    position: absolute;
+    background-color: red;
+    bottom: 20%;
+    right: 50%;
+    left: 15%;
+    width: 49%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.7em;
+    color: white;
+    padding: 0.3rem 0.5rem;
+    display: table;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 3px;
   }
 
   .profile-input {
@@ -229,19 +314,20 @@
 
   .social-cont {
     display: flex;
-    margin-left: 5%;
-    margin-right: 1%;
-    justify-content: space-between;
+    justify-content: space-around;
 
     .social-form {
       flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
     }
 
     .social-icons {
       position: relative;
-      top: 7.5px;
-      right: 5px;
-      margin-left: 10px;
+      top: 5px;
+      right: 2px;
+      z-index: 3;
+      opacity: 0.75;
     }
 
     .social-input {
@@ -249,10 +335,13 @@
       opacity: 0.75;
       outline: none;
       border: none;
+      text-align: center;
     }
 
     .social-buttons {
-      margin-top: 10px;
+      margin-top: 7.5px;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
@@ -264,231 +353,298 @@
   align-content: center;
 }
 
+// ----------- //
+
+.inputCont {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 17.5px;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.inputCont input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 17.5px;
+  width: 17.5px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 4;
+}
+
+/* Create a custom checkbox */
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 17.5px;
+  width: 17.5px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.inputCont:hover input ~ .checkmark {
+  background-color: $light-color;
+}
+
+/* When the checkbox is checked, add a blue background */
+.inputCont input:checked ~ .checkmark {
+  background-color: $primary-color;
+  border-radius: 2.5px;
+}
+
+.inputCont:hover input:checked ~ .checkmark {
+  background-color: red;
+  border-radius: 2.5px;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.inputCont input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.inputCont .checkmark:after {
+  left: 6px;
+  top: 2.5px;
+  width: 3px;
+  height: 7.5px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+// ----------- //
+
+.choose-color {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+// ---------------------------------------------------------------------------------------- // COLORS
+
 .yellowstyle {
   background: linear-gradient(to bottom, yellow, black);
 
   &-links {
-    background: #5e5d0d;
-    padding: 5px 10px;
-    color: white;
     margin: 10px 0;
-    border: 1px solid white;
-    border-radius: 3px;
-    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+
+    a {
+      background: #5e5d0d;
+      color: white;
+      border: 1px solid white;
+      border-radius: 3px;
+      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+      @include chooseLinks;
+    }
   }
 
   &-icons {
-    display: flex;
-    position: absolute;
-    top: 82.5%;
-    left: 31.5%;
+    @include chooseIcon;
 
     &:nth-child(n) {
-      color: yellow;
+      a {
+        color: yellow;
+      }
     }
   }
 }
 
 .yellowtheme {
-  width: 125px;
-  height: 200px;
   background: linear-gradient(to bottom, yellow, black);
-  border: solid 5px #333;
-  border-radius: 12.5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include chooseDisplay;
 
   .yellowlinks {
-    width: 50px;
-    height: 12.5px;
     background: #5e5d0d;
     border: 1px solid white;
     border-radius: 2px;
-    margin: 10px 0;
+    @include chooseStrokes;
   }
 }
+
+// ---------------------------------------------------------------------------------------- // GRAY GRAY GRAY
 
 .graystyle {
   background: linear-gradient(to bottom, grey, white);
 
   &-links {
-    background: rgba(255, 255, 255, 0.797);
-    padding: 5px 10px;
-    color: #878787;
     margin: 10px 0;
-    border: 1px solid #878787;
-    border-radius: 3px;
-    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+
+    a {
+      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+      background: rgba(255, 255, 255, 0.797);
+      color: #878787;
+      border: 1px solid #878787;
+      border-radius: 3px;
+      @include chooseLinks;
+    }
   }
 
   &-icons {
-    display: flex;
-    position: absolute;
-    top: 82.5%;
-    left: 31.5%;
+    @include chooseIcon;
 
     &:nth-child(n) {
-      color: grey;
+      a {
+        color: grey;
+      }
     }
   }
 }
 .graytheme {
-  width: 125px;
-  height: 200px;
   background: linear-gradient(to bottom, grey, white);
-  border: solid 5px #333;
-  border-radius: 12.5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include chooseDisplay;
 
   .graylinks {
-    width: 50px;
-    height: 12.5px;
     background: rgba(255, 255, 255, 0.797);
     border: 1px solid #878787;
     border-radius: 2px;
-    margin: 10px 0;
+    @include chooseStrokes;
   }
 }
+
+// ---------------------------------------------------------------------------------------- // PINK PINK PINK
 
 .pinkstyle {
   background: linear-gradient(to bottom, pink, grey);
 
   &-links {
-    background: #878787;
-    padding: 5px 10px;
-    color: white;
     margin: 10px 0;
-    border: 1px solid white;
-    border-radius: 3px;
-    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+
+    a {
+      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+      color: white;
+      background: #878787;
+      border: 1px solid white;
+      border-radius: 3px;
+      @include chooseLinks;
+    }
   }
 
   &-icons {
-    display: flex;
-    position: absolute;
-    top: 82.5%;
-    left: 31.5%;
+    @include chooseIcon;
 
     &:nth-child(n) {
-      color: pink;
+      a {
+        color: pink;
+      }
     }
   }
 }
+
 .pinktheme {
-  width: 125px;
-  height: 200px;
   background: linear-gradient(to bottom, pink, grey);
-  border: solid 5px #333;
-  border-radius: 12.5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include chooseDisplay;
 
   .pinklinks {
-    width: 50px;
-    height: 12.5px;
     background: #878787;
     border: 1px solid white;
     border-radius: 2px;
-    margin: 10px 0;
+    @include chooseStrokes;
   }
 }
+
+// ---------------------------------------------------------------------------------------- // BLACK BLACK BLACK
 
 .blackstyle {
   background: linear-gradient(to bottom, black, grey);
 
   &-links {
-    background: #878787;
-    padding: 5px 10px;
-    color: black;
     margin: 10px 0;
-    border: 1px solid white;
-    border-radius: 3px;
-    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+
+    a {
+      background: #878787;
+      color: black;
+      border: 1px solid white;
+      border-radius: 3px;
+      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+      @include chooseLinks;
+    }
   }
 
   &-icons {
-    display: flex;
-    position: absolute;
-    top: 82.5%;
-    left: 31.5%;
+    @include chooseIcon;
 
     &:nth-child(n) {
-      color: white;
+      a {
+        color: white;
+      }
     }
   }
 }
 .blacktheme {
-  width: 125px;
-  height: 200px;
   background: linear-gradient(to bottom, black, grey);
-  border: solid 5px #333;
-  border-radius: 12.5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include chooseDisplay;
 
   .blacklinks {
-    width: 50px;
-    height: 12.5px;
     background: #878787;
     border: 1px solid white;
     border-radius: 2px;
-    margin: 10px 0;
+    @include chooseStrokes;
   }
 }
+
+// ---------------------------------------------------------------------------------------- // BROWN BROWN BROWN
 
 .brownstyle {
   background: linear-gradient(to bottom, brown, white);
 
   &-links {
-    background: white;
-    padding: 5px 10px;
-    color: brown;
     margin: 10px 0;
-    border: 1px solid brown;
-    border-radius: 3px;
-    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+
+    a {
+      background: white;
+      color: brown;
+      border: 1px solid brown;
+      border-radius: 3px;
+      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+      @include chooseLinks;
+    }
   }
 
   &-icons {
-    display: flex;
-    position: absolute;
-    top: 82.5%;
-    left: 31.5%;
+    @include chooseIcon;
 
     &:nth-child(n) {
-      color: brown;
+      a {
+        color: brown;
+      }
     }
   }
 }
 .browntheme {
-  width: 125px;
-  height: 200px;
   background: linear-gradient(to bottom, brown, white);
-  border: solid 5px #333;
-  border-radius: 12.5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include chooseDisplay;
 
   .brownlinks {
-    width: 50px;
-    height: 12.5px;
     background: white;
     border: 1px solid brown;
     border-radius: 2px;
-    margin: 10px 0;
+    @include chooseStrokes;
   }
 }
+
+// ---------------------------------------------------------------------------------------- // COLORS
 
 // LINK
 .Link {

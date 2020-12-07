@@ -96,7 +96,7 @@ export default () => {
 
       const res = await axios.post(`${apiURL}/upload`, data, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
       })
       console.log("Geupload!", res)

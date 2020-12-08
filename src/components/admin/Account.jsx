@@ -9,6 +9,7 @@ import {
   FaTwitter,
   FaTrash,
   FaRegEdit,
+  FaRegUserCircle,
 } from "react-icons/fa"
 
 import { navigate } from "@reach/router"
@@ -48,10 +49,12 @@ export default () => {
 
   const [linkError, setLinkError] = useState(null)
 
+  const [profile, setProfile] = useState("")
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
+  const [disabledProfile, setDisabledProfile] = useState(true)
   const [disabledUsername, setDisabledUsername] = useState(true)
   const [disabledEmail, setDisabledEmail] = useState(true)
   const [disabledPassword, setDisabledPassword] = useState(true)
@@ -130,6 +133,50 @@ export default () => {
       setPreview(res.data.avatar.url)
     }
     getAvatarImage()
+  }, [gatsbyUser.user.gebruiker.id, token])
+
+  // UPDATE PROFILENAME <--------------------------------------------------------------------------------> UPDATE PROFILENAME //
+  const setProfileHandler = e => {
+    setProfile(e.target.value)
+  }
+
+  const submitProfile = async e => {
+    e.preventDefault()
+
+    const params = {
+      username: profile,
+    }
+    try {
+      const res = await axios.put(
+        `${apiURL}/users/${gatsbyUser.user.gebruiker.id}`,
+        params,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      setProfile(res.data.username)
+      setDisabledProfile(true)
+    } catch (err) {
+      console.log(err.message)
+      // setTimeout(() => setError(null), 5000)
+    }
+  }
+
+  useEffect(() => {
+    const getProfile = async () => {
+      const res = await axios.get(
+        `${apiURL}/users/${gatsbyUser.user.gebruiker.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      setProfile(res.data.username)
+    }
+    getProfile()
   }, [gatsbyUser.user.gebruiker.id, token])
 
   // UPDATE USERNAME <--------------------------------------------------------------------------------> UPDATE USERNAME //
@@ -539,6 +586,8 @@ export default () => {
 
     switch (color) {
       case "geel":
+        document.getElementById("iphone-username").className =
+          accountStyles.yellowstyleUsername
         document.getElementById("iphone-iconlook").className =
           accountStyles.yellowstyleIcons
         document.getElementById("iphone-bg").className =
@@ -548,6 +597,8 @@ export default () => {
         }
         break
       case "grijs":
+        document.getElementById("iphone-username").className =
+          accountStyles.graystyleUsername
         document.getElementById("iphone-iconlook").className =
           accountStyles.graystyleIcons
         document.getElementById("iphone-bg").className = accountStyles.graystyle
@@ -556,6 +607,8 @@ export default () => {
         }
         break
       case "roze":
+        document.getElementById("iphone-username").className =
+          accountStyles.pinkstyleUsername
         document.getElementById("iphone-iconlook").className =
           accountStyles.pinkstyleIcons
         document.getElementById("iphone-bg").className = accountStyles.pinkstyle
@@ -564,6 +617,8 @@ export default () => {
         }
         break
       case "zwart":
+        document.getElementById("iphone-username").className =
+          accountStyles.blackstyleUsername
         document.getElementById("iphone-iconlook").className =
           accountStyles.blackstyleIcons
         document.getElementById("iphone-bg").className =
@@ -573,6 +628,8 @@ export default () => {
         }
         break
       case "bruin":
+        document.getElementById("iphone-username").className =
+          accountStyles.brownstyleUsername
         document.getElementById("iphone-iconlook").className =
           accountStyles.brownstyleIcons
         document.getElementById("iphone-bg").className =
@@ -658,6 +715,9 @@ export default () => {
             className={accountStyles.iphoneAvatar}
             id="iphone-avatar"
           />
+          <p id="iphone-username" className={accountStyles.iphoneUsername}>
+            {username}
+          </p>
           <div
             id="iphone-bg"
             className={accountStyles.iphoneBackground}
@@ -784,12 +844,11 @@ export default () => {
           <div className={accountStyles.profileInfo}>
             <form onSubmit={submitUsername}>
               <label htmlFor="username">
-                <FaUser
-                  size="1.5em"
+                <FaRegUserCircle
+                  size="1.25em"
                   style={{
                     position: "relative",
-                    top: "7.5px",
-                    right: "5px",
+                    top: "5px",
                     marginRight: "5px",
                   }}
                 />
@@ -797,6 +856,7 @@ export default () => {
                   onChange={setUsernameHandler}
                   value={username}
                   type="text"
+                  maxlength="15"
                   disabled={disabledUsername}
                   name="username"
                   id="username"
@@ -814,28 +874,72 @@ export default () => {
                 onClick={() => setDisabledUsername(false)}
               />
               <button
-                className={`${accountStyles.btn} ${accountStyles.btnSecondary}`}
+                className={`${accountStyles.btn}`}
                 type="submit"
                 style={{
                   paddingTop: "7.5px",
                   paddingBottom: "7.5px",
                 }}
               >
-                Save Username
+                Save Profile Name
               </button>
 
               {error && <ErrorMessage text={error} />}
+            </form>
+
+            <form onSubmit={submitProfile}>
+              <p>
+                <label htmlFor="email">
+                  <FaUser
+                    size="1.25em"
+                    style={{
+                      position: "relative",
+                      top: "5px",
+                      marginRight: "5px",
+                    }}
+                  />
+                  <input
+                    onChange={setProfileHandler}
+                    value={profile}
+                    type="text"
+                    disabled={disabledProfile}
+                    name="text"
+                    id="profile"
+                    className={accountStyles.profileInput}
+                  />
+                </label>
+                <FaRegEdit
+                  size="1.1em"
+                  style={{
+                    position: "relative",
+                    top: "5px",
+                    right: "10px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setDisabledProfile(false)}
+                />
+                <button
+                  className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+                  type="submit"
+                  style={{
+                    paddingTop: "7.5px",
+                    paddingBottom: "7.5px",
+                  }}
+                >
+                  Save Username
+                </button>
+                {error && <ErrorMessage text={error} />}
+              </p>
             </form>
 
             <form onSubmit={submitEmail}>
               <p>
                 <label htmlFor="email">
                   <FaAt
-                    size="1.5em"
+                    size="1.25em"
                     style={{
                       position: "relative",
-                      top: "7.5px",
-                      right: "5px",
+                      top: "5px",
                       marginRight: "5px",
                     }}
                   />
@@ -877,11 +981,10 @@ export default () => {
               <div>
                 <label htmlFor="password">
                   <FaLock
-                    size="1.5em"
+                    size="1.25em"
                     style={{
                       position: "relative",
-                      top: "7.5px",
-                      right: "5px",
+                      top: "5px",
                       marginRight: "5px",
                     }}
                   />
@@ -920,18 +1023,15 @@ export default () => {
               </div>
             </form>
           </div>
-
-          <br />
         </div>
-        <br />
+
         <br />
         <hr
           style={{
-            border: "1px solid #223f49",
+            border: "1px solid #35748d",
             opacity: "0.5",
           }}
         />
-        <br />
         <br />
         <div className={accountStyles.socialCont}>
           <form onSubmit={submitFB} className={accountStyles.socialForm}>
@@ -1069,8 +1169,7 @@ export default () => {
         </div>
         <br />
         <br />
-        <br />
-        <hr style={{ border: "1px solid #35748d", opacity: "0.5" }} />
+        <hr style={{ border: "1px solid #d8e6d8" }} />
         <br />
         <br />
         <br />

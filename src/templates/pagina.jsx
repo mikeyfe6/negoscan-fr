@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react"
-import { graphql } from "gatsby"
-import Reactmarkdown from "react-markdown"
+import { graphql, Link } from "gatsby"
+// import Reactmarkdown from "react-markdown"
 import axios from "axios"
 
-import Img from "gatsby-image"
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa"
 
 // NEGO TEMPLATE
 import ProfLayout from "../components/proflayout"
@@ -13,6 +11,8 @@ import ProfLayout from "../components/proflayout"
 import profStyles from "../styles/modules/profStyles.module.scss"
 
 import "../styles/themes.scss"
+
+import negoLogo from "../../static/Negoscan-logo.png"
 
 const apiURL = process.env.GATSBY_BASE_URL
 
@@ -26,8 +26,14 @@ const NegositeTemplate = ({ data }) => {
   //   hideDiv()
   // }, [])
 
-  const [links, setLinks] = useState([])
   const [color, setColor] = useState("")
+  const [avatar, setAvatar] = useState()
+  const [username, setUsername] = useState()
+  const [links, setLinks] = useState([])
+
+  const [fbLink, setFbLink] = useState("")
+  const [twLink, setTwLink] = useState("")
+  const [igLink, setIgLink] = useState("")
 
   useEffect(() => {
     const getLinks = async () => {
@@ -36,6 +42,11 @@ const NegositeTemplate = ({ data }) => {
       )
       setColor(res.data.gebruiker.bgfree)
       setLinks(res.data.connections)
+      setAvatar(res.data.gebruiker.avatar.url)
+      setUsername(res.data.gebruiker.profiel)
+      setFbLink(res.data.gebruiker.facebooklink)
+      setTwLink(res.data.gebruiker.twitterlink)
+      setIgLink(res.data.gebruiker.instagramlink)
       console.log(res)
     }
     getLinks()
@@ -62,67 +73,73 @@ const NegositeTemplate = ({ data }) => {
       /> */}
 
       <div className={`theme-${color}`}>
-        <div
-          className={profStyles.profCenter}
-          style={{ zIndex: 2, position: "relative" }}
-        >
-          <Img
-            fixed={data.strapiNegosite.avatar.childImageSharp.fixed}
-            className={profStyles.avatar}
-          />
+        <div className={profStyles.profCenter} style={{ zIndex: 2 }}>
+          <img src={avatar} className={profStyles.avatar} alt="avatar" />
 
-          <h1>{data.strapiNegosite.profiel}</h1>
-          <Reactmarkdown
+          <h1>{username}</h1>
+          {/* <Reactmarkdown
             source={data.strapiNegosite.biografie}
             className={profStyles.profielContent}
             escapeHtml={false}
-          />
+          /> */}
 
           <ul>
-            {links.map(document => (
-              <li key={document.id} className={`theme-${color}-links`}>
-                {document.title}
+            {links.slice(0, 20).map(link => (
+              <li
+                key={link.id}
+                className={`theme-${color}-links`}
+                hidden={!link.visible}
+              >
+                <a
+                  href={`https://${link.hyperlink}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {link.title}
+                </a>
               </li>
             ))}
           </ul>
 
-          {/* <li
-            style={{
-              border: `3px solid ${data.strapiNegosite.linklook}`,
-              padding: "1rem 10rem",
-              borderRadius: "20px",
-              marginBottom: "2rem",
-            }}
-          >
+          <div className={`theme-${color}-icons`}>
             <a
-              href={`https://${data.strapiNegosite.sociallinks.instagram}`}
+              href={`https://${fbLink}`}
               rel="noopener noreferrer"
               target="_blank"
-              className="proflink"
             >
-              {data.strapiNegosite.sociallinks.instagram}
+              <FaFacebookF size="2.25em" />
             </a>
-          </li> */}
 
-          <ul
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <li>
-              <FontAwesomeIcon icon="coffee" size="3x" color="#72be72" />
-            </li>
-            <li>
-              <FontAwesomeIcon icon="coffee" size="3x" color="#72be72" />
-            </li>
-            <li>
-              <FontAwesomeIcon icon="coffee" size="3x" color="#72be72" />
-            </li>
-          </ul>
+            <a
+              href={`https://${twLink}`}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <FaTwitter size="2.25em" />
+            </a>
 
-          {/* <p>
+            <a
+              href={`https://${igLink}`}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <FaInstagram size="2.25em" />
+            </a>
+          </div>
+
+          <Link to="/">
+            <img
+              src={negoLogo}
+              alt=""
+              style={{
+                top: "100px",
+                position: "relative",
+                width: "100px",
+              }}
+            ></img>
+          </Link>
+
+          {/* <p></p>
             by{" "}
             <Link to={`/gebruiker/User_${data.strapiNegosite.website.id}`}>
               {data.strapiNegosite.website.username}

@@ -3,16 +3,16 @@
 
 .prof-center {
   display: table;
-  margin: 10rem auto !important;
+  margin: 0 auto;
+  height: 100vh;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
   text-align: center !important;
 }
 
 .avatar {
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-}
-
-.prof-links {
-  margin-top: 2rem;
-  padding: 15px;
-  font-weight: bold;
+  object-fit: cover;
 }

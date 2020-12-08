@@ -7,7 +7,6 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { Link } from "gatsby"
 // import { useStaticQuery, graphql } from "gatsby"
 
 const ProfLayout = ({ children }) => {
@@ -24,13 +23,11 @@ const ProfLayout = ({ children }) => {
   return (
     <>
       {/* <div siteTitle={data.site.siteMetadata?.title || `Title`} /> */}
-      <div id="page-container">
-        <div id="content-wrap">
+      <div>
+        <div>
           <main>{children}</main>
         </div>
-        <footer id="footer" style={{ textAlign: "center", zIndex: 2 }}>
-          <Link to="/">terug</Link>
-        </footer>
+        {/* <footer id="footer" style={{ zIndex: 2, width: "250px" }}></footer> */}
       </div>
     </>
   )

@@ -33,7 +33,11 @@ export default () => {
   const usernameRef = useRef()
   const passwordRef = useRef()
 
-  const handleSubmit = async e => {
+  const usernameRegRef = useRef()
+  const emailRegRef = useRef()
+  const passwordRegRef = useRef()
+
+  const handleSubmitLogin = async e => {
     e.preventDefault()
 
     try {
@@ -41,6 +45,41 @@ export default () => {
         identifier: usernameRef.current.value,
         password: passwordRef.current.value,
       })
+      setUser(data)
+      setLoading("Aan het laden")
+      setError(null)
+      navigate("/admin/account")
+    } catch {
+      setLoading(null)
+      setError("Verkeerde invoer, probeer 't opnieuw")
+      setTimeout(() => setError(null), 5000)
+    }
+  }
+
+  const handleSubmitRegister = async e => {
+    e.preventDefault()
+
+    try {
+      const { data } = await axios.post(`${apiURL}/auth/local/register`, {
+        username: usernameRegRef.current.value,
+        email: emailRegRef.current.value,
+        password: passwordRegRef.current.value,
+      })
+      // let negoData = new FormData()
+      // formData.append("key1", "value1")
+      // formData.append("key2", "value2")
+
+      await axios.post(
+        `${apiURL}/negosites`,
+        {
+          profiel: usernameRegRef.current.value,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${data.jwt}`,
+          },
+        }
+      )
       setUser(data)
       setLoading("Aan het laden")
       setError(null)
@@ -71,7 +110,7 @@ export default () => {
       </section>
 
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmitLogin}
         className={`${loginStyles.container} ${loginStyles.negoform}`}
       >
         <fieldset>
@@ -80,12 +119,11 @@ export default () => {
           </legend>
           <div className={`${loginStyles.formControl} ${loginStyles.p1}`}>
             <label htmlFor="username">
-              Username <br />
+              Username of Email <br />
               <input
                 ref={usernameRef}
                 type="text"
                 name="username"
-                id="username"
                 className={loginStyles.negoinput}
               />
             </label>
@@ -97,7 +135,6 @@ export default () => {
                 ref={passwordRef}
                 type="password"
                 name="password"
-                id="password"
                 className={loginStyles.negoinput}
               />
             </label>
@@ -110,6 +147,63 @@ export default () => {
           <input
             type="submit"
             value="Login"
+            className={`${loginStyles.btn} ${loginStyles.btnPrimary}`}
+          />
+        </div>
+        <div>
+          <p>Nog geen account, klik hier om aan te melden..</p>
+        </div>
+      </form>
+
+      <form
+        onSubmit={handleSubmitRegister}
+        className={`${loginStyles.container} ${loginStyles.negoform}`}
+      >
+        <fieldset>
+          <legend className={`${loginStyles.p1}`}>
+            Vul hier je gegevens in...
+          </legend>
+          <div className={`${loginStyles.formControl} ${loginStyles.p1}`}>
+            <label htmlFor="username">
+              Username <br />
+              <input
+                ref={usernameRegRef}
+                type="text"
+                name="usernameReg"
+                className={loginStyles.negoinput}
+              />
+            </label>
+          </div>
+          <div className={`${loginStyles.formControl} ${loginStyles.p1}`}>
+            <label htmlFor="email">
+              Email <br />
+              <input
+                ref={emailRegRef}
+                type="email"
+                name="emailReg"
+                className={loginStyles.negoinput}
+              />
+            </label>
+          </div>
+          <div className={`${loginStyles.formControl} ${loginStyles.p1}`}>
+            <label htmlFor="password">
+              Password <br />
+              <input
+                ref={passwordRegRef}
+                type="password"
+                name="passwordreg"
+                className={loginStyles.negoinput}
+              />
+            </label>
+          </div>
+          {error && <ErrorMessage text={error} />}
+          {loading && <LoadingMessage text={loading} />}
+        </fieldset>
+        <br />
+        <div>
+          <input
+            type="submit"
+            value="Register"
             className={`${loginStyles.btn} ${loginStyles.btnPrimary}`}
           />
         </div>

@@ -8,7 +8,7 @@ import languagesStyles from "../styles/modules/languagesStyles.module.scss"
 
 // TODO: count toevoegen
 
-import Img from "gatsby-image"
+// import Img from "gatsby-image"
 
 const Languages = () => {
   const data = useStaticQuery(graphql`
@@ -45,9 +45,10 @@ const Languages = () => {
             <li key={document.node.id} className={languagesStyles.card}>
               <h2>
                 <Link to={`/${document.node.id}`}>{document.node.profiel}</Link>
+                <p>{document.node.id}</p>
               </h2>
               <Reactmarkdown source={document.node.biografie} />
-              <Img fixed={document.node.avatar.childImageSharp.fixed} />
+              {/* <Img fixed={document.node.avatar.childImageSharp.fixed} /> */}
             </li>
           ))}
         </ul>{" "}

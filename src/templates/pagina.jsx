@@ -47,7 +47,6 @@ const NegositeTemplate = ({ data }) => {
       setFbLink(res.data.gebruiker.facebooklink)
       setTwLink(res.data.gebruiker.twitterlink)
       setIgLink(res.data.gebruiker.instagramlink)
-      console.log(res)
     }
     getLinks()
   }, [data.strapiNegosite.website.id])

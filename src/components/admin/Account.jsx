@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect, useLayoutEffect } from "react"
 import axios from "axios"
 import {
   FaLock,
@@ -38,7 +38,7 @@ const DoThis = ({ text }) => {
 }
 
 export default () => {
-  const gatsbyUser = getUser()
+  const [userId, setUserId] = useState("")
 
   const [image, setImage] = useState()
   const [preview, setPreview] = useState()
@@ -76,7 +76,20 @@ export default () => {
 
   const [color, setColor] = useState()
 
+  const gatsbyUser = getUser()
   const token = gatsbyUser.jwt
+
+  useLayoutEffect(() => {
+    const getUserId = async () => {
+      const res = await axios.get(`${apiURL}/users/${gatsbyUser.user.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      setUserId(res.data.gebruiker.id)
+    }
+    getUserId()
+  }, [gatsbyUser.user.id, token])
 
   // AVATAR CHANGE <--------------------------------------------------------------------------------> AVATAR CHANGE //
   const removeHeading = () => {
@@ -94,7 +107,7 @@ export default () => {
       const data = new FormData()
       data.append("files", image)
       data.append("ref", "negosite") // optional, you need it if you want to link the image to an entry
-      data.append("refId", gatsbyUser.user.id) // optional, you need it if you want to link the image to an entry
+      data.append("refId", userId) // optional, you need it if you want to link the image to an entry
       data.append("field", "avatar") // optional, you need it if you want to link the image to an entry
 
       const res = await axios.post(`${apiURL}/upload`, data, {
@@ -122,18 +135,19 @@ export default () => {
 
   useEffect(() => {
     const getAvatarImage = async () => {
-      const res = await axios.get(
-        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      setPreview(res.data.avatar.url)
+      const res = await axios.get(`${apiURL}/negosites/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      if (res.data.avatar == null) {
+        return setPreview(noavatar)
+      } else {
+        setPreview(res.data.avatar.url)
+      }
     }
     getAvatarImage()
-  }, [gatsbyUser.user.gebruiker.id, token])
+  }, [userId, token])
 
   // UPDATE PROFILENAME <--------------------------------------------------------------------------------> UPDATE PROFILENAME //
   const setProfileHandler = e => {
@@ -148,7 +162,7 @@ export default () => {
     }
     try {
       const res = await axios.put(
-        `${apiURL}/users/${gatsbyUser.user.gebruiker.id}`,
+        `${apiURL}/users/${gatsbyUser.user.id}`,
         params,
         {
           headers: {
@@ -166,18 +180,15 @@ export default () => {
 
   useEffect(() => {
     const getProfile = async () => {
-      const res = await axios.get(
-        `${apiURL}/users/${gatsbyUser.user.gebruiker.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const res = await axios.get(`${apiURL}/users/${gatsbyUser.user.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setProfile(res.data.username)
     }
     getProfile()
-  }, [gatsbyUser.user.gebruiker.id, token])
+  }, [gatsbyUser.user.id, token])
 
   // UPDATE USERNAME <--------------------------------------------------------------------------------> UPDATE USERNAME //
 
@@ -192,15 +203,11 @@ export default () => {
       profiel: username,
     }
     try {
-      const res = await axios.put(
-        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
-        params,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const res = await axios.put(`${apiURL}/negosites/${userId}`, params, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setError(null)
       setUsername(res.data.profiel)
       setDisabledUsername(true)
@@ -213,18 +220,15 @@ export default () => {
 
   useEffect(() => {
     const getUsername = async () => {
-      const res = await axios.get(
-        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const res = await axios.get(`${apiURL}/negosites/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setUsername(res.data.profiel)
     }
     getUsername()
-  }, [gatsbyUser.user.gebruiker.id, token])
+  }, [userId, token])
 
   // UPDATE EMAIL <--------------------------------------------------------------------------------> UPDATE EMAIL //
   const setEmailHandler = e => {
@@ -239,7 +243,7 @@ export default () => {
     }
     try {
       const res = await axios.put(
-        `${apiURL}/users/${gatsbyUser.user.gebruiker.id}`,
+        `${apiURL}/users/${gatsbyUser.user.id}`,
         params,
         {
           headers: {
@@ -257,18 +261,15 @@ export default () => {
 
   useEffect(() => {
     const getEmail = async () => {
-      const res = await axios.get(
-        `${apiURL}/users/${gatsbyUser.user.gebruiker.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const res = await axios.get(`${apiURL}/users/${gatsbyUser.user.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setEmail(res.data.email)
     }
     getEmail()
-  }, [gatsbyUser.user.gebruiker.id, token])
+  }, [gatsbyUser.user.id, token])
 
   // UPDATE FBLINK <--------------------------------------------------------------------------------> UPDATE FBLINK //
   const setFbHandler = e => {
@@ -282,15 +283,11 @@ export default () => {
       facebooklink: fbLink,
     }
     try {
-      const res = await axios.put(
-        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
-        params,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const res = await axios.put(`${apiURL}/negosites/${userId}`, params, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setFbLink(res.data.facebooklink)
       setDisabledFbLink(true)
     } catch (err) {
@@ -301,18 +298,15 @@ export default () => {
 
   useEffect(() => {
     const getFbLink = async () => {
-      const res = await axios.get(
-        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const res = await axios.get(`${apiURL}/negosites/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setFbLink(res.data.facebooklink)
     }
     getFbLink()
-  }, [gatsbyUser.user.gebruiker.id, token])
+  }, [userId, token])
 
   // UPDATE TWLINK <--------------------------------------------------------------------------------> UPDATE TWLINK //
   const setTwHandler = e => {
@@ -326,15 +320,11 @@ export default () => {
       twitterlink: twLink,
     }
     try {
-      const res = await axios.put(
-        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
-        params,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const res = await axios.put(`${apiURL}/negosites/${userId}`, params, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setTwLink(res.data.twitterlink)
       setDisabledTwLink(true)
     } catch (err) {
@@ -345,18 +335,15 @@ export default () => {
 
   useEffect(() => {
     const getTwLink = async () => {
-      const res = await axios.get(
-        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const res = await axios.get(`${apiURL}/negosites/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setTwLink(res.data.twitterlink)
     }
     getTwLink()
-  }, [gatsbyUser.user.gebruiker.id, token])
+  }, [userId, token])
 
   // UPDATE IGLINK <--------------------------------------------------------------------------------> UPDATE IGLINK //
   const setIgHandler = e => {
@@ -370,15 +357,11 @@ export default () => {
       instagramlink: igLink,
     }
     try {
-      const res = await axios.put(
-        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
-        params,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const res = await axios.put(`${apiURL}/negosites/${userId}`, params, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setIgLink(res.data.instagramlink)
       setDisabledIgLink(true)
     } catch (err) {
@@ -389,18 +372,15 @@ export default () => {
 
   useEffect(() => {
     const getIgLink = async () => {
-      const res = await axios.get(
-        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const res = await axios.get(`${apiURL}/negosites/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setIgLink(res.data.instagramlink)
     }
     getIgLink()
-  }, [gatsbyUser.user.gebruiker.id, token])
+  }, [userId, token])
 
   // UPDATE PASSWORD <--------------------------------------------------------------------------------> UPDATE PASSWORD //
   const setPasswordHandler = e => {
@@ -414,16 +394,11 @@ export default () => {
       password: password,
     }
     try {
-      const res = await axios.put(
-        `${apiURL}/users/${gatsbyUser.user.gebruiker.id}`,
-        params,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      console.log(res)
+      await axios.put(`${apiURL}/users/${gatsbyUser.user.id}`, params, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setDisabledPassword(true)
     } catch (err) {
       console.log(err.message)
@@ -567,7 +542,7 @@ export default () => {
       bgfree: e.target.value,
     }
     await axios
-      .put(`${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`, params, {
+      .put(`${apiURL}/negosites/${userId}`, params, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -644,20 +619,17 @@ export default () => {
 
   useEffect(() => {
     const getColor = async () => {
-      const res = await axios.get(
-        `${apiURL}/negosites/${gatsbyUser.user.gebruiker.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const res = await axios.get(`${apiURL}/negosites/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setColor(res.data.bgfree)
       changeHeadingBg(res.data.bgfree)
     }
     getColor()
     changeHeadingBg()
-  }, [gatsbyUser.user.gebruiker.id, token, links])
+  }, [userId, token, links])
 
   // function changeHeadingBg(klasse) {
   //   document.getElementById("iphone-bg").className = klasse
@@ -856,7 +828,7 @@ export default () => {
                   onChange={setUsernameHandler}
                   value={username}
                   type="text"
-                  maxlength="15"
+                  maxLength="15"
                   disabled={disabledUsername}
                   name="username"
                   id="username"

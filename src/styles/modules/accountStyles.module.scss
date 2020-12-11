@@ -11,6 +11,13 @@
   height: 200px;
   border: solid 5px #424242;
   cursor: pointer;
+  transition: all 0.6s ease-in-out;
+
+  &:hover {
+    opacity: 0.9;
+    border: solid 5px $primary-color;
+    transition: all 0.6s ease-in-out;
+  }
 }
 
 @mixin chooseUsername {
@@ -56,19 +63,26 @@
     "Sidebar Navigation Navigation Link"
     "Sidebar Dashboard Dashboard Preview"
     "Sidebar Dashboard Dashboard Preview";
-  background: linear-gradient(to top, white, #ededed);
+  // background: linear-gradient(to top, white, #ededed);
+
+  background: linear-gradient(to bottom, white, $primary-color) no-repeat 0 0 /
+    cover;
 }
 
 // SIDEBAR
 .Sidebar {
   grid-area: Sidebar;
-  background: linear-gradient(to bottom, white, #ededed);
+  // background: linear-gradient(to bottom, white, #ededed);
+  background: linear-gradient(to top, white, $primary-color) no-repeat 0 0 /
+    cover;
 }
 
 // NAVIGATION
 .Navigation {
   grid-area: Navigation;
-  background: linear-gradient(to bottom, white, #ededed);
+  // background: linear-gradient(to bottom, white, #ededed);
+  background: linear-gradient(to left, white, $primary-color) no-repeat 0 0 /
+    cover;
 }
 
 // PREVIEW
@@ -330,8 +344,13 @@
 
   .social-cont {
     display: flex;
+    background: linear-gradient(to left, #d4eefb, #d8e6d8) no-repeat 0 0 / cover;
     justify-content: space-around;
+    border: solid 3px #333;
+    // border-bottom: solid 3px black;
+    padding: 50px 0;
     margin: 15px 0;
+    box-shadow: 3px 5px 7px rgba(167, 167, 167, 0.767);
 
     .social-form {
       flex-wrap: wrap;
@@ -479,6 +498,10 @@
       border-radius: 3px;
       box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
       @include chooseLinks;
+
+      &:hover {
+        opacity: 0.75;
+      }
     }
   }
 
@@ -488,6 +511,10 @@
     &:nth-child(n) {
       a {
         color: yellow;
+
+        &:hover {
+          opacity: 0.75;
+        }
       }
     }
   }
@@ -525,6 +552,10 @@
       border: 1px solid #878787;
       border-radius: 3px;
       @include chooseLinks;
+
+      &:hover {
+        opacity: 0.75;
+      }
     }
   }
 
@@ -534,6 +565,10 @@
     &:nth-child(n) {
       a {
         color: grey;
+
+        &:hover {
+          opacity: 0.75;
+        }
       }
     }
   }
@@ -570,6 +605,10 @@
       border: 1px solid white;
       border-radius: 3px;
       @include chooseLinks;
+
+      &:hover {
+        opacity: 0.75;
+      }
     }
   }
 
@@ -579,6 +618,10 @@
     &:nth-child(n) {
       a {
         color: pink;
+
+        &:hover {
+          opacity: 0.75;
+        }
       }
     }
   }
@@ -616,6 +659,10 @@
       border-radius: 3px;
       box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
       @include chooseLinks;
+
+      &:hover {
+        opacity: 0.75;
+      }
     }
   }
 
@@ -625,6 +672,10 @@
     &:nth-child(n) {
       a {
         color: white;
+
+        &:hover {
+          opacity: 0.75;
+        }
       }
     }
   }
@@ -661,6 +712,10 @@
       border-radius: 3px;
       box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
       @include chooseLinks;
+
+      &:hover {
+        opacity: 0.75;
+      }
     }
   }
 
@@ -670,6 +725,10 @@
     &:nth-child(n) {
       a {
         color: brown;
+
+        &:hover {
+          opacity: 0.75;
+        }
       }
     }
   }
@@ -691,6 +750,15 @@
 // LINK
 .Link {
   grid-area: Link;
+  background: linear-gradient(to bottom, white, #ededed);
+
+  .userLink {
+    color: $primary-color;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
 }
 
 @media (max-width: 768px) {
@@ -701,23 +769,22 @@
 
 @media (max-width: 500px) {
   .grid-container {
-    display: grid;
-    min-height: calc(100vh - 290px);
     grid-template-columns: 1fr;
-    grid-template-rows: 0.1fr 0.1fr 2.8fr;
     gap: 0px 0px;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-template-areas:
       "Sidebar"
       "Navigation"
       "Dashboard"
       "Preview"
       "Link";
-    background: linear-gradient(to top, white, #ededed);
   }
 
   .Sidebar {
-    // grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .Navigation {
+    background: linear-gradient(to bottom, white, #ededed);
   }
 
   .Dashboard {
@@ -804,17 +871,9 @@
       bottom: 10px;
     }
 
-    .chooseCont {
-      flex-direction: column;
-      align-items: center !important;
-      justify-content: center !important;
-      margin: 0 auto;
-    }
-
     .pickColor {
       display: grid;
       grid-gap: 15px;
-      grid-template-columns: minmax(100px, 1fr);
     }
   }
 }

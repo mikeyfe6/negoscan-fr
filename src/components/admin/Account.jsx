@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useLayoutEffect } from "react"
+import { Link } from "gatsby"
 import axios from "axios"
 import {
   FaLock,
@@ -672,10 +673,9 @@ export default () => {
       </div>
 
       {/* NAVIGATION NAVIGATION NAVIGATION NAVIGATION NAVIGATION <--------------------------------------------------------------------------------> NAVIGATION NAVIGATION NAVIGATION NAVIGATION NAVIGATION */}
-      <div className={`${accountStyles.Navigation} ${accountStyles.card}`}>
-        {" "}
-        NAVIGATION
-      </div>
+      <div
+        className={`${accountStyles.Navigation} ${accountStyles.card}`}
+      ></div>
 
       {/* PREVIEW PREVIEW PREVIEW PREVIEW PREVIEW <--------------------------------------------------------------------------------> PREVIEW PREVIEW PREVIEW PREVIEW PREVIEW */}
       <div className={`${accountStyles.Preview} ${accountStyles.card}`}>
@@ -695,7 +695,7 @@ export default () => {
             className={accountStyles.iphoneBackground}
             style={{
               position: "relative",
-              width: "100vh",
+              // width: "100vh",
               height: "100%",
               zindex: 1,
             }}
@@ -875,6 +875,8 @@ export default () => {
                     value={profile}
                     type="text"
                     disabled={disabledProfile}
+                    pattern="[^\s]+"
+                    title="Geen spaties"
                     name="text"
                     id="profile"
                     className={accountStyles.profileInput}
@@ -971,7 +973,7 @@ export default () => {
                     id="password"
                     className={accountStyles.profileInput}
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                    title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+                    title="Moet op z'n minst 1 nummer, 1 hoofdletter, 1 klein letter en 8 karakters lang zijn."
                   />
                 </label>
                 <FaRegEdit
@@ -1001,13 +1003,13 @@ export default () => {
         </div>
 
         <br />
-        <hr
+        {/* <hr
           style={{
             border: "1px solid #35748d",
             opacity: "0.5",
           }}
-        />
-        <br />
+        /> */}
+
         <div className={accountStyles.socialCont}>
           <form onSubmit={submitFB} className={accountStyles.socialForm}>
             <div>
@@ -1142,9 +1144,7 @@ export default () => {
             {error && <ErrorMessage text={error} />}
           </form>
         </div>
-        <br />
-        <br />
-        <hr style={{ border: "1px solid #d8e6d8" }} />
+        {/* <hr style={{ border: "1px solid #d8e6d8" }} /> */}
         <br />
         <br />
         <br />
@@ -1258,6 +1258,7 @@ export default () => {
                   Update Hyperlink
                 </button>
                 <FaTrash
+                  style={{ cursor: "pointer" }}
                   className={accountStyles.trashBtn}
                   onClick={event => {
                     deleteLink(link)
@@ -1408,7 +1409,15 @@ export default () => {
 
       {/* LINK LINK LINK LINK LINK <--------------------------------------------------------------------------------> LINK LINK LINK LINK LINK */}
 
-      <div className={`${accountStyles.Link} ${accountStyles.card}`}>LINK</div>
+      <div className={`${accountStyles.Link} ${accountStyles.card}`}>
+        <div style={{ textAlign: "center" }}>
+          <b>JOUW Negosite: {""}</b>
+          <Link
+            className={accountStyles.userLink}
+            to={`/Negosite_${userId}`}
+          >{`${apiURL}/Negosite_${userId}`}</Link>
+        </div>
+      </div>
     </div>
   )
 }

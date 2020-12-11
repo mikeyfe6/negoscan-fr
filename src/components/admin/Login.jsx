@@ -77,7 +77,7 @@ export default () => {
 
     try {
       const { data } = await axios.post(`${apiURL}/auth/local/register`, {
-        username: usernameRegRef.current.value.replace(/\s+/g, ""),
+        username: usernameRegRef.current.value,
         email: emailRegRef.current.value,
         password: passwordRegRef.current.value,
       })
@@ -149,7 +149,7 @@ export default () => {
                 ref={usernameRegRef}
                 type="text"
                 name="usernameReg"
-                pattern="^\S+$"
+                pattern="[^\s]+"
                 placeholder="gebruikersnaam"
               />
               <input
@@ -165,7 +165,7 @@ export default () => {
                 name="passwordreg"
                 placeholder="wachtwoord"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+                title="Moet op z'n minst 1 nummer, 1 hoofdletter, 1 klein letter en 8 karakters lang zijn."
               />
               <button>Sign Up</button>
             </form>

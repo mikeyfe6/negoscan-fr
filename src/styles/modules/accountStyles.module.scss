@@ -68,6 +68,7 @@
 // NAVIGATION
 .Navigation {
   grid-area: Navigation;
+  background: linear-gradient(to bottom, white, #ededed);
 }
 
 // PREVIEW
@@ -330,6 +331,7 @@
   .social-cont {
     display: flex;
     justify-content: space-around;
+    margin: 15px 0;
 
     .social-form {
       flex-wrap: wrap;
@@ -812,6 +814,7 @@
     .pickColor {
       display: grid;
       grid-gap: 15px;
+      grid-template-columns: minmax(100px, 1fr);
     }
   }
 }

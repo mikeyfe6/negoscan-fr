@@ -1255,7 +1255,7 @@ export default () => {
                   Update Hyperlink
                 </button>
                 <FaTrash
-                  style={{ cursor: "pointer" }}
+                  className={accountStyles.trashBtn}
                   onClick={event => {
                     deleteLink(link)
                     event.preventDefault()
@@ -1293,10 +1293,7 @@ export default () => {
         </h2>
         <br />
 
-        <ul
-          style={{ display: "flex", justifyContent: "space-around" }}
-          className={accountStyles.pickColor}
-        >
+        <ul className={accountStyles.pickColor}>
           <li className={accountStyles.chooseColor}>
             <label>
               <input

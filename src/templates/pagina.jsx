@@ -157,20 +157,20 @@ export const query = graphql`
     strapiNegosite(id: { eq: $id }) {
       profiel
       biografie
-      background {
-        childImageSharp {
-          fluid(maxWidth: 1200) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      avatar {
-        childImageSharp {
-          fixed(width: 125, height: 125) {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
+      # background {
+      #   childImageSharp {
+      #     fluid(maxWidth: 1200) {
+      #       ...GatsbyImageSharpFluid
+      #     }
+      #   }
+      # }
+      # avatar {
+      #   childImageSharp {
+      #     fixed(width: 125, height: 125) {
+      #       ...GatsbyImageSharpFixed
+      #     }
+      #   }
+      # }
       website {
         id
         username

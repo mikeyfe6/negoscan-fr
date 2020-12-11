@@ -14,7 +14,7 @@ import { fab } from "@fortawesome/free-brands-svg-icons"
 import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons"
 
 import Header from "./header"
-import Footer from "./footer"
+// import Footer from "./footer"
 
 library.add(fab, faCheckSquare, faCoffee)
 
@@ -33,13 +33,13 @@ const Layout = ({ children }) => {
     <>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div>
-        <main style={{ minHeight: "calc(100vh - 290px)" }}>{children}</main>
+        <main style={{ overflow: "hidden" }}>{children}</main>
         {/* <footer>
           © {new Date().getFullYear()}, Built with
           {` `}
           <a href="https://www.gatsbyjs.com">Gatsby</a>
         </footer> */}
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   )
@@ -50,3 +50,5 @@ Layout.propTypes = {
 }
 
 export default Layout
+
+// {{ minHeight: "calc(100vh - 290px)" }}

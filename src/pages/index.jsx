@@ -2,22 +2,33 @@ import React from "react"
 
 import Layout from "../components/layout"
 
-import Showcase from "../components/showcase"
-import Stats from "../components/stats"
-import Cli from "../components/cli"
-import Cloud from "../components/cloud"
-import Languages from "../components/languages"
-
 import SEO from "../components/seo"
+import loginStyles from "../styles/modules/loginStyles.module.scss"
+
+import servImage from "../images/server.png"
+import { Link } from "gatsby"
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <Showcase />
-    <Stats />
-    <Cli />
-    <Cloud />
-    <Languages />
+    <section
+      className={`${loginStyles.docsHead} ${loginStyles.bgPrimary} ${loginStyles.py3}`}
+    >
+      <div className={`${loginStyles.container} ${loginStyles.grid}`}>
+        <div>
+          <h1 className={loginStyles.xl}>Negoscan.me</h1>
+          <p className={loginStyles.lead}>
+            Klik{" "}
+            <Link to="/admin/login" className={loginStyles.link}>
+              hier
+            </Link>{" "}
+            om in te loggen..
+          </p>
+        </div>
+        <img src={servImage} alt="" />
+      </div>
+    </section>
+    <div className={loginStyles.indexBg} />
   </Layout>
 )
 

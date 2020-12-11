@@ -19,13 +19,17 @@ module.exports = {
         apiURL: process.env.DEPLOY_URL
           ? "https://negoscan-database.herokuapp.com"
           : "http://localhost:1337",
-        contentTypes: [`connection`, `negosite`, `user`],
+        contentTypes: [`negosite`, `user`],
         markdownImages: {
           typesToParse: {
             negosite: ["biografie"],
           },
         },
         queryLimit: 1000,
+        loginData: {
+          identifier: "",
+          password: "",
+        },
       },
     },
     {

@@ -30,12 +30,28 @@ const LoadingMessage = ({ text }) => {
 export default () => {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(null)
+
   const usernameRef = useRef()
   const passwordRef = useRef()
 
   const usernameRegRef = useRef()
   const emailRegRef = useRef()
   const passwordRegRef = useRef()
+
+  // const signUpButton = document.getElementById("signUp")
+  // const signInButton = document.getElementById("signIn")
+
+  const signUpHandler = e => {
+    const container = document.getElementById("container")
+    container.classList.add(loginStyles.rightPanelActive)
+    e.preventDefault()
+  }
+
+  const signInHandler = e => {
+    const container = document.getElementById("container")
+    container.classList.remove(loginStyles.rightPanelActive)
+    e.preventDefault()
+  }
 
   const handleSubmitLogin = async e => {
     e.preventDefault()
@@ -61,7 +77,7 @@ export default () => {
 
     try {
       const { data } = await axios.post(`${apiURL}/auth/local/register`, {
-        username: usernameRegRef.current.value,
+        username: usernameRegRef.current.value.replace(/\s+/g, ""),
         email: emailRegRef.current.value,
         password: passwordRegRef.current.value,
       })
@@ -108,109 +124,132 @@ export default () => {
           <img src={servImage} alt="" />
         </div>
       </section>
+      <div className={loginStyles.indexBg} />
 
-      <form
-        onSubmit={handleSubmitLogin}
-        className={`${loginStyles.container} ${loginStyles.negoform}`}
-      >
-        <fieldset>
-          <legend className={`${loginStyles.p1}`}>
-            Vul hier je gegevens in...
-          </legend>
-          <div className={`${loginStyles.formControl} ${loginStyles.p1}`}>
-            <label htmlFor="username">
-              Username of Email <br />
-              <input
-                ref={usernameRef}
-                type="text"
-                name="username"
-                className={loginStyles.negoinput}
-              />
-            </label>
-          </div>
-          <div className={`${loginStyles.formControl} ${loginStyles.p1}`}>
-            <label htmlFor="password">
-              Password <br />
-              <input
-                ref={passwordRef}
-                type="password"
-                name="password"
-                className={loginStyles.negoinput}
-              />
-            </label>
-          </div>
-          {error && <ErrorMessage text={error} />}
-          {loading && <LoadingMessage text={loading} />}
-        </fieldset>
-        <br />
-        <div>
-          <input
-            type="submit"
-            value="Login"
-            className={`${loginStyles.btn} ${loginStyles.btnPrimary}`}
-          />
-        </div>
-        <div>
-          <p>Nog geen account, klik hier om aan te melden..</p>
-        </div>
-      </form>
-
-      <form
-        onSubmit={handleSubmitRegister}
-        className={`${loginStyles.container} ${loginStyles.negoform}`}
-      >
-        <fieldset>
-          <legend className={`${loginStyles.p1}`}>
-            Vul hier je gegevens in...
-          </legend>
-          <div className={`${loginStyles.formControl} ${loginStyles.p1}`}>
-            <label htmlFor="username">
-              Username <br />
+      <div className={loginStyles.superContainer}>
+        <div className={loginStyles.container} id="container">
+          <div
+            className={`${loginStyles.formContainer} ${loginStyles.signUpContainer}`}
+          >
+            <form onSubmit={handleSubmitRegister}>
+              <h1> Maak een account aan</h1>
+              {/* <div className={loginStyles.socialContainer}>
+                <a href="" className="social">
+                  <i>icon</i>
+                </a>
+                <a href="" className="social">
+                  <i>icon</i>
+                </a>
+                <a href="" className="social">
+                  <i>icon</i>
+                </a>
+              </div> */}
+              <span>vul je email/adress in en kies een wachtwoord</span>
               <input
                 ref={usernameRegRef}
                 type="text"
                 name="usernameReg"
-                className={loginStyles.negoinput}
+                pattern="^\S+$"
+                placeholder="gebruikersnaam"
               />
-            </label>
-          </div>
-          <div className={`${loginStyles.formControl} ${loginStyles.p1}`}>
-            <label htmlFor="email">
-              Email <br />
               <input
                 ref={emailRegRef}
                 type="email"
                 name="emailReg"
-                className={loginStyles.negoinput}
+                placeholder="email"
               />
-            </label>
-          </div>
-          <div className={`${loginStyles.formControl} ${loginStyles.p1}`}>
-            <label htmlFor="password">
-              Password <br />
               <input
                 ref={passwordRegRef}
                 type="password"
                 name="passwordreg"
-                className={loginStyles.negoinput}
+                placeholder="wachtwoord"
               />
-            </label>
+              <button>Sign Up</button>
+            </form>
           </div>
-          {error && <ErrorMessage text={error} />}
-          {loading && <LoadingMessage text={loading} />}
-        </fieldset>
-        <br />
-        <div>
-          <input
-            type="submit"
-            value="Register"
-            className={`${loginStyles.btn} ${loginStyles.btnPrimary}`}
-          />
+          <div
+            className={`${loginStyles.formContainer} ${loginStyles.signInContainer}`}
+          >
+            <form onSubmit={handleSubmitLogin}>
+              <h1> Inloggen </h1>
+              {/* <div className={loginStyles.socialContainer}>
+                <a href="" className="social">
+                  <i>icon</i>
+                </a>
+                <a href="" className="social">
+                  <i>icon</i>
+                </a>
+                <a href="" className="social">
+                  <i>icon</i>
+                </a>
+              </div> */}
+              <span>gebruik je account</span>
+              <input
+                ref={usernameRef}
+                type="text"
+                name="username"
+                placeholder="email / gebruikersnaam"
+              />
+              <input
+                ref={passwordRef}
+                type="password"
+                name="password"
+                placeholder="wachtwoord"
+              />
+              {error && <ErrorMessage text={error} />}
+              {loading && <LoadingMessage text={loading} />}
+              <a href="#">Forget your password</a>
+              <button>Log in</button>
+            </form>
+          </div>
+          <div className={loginStyles.overlayContainer}>
+            <div className={loginStyles.overlay}>
+              <div
+                className={`${loginStyles.overlayPanel} ${loginStyles.overlayLeft}`}
+              >
+                <h1 className={loginStyles.signUpTitle}>
+                  Welkom bij Negoscan.me
+                </h1>
+                <p className={loginStyles.signUpText}>
+                  Hier kan je je registeren <br />
+                  <br /> Lorem ipsum dolor, sit amet consectetur adipisicing
+                  elit. Maiores nihil corporis dolores eaque delectus. <br />
+                  <br />
+                  Al een account? klik hieronder..
+                </p>
+
+                <button
+                  className={loginStyles.ghost}
+                  id="signIn"
+                  onClick={signInHandler}
+                >
+                  Naar 'Inloggen'
+                </button>
+              </div>
+              <div
+                className={`${loginStyles.overlayPanel} ${loginStyles.overlayRight}`}
+              >
+                <h1 className={loginStyles.signUpTitle}>Welkom Terug</h1>
+                <p className={loginStyles.signUpText}>
+                  Hier kan je inloggen <br />
+                  <br />
+                  Lorem ipsum dolor sit amet consectetur apersonal info Lorem,
+                  ipsum dolor sit amet consectetur adipisicing elit. <br />
+                  <br />
+                  Nog geen account? Klik hieronder..
+                </p>
+                <button
+                  className={loginStyles.ghost}
+                  id="signUp"
+                  onClick={signUpHandler}
+                >
+                  Naar 'Registreren'
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <p>Nog geen account, klik hier om aan te melden..</p>
-        </div>
-      </form>
+      </div>
     </div>
   )
 }

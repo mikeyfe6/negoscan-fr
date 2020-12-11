@@ -240,4 +240,13 @@
 
 // --> MQ: Mobile !
 @media (max-width: 500px) {
+  .card {
+    padding: 5px !important;
+    margin: 5px !important;
+  }
+
+  .btn {
+    float: right;
+    margin-right: 7.5%;
+  }
 }

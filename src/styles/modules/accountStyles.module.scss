@@ -452,7 +452,9 @@
 
 // ----------- //
 
-.choose-color {
+.pickColor {
+  display: flex;
+  justify-content: space-around;
 }
 
 // ---------------------------------------------------------------------------------------- // YELLOW YELLOW YELLOW
@@ -687,4 +689,129 @@
 // LINK
 .Link {
   grid-area: Link;
+}
+
+@media (max-width: 768px) {
+  // .grid-container {
+  //   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  // }
+}
+
+@media (max-width: 500px) {
+  .grid-container {
+    display: grid;
+    min-height: calc(100vh - 290px);
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.1fr 0.1fr 2.8fr;
+    gap: 0px 0px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-areas:
+      "Sidebar"
+      "Navigation"
+      "Dashboard"
+      "Preview"
+      "Link";
+    background: linear-gradient(to top, white, #ededed);
+  }
+
+  .Sidebar {
+    // grid-template-columns: 1fr;
+  }
+
+  .Dashboard {
+    grid-template-columns: 1fr;
+
+    .avatarformcont {
+      flex-direction: column !important;
+    }
+    .formavatar {
+      margin-bottom: 7.5%;
+    }
+
+    .profile-info {
+      margin-left: 2.5%;
+    }
+
+    .profile-input {
+      width: 75%;
+      margin: 5% 2.5%;
+    }
+
+    .social-cont {
+      flex-direction: column;
+    }
+
+    .social-buttons {
+      margin: 15px 0px !important;
+    }
+
+    .social-form {
+      margin-left: 5%;
+    }
+
+    .social-buttons {
+      float: right;
+      width: 57.5%;
+    }
+
+    .link-cont {
+      display: block;
+      margin: 20px 5px;
+
+      h3 {
+        margin-left: 15px;
+      }
+
+      .link-input {
+        margin: 15px 0 15px 22.5px;
+      }
+    }
+
+    .links-cont {
+      display: block;
+      padding: 15px 10px 30px 15px !important;
+    }
+
+    .updateLink {
+      float: right;
+      bottom: 47.5px;
+      right: 10px;
+      position: relative;
+    }
+
+    .updateLinkShow {
+      margin-bottom: 5px;
+    }
+
+    .updateUpdateLinkShow {
+      margin-top: 15px;
+    }
+
+    .inputCont {
+      float: right;
+      position: relative;
+      left: 95px;
+      bottom: 10px;
+    }
+
+    .trashBtn {
+      cursor: pointer;
+      position: relative;
+      float: right;
+      left: 90px;
+      bottom: 10px;
+    }
+
+    .chooseCont {
+      flex-direction: column;
+      align-items: center !important;
+      justify-content: center !important;
+      margin: 0 auto;
+    }
+
+    .pickColor {
+      display: grid;
+      grid-gap: 15px;
+    }
+  }
 }

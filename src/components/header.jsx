@@ -8,15 +8,19 @@ import negoLogo from "../../static/Negoscan-logo.png"
 const Header = () => (
   <header className={headerStyles.navbar}>
     <div className={`${headerStyles.container} ${headerStyles.flex}`}>
-      <img src={negoLogo} alt="" style={{ width: "100px" }} />
+      <Link to="/">
+        <img src={negoLogo} alt="" style={{ width: "100px" }} />
+      </Link>
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="#">
+              <b>Store</b>
+            </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/docs">Docs</Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/admin/login">Login / Register</Link>
           </li>

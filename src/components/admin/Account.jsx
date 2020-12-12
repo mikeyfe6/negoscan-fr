@@ -13,6 +13,8 @@ import {
   FaRegUserCircle,
 } from "react-icons/fa"
 
+import SEO from "../../components/seo"
+
 import { navigate } from "@reach/router"
 import { getUser, logout } from "../../services/auth"
 
@@ -649,809 +651,822 @@ export default () => {
   // }
 
   return (
-    <div className={`${accountStyles.gridContainer} ${accountStyles.card}`}>
-      {/* SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR <--------------------------------------------------------------------------------> SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR */}
+    <>
+      <SEO title="Admin Panel" />
+      <div className={`${accountStyles.gridContainer} ${accountStyles.card}`}>
+        {/* SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR <--------------------------------------------------------------------------------> SIDEBAR SIDEBAR SIDEBAR SIDEBAR SIDEBAR */}
 
-      <div
-        className={`${accountStyles.Sidebar} ${accountStyles.card}`}
-        style={{
-          position: "relative",
-        }}
-      >
-        <h5
-          clasNname={accountStyles.userTitle}
+        <div
+          className={`${accountStyles.Sidebar} ${accountStyles.card}`}
           style={{
-            textAlign: "center",
-            fontSize: "0.9em",
-            margin: "auto",
-            color: "white",
+            position: "relative",
           }}
         >
-          Welkom {gatsbyUser.user.username}!
-        </h5>
+          <h5
+            clasNname={accountStyles.userTitle}
+            style={{
+              textAlign: "center",
+              fontSize: "0.9em",
+              margin: "auto",
+              color: "white",
+            }}
+          >
+            Welkom {gatsbyUser.user.username}!
+          </h5>
 
-        <button
-          style={{
-            position: "absolute",
-            bottom: "10px",
-            right: "10px",
-          }}
-          className={accountStyles.btn}
-          href="#"
-          onClick={e => {
-            e.preventDefault()
-            logout(() => navigate("/admin/login"))
-          }}
-        >
-          Logout
-        </button>
-      </div>
+          <button
+            style={{
+              position: "absolute",
+              bottom: "10px",
+              right: "10px",
+            }}
+            className={accountStyles.btn}
+            href="#"
+            onClick={e => {
+              e.preventDefault()
+              logout(() => navigate("/admin/login"))
+            }}
+          >
+            Logout
+          </button>
+        </div>
 
-      {/* NAVIGATION NAVIGATION NAVIGATION NAVIGATION NAVIGATION <--------------------------------------------------------------------------------> NAVIGATION NAVIGATION NAVIGATION NAVIGATION NAVIGATION */}
-      {/* <div
+        {/* NAVIGATION NAVIGATION NAVIGATION NAVIGATION NAVIGATION <--------------------------------------------------------------------------------> NAVIGATION NAVIGATION NAVIGATION NAVIGATION NAVIGATION */}
+        {/* <div
         className={`${accountStyles.Navigation} ${accountStyles.card}`}
       ></div> */}
 
-      {/* PREVIEW PREVIEW PREVIEW PREVIEW PREVIEW <--------------------------------------------------------------------------------> PREVIEW PREVIEW PREVIEW PREVIEW PREVIEW */}
-      <div className={`${accountStyles.Preview} ${accountStyles.card}`}>
-        <div className={accountStyles.iphoneFrame}>
-          {" "}
-          <img
-            src={preview}
-            alt=""
-            className={accountStyles.iphoneAvatar}
-            id="iphone-avatar"
-          />
-          <p id="iphone-username" className={accountStyles.iphoneUsername}>
-            {username}
-          </p>
-          <div
-            id="iphone-bg"
-            className={accountStyles.iphoneBackground}
-            style={{
-              position: "relative",
-              // width: "100vh",
-              height: "100%",
-              zindex: 1,
-            }}
-          />
-          <div>
-            <ul className={accountStyles.iphoneLinks} id="iphone-linklook">
-              {links.slice(0, 5).map(link => (
-                <li key={link.id} id={`link${link.id}`} hidden={!link.visible}>
-                  <a
-                    href={`https://${link.hyperlink}`}
-                    rel="noopener noreferrer"
-                    target="_blank"
+        {/* PREVIEW PREVIEW PREVIEW PREVIEW PREVIEW <--------------------------------------------------------------------------------> PREVIEW PREVIEW PREVIEW PREVIEW PREVIEW */}
+        <div className={`${accountStyles.Preview} ${accountStyles.card}`}>
+          <div className={accountStyles.iphoneFrame}>
+            {" "}
+            <img
+              src={preview}
+              alt=""
+              className={accountStyles.iphoneAvatar}
+              id="iphone-avatar"
+            />
+            <p id="iphone-username" className={accountStyles.iphoneUsername}>
+              {username}
+            </p>
+            <div
+              id="iphone-bg"
+              className={accountStyles.iphoneBackground}
+              style={{
+                position: "relative",
+                // width: "100vh",
+                height: "100%",
+                zindex: 1,
+              }}
+            />
+            <div>
+              <ul className={accountStyles.iphoneLinks} id="iphone-linklook">
+                {links.slice(0, 5).map(link => (
+                  <li
+                    key={link.id}
+                    id={`link${link.id}`}
+                    hidden={!link.visible}
                   >
-                    {link.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className={accountStyles.iphoneSocials} id="iphone-iconlook">
-            <a
-              href={`https://${fbLink}`}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <FaFacebookF size="1.75em" />
-            </a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a
-              href={`https://${twLink}`}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <FaTwitter size="1.75em" />
-            </a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a
-              href={`https://${igLink}`}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <FaInstagram size="1.75em" />
-            </a>
-          </div>
-          {/* <img
+                    <a
+                      href={`https://${link.hyperlink}`}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {link.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className={accountStyles.iphoneSocials} id="iphone-iconlook">
+              <a
+                href={`https://${fbLink}`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <FaFacebookF size="1.75em" />
+              </a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a
+                href={`https://${twLink}`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <FaTwitter size="1.75em" />
+              </a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a
+                href={`https://${igLink}`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <FaInstagram size="1.75em" />
+              </a>
+            </div>
+            {/* <img
             src={gatsbyUser.user.gebruiker.background.url}
             alt=""
             className={accountStyles.iphoneBg}
           />{" "} */}
-        </div>
-      </div>
-
-      {/* DASHBOARD DASHBOARD DASHBOARD DASHBOARD DASHBOARD <--------------------------------------------------------------------------------> DASHBOARD DASHBOARD DASHBOARD DASHBOARD DASHBOARD */}
-      <div
-        className={`${accountStyles.Dashboard} ${accountStyles.p3} ${accountStyles.card}`}
-      >
-        <br />
-        <div className={accountStyles.avatarformcont}>
-          <form onSubmit={handleSubmit} className={accountStyles.formavatar}>
-            <div>
-              <img
-                src={preview}
-                alt=""
-                className={accountStyles.avatarImage}
-                id="avatar-image"
-              />{" "}
-              {loading && (
-                <div className={accountStyles.loadingComplete}>
-                  Profielfoto Geupload
-                </div>
-              )}
-            </div>
-
-            <div className={accountStyles.buttonsenzo}>
-              <button
-                className={`${accountStyles.btn} ${accountStyles.addBtn}`}
-                onClick={event => {
-                  event.preventDefault()
-                  fileInputRef.current.click()
-                }}
-              >
-                {" "}
-                Add image
-              </button>
-              <button
-                className={`${accountStyles.btn} ${accountStyles.btnLight} ${accountStyles.resetBtn}`}
-                type="reset"
-                onClick={event => {
-                  removeHeading()
-                  event.preventDefault()
-                }}
-              >
-                Reset
-              </button>
-              <input
-                type="file"
-                accept="image/*"
-                style={{ display: "none" }}
-                ref={fileInputRef}
-                onChange={event => {
-                  const file = event.target.files[0]
-                  if (file && file.type.substring(0, 5) === "image") {
-                    setImage(file)
-                  } else {
-                    setImage(null)
-                  }
-                }}
-              />
-              <button
-                className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
-                type="submit"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
-
-          <div className={accountStyles.profileInfo}>
-            <form onSubmit={submitUsername}>
-              <label htmlFor="username">
-                <FaRegUserCircle
-                  size="1.25em"
-                  style={{
-                    position: "relative",
-                    top: "5px",
-                    marginRight: "5px",
-                  }}
-                />
-                <input
-                  onChange={setUsernameHandler}
-                  value={username}
-                  type="text"
-                  maxLength="15"
-                  disabled={disabledUsername}
-                  name="username"
-                  id="username"
-                  className={accountStyles.profileInput}
-                />
-              </label>
-              <FaRegEdit
-                size="1.1em"
-                style={{
-                  position: "relative",
-                  top: "5px",
-                  right: "10px",
-                  cursor: "pointer",
-                }}
-                onClick={() => setDisabledUsername(false)}
-              />
-              <button
-                className={`${accountStyles.btn}`}
-                type="submit"
-                style={{
-                  paddingTop: "7.5px",
-                  paddingBottom: "7.5px",
-                }}
-              >
-                Save Profile Name
-              </button>
-
-              {error && <ErrorMessage text={error} />}
-            </form>
-
-            <form onSubmit={submitProfile}>
-              <p>
-                <label htmlFor="email">
-                  <FaUser
-                    size="1.25em"
-                    style={{
-                      position: "relative",
-                      top: "5px",
-                      marginRight: "5px",
-                    }}
-                  />
-                  <input
-                    onChange={setProfileHandler}
-                    value={profile}
-                    type="text"
-                    disabled={disabledProfile}
-                    pattern="[^\s]+"
-                    title="Geen spaties"
-                    name="text"
-                    id="profile"
-                    className={accountStyles.profileInput}
-                  />
-                </label>
-                <FaRegEdit
-                  size="1.1em"
-                  style={{
-                    position: "relative",
-                    top: "5px",
-                    right: "10px",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setDisabledProfile(false)}
-                />
-                <button
-                  className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
-                  type="submit"
-                  style={{
-                    paddingTop: "7.5px",
-                    paddingBottom: "7.5px",
-                  }}
-                >
-                  Save Username
-                </button>
-                {error && <ErrorMessage text={error} />}
-              </p>
-            </form>
-
-            <form onSubmit={submitEmail}>
-              <p>
-                <label htmlFor="email">
-                  <FaAt
-                    size="1.25em"
-                    style={{
-                      position: "relative",
-                      top: "5px",
-                      marginRight: "5px",
-                    }}
-                  />
-                  <input
-                    onChange={setEmailHandler}
-                    value={email}
-                    type="email"
-                    disabled={disabledEmail}
-                    name="email"
-                    id="email"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                    className={accountStyles.profileInput}
-                  />
-                </label>
-                <FaRegEdit
-                  size="1.1em"
-                  style={{
-                    position: "relative",
-                    top: "5px",
-                    right: "10px",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setDisabledEmail(false)}
-                />
-                <button
-                  className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
-                  type="submit"
-                  style={{
-                    paddingTop: "7.5px",
-                    paddingBottom: "7.5px",
-                  }}
-                >
-                  Save Email
-                </button>
-                {error && <ErrorMessage text={error} />}
-              </p>
-            </form>
-
-            <form onSubmit={submitPassword}>
-              <div>
-                <label htmlFor="password">
-                  <FaLock
-                    size="1.25em"
-                    style={{
-                      position: "relative",
-                      top: "5px",
-                      marginRight: "5px",
-                    }}
-                  />
-                  <input
-                    onChange={setPasswordHandler}
-                    value={password}
-                    placeholder="*********"
-                    type="password"
-                    disabled={disabledPassword}
-                    name="password"
-                    id="password"
-                    className={accountStyles.profileInput}
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                    title="Moet op z'n minst 1 nummer, 1 hoofdletter, 1 klein letter en 8 karakters lang zijn."
-                  />
-                </label>
-                <FaRegEdit
-                  size="1.1em"
-                  style={{
-                    position: "relative",
-                    top: "5px",
-                    right: "10px",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setDisabledPassword(false)}
-                />
-                <button
-                  className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
-                  type="submit"
-                  style={{
-                    paddingTop: "7.5px",
-                    paddingBottom: "7.5px",
-                  }}
-                >
-                  Update Password
-                </button>
-                {error && <ErrorMessage text={error} />}
-              </div>
-            </form>
           </div>
         </div>
 
-        {/* <hr
+        {/* DASHBOARD DASHBOARD DASHBOARD DASHBOARD DASHBOARD <--------------------------------------------------------------------------------> DASHBOARD DASHBOARD DASHBOARD DASHBOARD DASHBOARD */}
+        <div
+          className={`${accountStyles.Dashboard} ${accountStyles.p3} ${accountStyles.card}`}
+        >
+          <br />
+          <div className={accountStyles.avatarformcont}>
+            <form onSubmit={handleSubmit} className={accountStyles.formavatar}>
+              <div>
+                <img
+                  src={preview}
+                  alt=""
+                  className={accountStyles.avatarImage}
+                  id="avatar-image"
+                />{" "}
+                {loading && (
+                  <div className={accountStyles.loadingComplete}>
+                    Profielfoto Geupload
+                  </div>
+                )}
+              </div>
+
+              <div className={accountStyles.buttonsenzo}>
+                <button
+                  className={`${accountStyles.btn} ${accountStyles.addBtn}`}
+                  onClick={event => {
+                    event.preventDefault()
+                    fileInputRef.current.click()
+                  }}
+                >
+                  {" "}
+                  Add image
+                </button>
+                <button
+                  className={`${accountStyles.btn} ${accountStyles.btnLight} ${accountStyles.resetBtn}`}
+                  type="reset"
+                  onClick={event => {
+                    removeHeading()
+                    event.preventDefault()
+                  }}
+                >
+                  Reset
+                </button>
+                <input
+                  type="file"
+                  accept="image/*"
+                  style={{ display: "none" }}
+                  ref={fileInputRef}
+                  onChange={event => {
+                    const file = event.target.files[0]
+                    if (file && file.type.substring(0, 5) === "image") {
+                      setImage(file)
+                    } else {
+                      setImage(null)
+                    }
+                  }}
+                />
+                <button
+                  className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+
+            <div className={accountStyles.profileInfo}>
+              <form onSubmit={submitUsername}>
+                <label htmlFor="username">
+                  <FaRegUserCircle
+                    size="1.25em"
+                    style={{
+                      position: "relative",
+                      top: "5px",
+                      marginRight: "5px",
+                    }}
+                  />
+                  <input
+                    onChange={setUsernameHandler}
+                    value={username}
+                    type="text"
+                    maxLength="15"
+                    disabled={disabledUsername}
+                    name="username"
+                    id="username"
+                    className={accountStyles.profileInput}
+                  />
+                </label>
+                <FaRegEdit
+                  size="1.1em"
+                  style={{
+                    position: "relative",
+                    top: "5px",
+                    right: "10px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setDisabledUsername(false)}
+                />
+                <button
+                  className={`${accountStyles.btn}`}
+                  type="submit"
+                  style={{
+                    paddingTop: "7.5px",
+                    paddingBottom: "7.5px",
+                  }}
+                >
+                  Save Profile Name
+                </button>
+
+                {error && <ErrorMessage text={error} />}
+              </form>
+
+              <form onSubmit={submitProfile}>
+                <p>
+                  <label htmlFor="email">
+                    <FaUser
+                      size="1.25em"
+                      style={{
+                        position: "relative",
+                        top: "5px",
+                        marginRight: "5px",
+                      }}
+                    />
+                    <input
+                      onChange={setProfileHandler}
+                      value={profile}
+                      type="text"
+                      disabled={disabledProfile}
+                      pattern="[^\s]+"
+                      title="Geen spaties"
+                      name="text"
+                      id="profile"
+                      className={accountStyles.profileInput}
+                    />
+                  </label>
+                  <FaRegEdit
+                    size="1.1em"
+                    style={{
+                      position: "relative",
+                      top: "5px",
+                      right: "10px",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setDisabledProfile(false)}
+                  />
+                  <button
+                    className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+                    type="submit"
+                    style={{
+                      paddingTop: "7.5px",
+                      paddingBottom: "7.5px",
+                    }}
+                  >
+                    Save Username
+                  </button>
+                  {error && <ErrorMessage text={error} />}
+                </p>
+              </form>
+
+              <form onSubmit={submitEmail}>
+                <p>
+                  <label htmlFor="email">
+                    <FaAt
+                      size="1.25em"
+                      style={{
+                        position: "relative",
+                        top: "5px",
+                        marginRight: "5px",
+                      }}
+                    />
+                    <input
+                      onChange={setEmailHandler}
+                      value={email}
+                      type="email"
+                      disabled={disabledEmail}
+                      name="email"
+                      id="email"
+                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                      className={accountStyles.profileInput}
+                    />
+                  </label>
+                  <FaRegEdit
+                    size="1.1em"
+                    style={{
+                      position: "relative",
+                      top: "5px",
+                      right: "10px",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setDisabledEmail(false)}
+                  />
+                  <button
+                    className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+                    type="submit"
+                    style={{
+                      paddingTop: "7.5px",
+                      paddingBottom: "7.5px",
+                    }}
+                  >
+                    Save Email
+                  </button>
+                  {error && <ErrorMessage text={error} />}
+                </p>
+              </form>
+
+              <form onSubmit={submitPassword}>
+                <div>
+                  <label htmlFor="password">
+                    <FaLock
+                      size="1.25em"
+                      style={{
+                        position: "relative",
+                        top: "5px",
+                        marginRight: "5px",
+                      }}
+                    />
+                    <input
+                      onChange={setPasswordHandler}
+                      value={password}
+                      placeholder="*********"
+                      type="password"
+                      disabled={disabledPassword}
+                      name="password"
+                      id="password"
+                      className={accountStyles.profileInput}
+                      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                      title="Moet op z'n minst 1 nummer, 1 hoofdletter, 1 klein letter en 8 karakters lang zijn."
+                    />
+                  </label>
+                  <FaRegEdit
+                    size="1.1em"
+                    style={{
+                      position: "relative",
+                      top: "5px",
+                      right: "10px",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setDisabledPassword(false)}
+                  />
+                  <button
+                    className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+                    type="submit"
+                    style={{
+                      paddingTop: "7.5px",
+                      paddingBottom: "7.5px",
+                    }}
+                  >
+                    Update Password
+                  </button>
+                  {error && <ErrorMessage text={error} />}
+                </div>
+              </form>
+            </div>
+          </div>
+
+          {/* <hr
           style={{
             border: "1px solid #35748d",
             opacity: "0.5",
           }}
         /> */}
 
-        <div className={accountStyles.socialCont}>
-          <form onSubmit={submitFB} className={accountStyles.socialForm}>
-            <div>
-              <label htmlFor="fblink">
-                <FaFacebookF
-                  size="1.1em"
-                  className={accountStyles.socialIcons}
-                />
+          <div className={accountStyles.socialCont}>
+            <form onSubmit={submitFB} className={accountStyles.socialForm}>
+              <div>
+                <label htmlFor="fblink">
+                  <FaFacebookF
+                    size="1.1em"
+                    className={accountStyles.socialIcons}
+                  />
 
-                <input
-                  onChange={setFbHandler}
-                  value={fbLink}
-                  type="text"
-                  disabled={disabledFbLink}
-                  name="fblink"
-                  id="fblink"
-                  className={accountStyles.socialInput}
-                />
-              </label>
-            </div>
-            <div className={accountStyles.socialButtons}>
-              <button
-                className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.socialSpec} `}
-                type="submit"
-                style={{
-                  paddingTop: "7.5px",
-                  paddingBottom: "7.5px",
-                  paddingLeft: "20px",
-                  paddingRight: "20px",
-                }}
-              >
-                Save Facebook
-              </button>
-              <FaRegEdit
-                size="1.1em"
-                style={{
-                  position: "relative",
-                  top: "5px",
-                  left: "15px",
-                  cursor: "pointer",
-                }}
-                onClick={() => setDisabledFbLink(false)}
-              />
-            </div>
-            <div style={{ clear: "both" }} />
-            {error && <ErrorMessage text={error} />}
-          </form>
-
-          <form onSubmit={submitTW} className={accountStyles.socialForm}>
-            <div>
-              <label htmlFor="twlink">
-                <FaTwitter size="1.1em" className={accountStyles.socialIcons} />
-
-                <input
-                  onChange={setTwHandler}
-                  value={twLink}
-                  type="text"
-                  disabled={disabledTwLink}
-                  name="twlink"
-                  id="twlink"
-                  className={accountStyles.socialInput}
-                />
-              </label>
-            </div>
-            <div className={accountStyles.socialButtons}>
-              <button
-                className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.socialSpec}`}
-                type="submit"
-                style={{
-                  paddingTop: "7.5px",
-                  paddingBottom: "7.5px",
-                  paddingLeft: "20px",
-                  paddingRight: "20px",
-                }}
-              >
-                Save Twitter
-              </button>
-              <FaRegEdit
-                size="1.1em"
-                style={{
-                  position: "relative",
-                  top: "5px",
-                  left: "15px",
-                  cursor: "pointer",
-                }}
-                onClick={() => setDisabledTwLink(false)}
-              />
-            </div>
-            {error && <ErrorMessage text={error} />}
-          </form>
-          <form onSubmit={submitIG} className={accountStyles.socialForm}>
-            <div>
-              <label htmlFor="iglink">
-                <FaInstagram
-                  size="1.1em"
-                  className={accountStyles.socialIcons}
-                />
-
-                <input
-                  onChange={setIgHandler}
-                  value={igLink}
-                  type="text"
-                  disabled={disabledIgLink}
-                  name="iglink"
-                  id="iglink"
-                  className={accountStyles.socialInput}
-                />
-              </label>
-            </div>
-            <div className={accountStyles.socialButtons}>
-              <button
-                className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.socialSpec}`}
-                type="submit"
-                style={{
-                  paddingTop: "7.5px",
-                  paddingBottom: "7.5px",
-                  paddingLeft: "20px",
-                  paddingRight: "20px",
-                }}
-              >
-                Save Instagram
-              </button>
-              <FaRegEdit
-                size="1.1em"
-                style={{
-                  position: "relative",
-                  top: "5px",
-                  left: "15px",
-                  cursor: "pointer",
-                }}
-                onClick={() => setDisabledIgLink(false)}
-              />
-            </div>
-            {error && <ErrorMessage text={error} />}
-          </form>
-        </div>
-
-        <br />
-        <hr style={{ border: "1px solid #d8e6d8", margin: "15px 50px" }} />
-        <br />
-        <div>
-          <div className={accountStyles.linkCont}>
-            <h3>Title:</h3>
-            <input
-              className={accountStyles.linkInput}
-              type="text"
-              size="35"
-              placeholder="vul titel in"
-              ref={linkTitle}
-              minLength="5"
-              required
-            />
-            <h3>Hyperlink:</h3>
-            <input
-              className={accountStyles.linkInput}
-              type="url"
-              size="35"
-              placeholder="voer hyperlink in, bijv. voorbeeld.nl"
-              ref={hyperLink}
-              minLength="5"
-              required
-            />
-            <button
-              className={`${accountStyles.btn} ${accountStyles.btnPrimary} ${accountStyles.nextoClear} `}
-              style={{
-                float: "right",
-              }}
-              onClick={event => {
-                createLink()
-                event.preventDefault()
-              }}
-            >
-              Create a link
-            </button>
-            <button
-              className={accountStyles.btn}
-              style={{ background: "red", float: "right" }}
-              onClick={event => {
-                linkTitle.current.value = ""
-                hyperLink.current.value = ""
-                event.preventDefault()
-              }}
-            >
-              Clear
-            </button>
-          </div>
-          {linkError && <DoThis text={linkError} />}
-          <br />
-          <br />
-          <ul>
-            {links.map(link => (
-              <li
-                key={link.id}
-                className={`${accountStyles.linksCont} ${accountStyles.card}`}
-              >
-                <div>
-                  <p className={accountStyles.updateLinkShow}>{link.title}</p>
                   <input
-                    className={accountStyles.editInput}
-                    id={`editlink${link.id}`}
+                    onChange={setFbHandler}
+                    value={fbLink}
                     type="text"
-                    size="30"
-                    value={editLink[link]}
-                    onChange={handleEditLink}
-                    placeholder="edit title"
-                    minLength="5"
-                    required
+                    disabled={disabledFbLink}
+                    name="fblink"
+                    id="fblink"
+                    className={accountStyles.socialInput}
                   />
-                </div>
+                </label>
+              </div>
+              <div className={accountStyles.socialButtons}>
                 <button
-                  className={accountStyles.updateLink}
-                  onClick={event => {
-                    editTheLink({
-                      id: link.id,
-                      value: editLink,
-                    })
-                    event.preventDefault()
+                  className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.socialSpec} `}
+                  type="submit"
+                  style={{
+                    paddingTop: "7.5px",
+                    paddingBottom: "7.5px",
+                    paddingLeft: "20px",
+                    paddingRight: "20px",
                   }}
                 >
-                  Update Link
+                  Save Facebook
                 </button>
-                <div>
-                  <b>
-                    <p className={accountStyles.updateUpdateLinkShow}>
-                      {link.hyperlink}
-                    </p>{" "}
-                  </b>
-                  <input
-                    className={accountStyles.editInput}
-                    id={`hyperlink${link.id}`}
-                    type="url"
-                    size="30"
-                    value={editHyperLink[link]}
-                    onChange={handleEditHyperLink}
-                    placeholder="edit hyperlink"
-                    minLength="5"
-                    required
+                <FaRegEdit
+                  size="1.1em"
+                  style={{
+                    position: "relative",
+                    top: "5px",
+                    left: "15px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setDisabledFbLink(false)}
+                />
+              </div>
+              <div style={{ clear: "both" }} />
+              {error && <ErrorMessage text={error} />}
+            </form>
+
+            <form onSubmit={submitTW} className={accountStyles.socialForm}>
+              <div>
+                <label htmlFor="twlink">
+                  <FaTwitter
+                    size="1.1em"
+                    className={accountStyles.socialIcons}
                   />
-                </div>
+
+                  <input
+                    onChange={setTwHandler}
+                    value={twLink}
+                    type="text"
+                    disabled={disabledTwLink}
+                    name="twlink"
+                    id="twlink"
+                    className={accountStyles.socialInput}
+                  />
+                </label>
+              </div>
+              <div className={accountStyles.socialButtons}>
                 <button
-                  className={accountStyles.updateLink}
-                  onClick={event => {
-                    editTheHyperLink({
-                      id: link.id,
-                      value: editHyperLink,
-                    })
-                    event.preventDefault()
+                  className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.socialSpec}`}
+                  type="submit"
+                  style={{
+                    paddingTop: "7.5px",
+                    paddingBottom: "7.5px",
+                    paddingLeft: "20px",
+                    paddingRight: "20px",
                   }}
                 >
-                  Update Hyperlink
+                  Save Twitter
                 </button>
-                <FaTrash
-                  style={{ cursor: "pointer" }}
-                  className={accountStyles.trashBtn}
-                  onClick={event => {
-                    deleteLink(link)
-                    event.preventDefault()
+                <FaRegEdit
+                  size="1.1em"
+                  style={{
+                    position: "relative",
+                    top: "5px",
+                    left: "15px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setDisabledTwLink(false)}
+                />
+              </div>
+              {error && <ErrorMessage text={error} />}
+            </form>
+            <form onSubmit={submitIG} className={accountStyles.socialForm}>
+              <div>
+                <label htmlFor="iglink">
+                  <FaInstagram
+                    size="1.1em"
+                    className={accountStyles.socialIcons}
+                  />
+
+                  <input
+                    onChange={setIgHandler}
+                    value={igLink}
+                    type="text"
+                    disabled={disabledIgLink}
+                    name="iglink"
+                    id="iglink"
+                    className={accountStyles.socialInput}
+                  />
+                </label>
+              </div>
+              <div className={accountStyles.socialButtons}>
+                <button
+                  className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.socialSpec}`}
+                  type="submit"
+                  style={{
+                    paddingTop: "7.5px",
+                    paddingBottom: "7.5px",
+                    paddingLeft: "20px",
+                    paddingRight: "20px",
                   }}
                 >
-                  Delete Link
-                </FaTrash>
-                <div className={accountStyles.inputCont}>
-                  <input
-                    type="checkbox"
-                    id={`checkbox${link.id}`}
-                    checked={link.visible}
-                    onChange={e => toggleLink(link, e.target.checked)}
-                  />
-                  <span className={accountStyles.checkmark}></span>
+                  Save Instagram
+                </button>
+                <FaRegEdit
+                  size="1.1em"
+                  style={{
+                    position: "relative",
+                    top: "5px",
+                    left: "15px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setDisabledIgLink(false)}
+                />
+              </div>
+              {error && <ErrorMessage text={error} />}
+            </form>
+          </div>
+
+          <br />
+          <hr style={{ border: "1px solid #d8e6d8", margin: "15px 50px" }} />
+          <br />
+          <div>
+            <div className={accountStyles.linkCont}>
+              <h3>Title:</h3>
+              <input
+                className={accountStyles.linkInput}
+                type="text"
+                size="35"
+                placeholder="vul titel in"
+                ref={linkTitle}
+                minLength="5"
+                required
+              />
+              <h3>Hyperlink:</h3>
+              <input
+                className={accountStyles.linkInput}
+                type="url"
+                size="35"
+                placeholder="voer hyperlink in, bijv. voorbeeld.nl"
+                ref={hyperLink}
+                minLength="5"
+                required
+              />
+              <button
+                className={`${accountStyles.btn} ${accountStyles.btnPrimary} ${accountStyles.nextoClear} `}
+                style={{
+                  float: "right",
+                }}
+                onClick={event => {
+                  createLink()
+                  event.preventDefault()
+                }}
+              >
+                Create a link
+              </button>
+              <button
+                className={accountStyles.btn}
+                style={{ background: "red", float: "right" }}
+                onClick={event => {
+                  linkTitle.current.value = ""
+                  hyperLink.current.value = ""
+                  event.preventDefault()
+                }}
+              >
+                Clear
+              </button>
+            </div>
+            {linkError && <DoThis text={linkError} />}
+            <br />
+            <br />
+            <ul>
+              {links.map(link => (
+                <li
+                  key={link.id}
+                  className={`${accountStyles.linksCont} ${accountStyles.card}`}
+                >
+                  <div>
+                    <p className={accountStyles.updateLinkShow}>{link.title}</p>
+                    <input
+                      className={accountStyles.editInput}
+                      id={`editlink${link.id}`}
+                      type="text"
+                      size="30"
+                      value={editLink[link]}
+                      onChange={handleEditLink}
+                      placeholder="edit title"
+                      minLength="5"
+                      required
+                    />
+                  </div>
+                  <button
+                    className={accountStyles.updateLink}
+                    onClick={event => {
+                      editTheLink({
+                        id: link.id,
+                        value: editLink,
+                      })
+                      event.preventDefault()
+                    }}
+                  >
+                    Update Link
+                  </button>
+                  <div>
+                    <b>
+                      <p className={accountStyles.updateUpdateLinkShow}>
+                        {link.hyperlink}
+                      </p>{" "}
+                    </b>
+                    <input
+                      className={accountStyles.editInput}
+                      id={`hyperlink${link.id}`}
+                      type="url"
+                      size="30"
+                      value={editHyperLink[link]}
+                      onChange={handleEditHyperLink}
+                      placeholder="edit hyperlink"
+                      minLength="5"
+                      required
+                    />
+                  </div>
+                  <button
+                    className={accountStyles.updateLink}
+                    onClick={event => {
+                      editTheHyperLink({
+                        id: link.id,
+                        value: editHyperLink,
+                      })
+                      event.preventDefault()
+                    }}
+                  >
+                    Update Hyperlink
+                  </button>
+                  <FaTrash
+                    style={{ cursor: "pointer" }}
+                    className={accountStyles.trashBtn}
+                    onClick={event => {
+                      deleteLink(link)
+                      event.preventDefault()
+                    }}
+                  >
+                    Delete Link
+                  </FaTrash>
+                  <div className={accountStyles.inputCont}>
+                    <input
+                      type="checkbox"
+                      id={`checkbox${link.id}`}
+                      checked={link.visible}
+                      onChange={e => toggleLink(link, e.target.checked)}
+                    />
+                    <span className={accountStyles.checkmark}></span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <hr
+            style={{
+              border: "1px solid #d8e6d8",
+              margin: "50px 50px 25px 50px",
+            }}
+          />
+
+          <br />
+          <h2 style={{ textAlign: "center" }}>
+            <b>
+              <u
+                style={{
+                  textDecoration: "underline",
+                  textDecorationColor: "#35748d",
+                }}
+              >
+                Kies Thema
+              </u>
+            </b>
+          </h2>
+          <br />
+
+          <ul className={accountStyles.pickColor}>
+            <li className={accountStyles.chooseColor}>
+              <label>
+                <input
+                  type="radio"
+                  value="geel"
+                  checked={color === "geel"}
+                  onChange={onRadioChange}
+                  onClick={event => {
+                    changeHeadingBg("geel")
+                    event.preventDefault()
+                  }}
+                  style={{ display: "none" }}
+                />
+                <div className={accountStyles.yellowtheme}>
+                  <div className={accountStyles.yellowlinks} />
+                  <div className={accountStyles.yellowlinks} />
+                  <div className={accountStyles.yellowlinks} />
                 </div>
-              </li>
-            ))}
+              </label>
+            </li>
+
+            <li className={accountStyles.chooseColor}>
+              <label>
+                <input
+                  type="radio"
+                  value="grijs"
+                  checked={color === "grijs"}
+                  onChange={onRadioChange}
+                  onClick={event => {
+                    changeHeadingBg("grijs")
+                    event.preventDefault()
+                  }}
+                  style={{ display: "none" }}
+                />
+                <div className={accountStyles.graytheme}>
+                  <div className={accountStyles.graylinks} />
+                  <div className={accountStyles.graylinks} />
+                  <div className={accountStyles.graylinks} />
+                </div>
+              </label>
+            </li>
+
+            <li className={accountStyles.chooseColor}>
+              <label>
+                <input
+                  type="radio"
+                  value="roze"
+                  checked={color === "roze"}
+                  onChange={onRadioChange}
+                  onClick={event => {
+                    changeHeadingBg("roze")
+                    event.preventDefault()
+                  }}
+                  style={{ display: "none" }}
+                />
+                <div className={accountStyles.pinktheme}>
+                  <div className={accountStyles.pinklinks} />
+                  <div className={accountStyles.pinklinks} />
+                  <div className={accountStyles.pinklinks} />
+                </div>
+              </label>
+            </li>
+
+            <li className={accountStyles.chooseColor}>
+              <label>
+                <input
+                  type="radio"
+                  value="zwart"
+                  checked={color === "zwart"}
+                  onChange={onRadioChange}
+                  onClick={event => {
+                    changeHeadingBg("zwart")
+                    event.preventDefault()
+                  }}
+                  style={{ display: "none" }}
+                />
+                <div className={accountStyles.blacktheme}>
+                  <div className={accountStyles.blacklinks} />
+                  <div className={accountStyles.blacklinks} />
+                  <div className={accountStyles.blacklinks} />
+                </div>
+              </label>
+            </li>
+
+            <li className={accountStyles.chooseColor}>
+              <label>
+                <input
+                  type="radio"
+                  value="bruin"
+                  checked={color === "bruin"}
+                  onChange={onRadioChange}
+                  onClick={event => {
+                    changeHeadingBg("bruin")
+                    event.preventDefault()
+                  }}
+                  style={{ display: "none" }}
+                />
+                <div className={accountStyles.browntheme}>
+                  <div className={accountStyles.brownlinks} />
+                  <div className={accountStyles.brownlinks} />
+                  <div className={accountStyles.brownlinks} />
+                </div>
+              </label>
+            </li>
           </ul>
+          <br />
+          <br />
         </div>
-        <hr
-          style={{ border: "1px solid #d8e6d8", margin: "50px 50px 25px 50px" }}
-        />
 
-        <br />
-        <h2 style={{ textAlign: "center" }}>
-          <b>
-            <u
-              style={{
-                textDecoration: "underline",
-                textDecorationColor: "#35748d",
-              }}
-            >
-              Kies Thema
-            </u>
-          </b>
-        </h2>
-        <br />
+        {/* LINK LINK LINK LINK LINK <--------------------------------------------------------------------------------> LINK LINK LINK LINK LINK */}
 
-        <ul className={accountStyles.pickColor}>
-          <li className={accountStyles.chooseColor}>
-            <label>
-              <input
-                type="radio"
-                value="geel"
-                checked={color === "geel"}
-                onChange={onRadioChange}
-                onClick={event => {
-                  changeHeadingBg("geel")
-                  event.preventDefault()
-                }}
-                style={{ display: "none" }}
-              />
-              <div className={accountStyles.yellowtheme}>
-                <div className={accountStyles.yellowlinks} />
-                <div className={accountStyles.yellowlinks} />
-                <div className={accountStyles.yellowlinks} />
-              </div>
-            </label>
-          </li>
-
-          <li className={accountStyles.chooseColor}>
-            <label>
-              <input
-                type="radio"
-                value="grijs"
-                checked={color === "grijs"}
-                onChange={onRadioChange}
-                onClick={event => {
-                  changeHeadingBg("grijs")
-                  event.preventDefault()
-                }}
-                style={{ display: "none" }}
-              />
-              <div className={accountStyles.graytheme}>
-                <div className={accountStyles.graylinks} />
-                <div className={accountStyles.graylinks} />
-                <div className={accountStyles.graylinks} />
-              </div>
-            </label>
-          </li>
-
-          <li className={accountStyles.chooseColor}>
-            <label>
-              <input
-                type="radio"
-                value="roze"
-                checked={color === "roze"}
-                onChange={onRadioChange}
-                onClick={event => {
-                  changeHeadingBg("roze")
-                  event.preventDefault()
-                }}
-                style={{ display: "none" }}
-              />
-              <div className={accountStyles.pinktheme}>
-                <div className={accountStyles.pinklinks} />
-                <div className={accountStyles.pinklinks} />
-                <div className={accountStyles.pinklinks} />
-              </div>
-            </label>
-          </li>
-
-          <li className={accountStyles.chooseColor}>
-            <label>
-              <input
-                type="radio"
-                value="zwart"
-                checked={color === "zwart"}
-                onChange={onRadioChange}
-                onClick={event => {
-                  changeHeadingBg("zwart")
-                  event.preventDefault()
-                }}
-                style={{ display: "none" }}
-              />
-              <div className={accountStyles.blacktheme}>
-                <div className={accountStyles.blacklinks} />
-                <div className={accountStyles.blacklinks} />
-                <div className={accountStyles.blacklinks} />
-              </div>
-            </label>
-          </li>
-
-          <li className={accountStyles.chooseColor}>
-            <label>
-              <input
-                type="radio"
-                value="bruin"
-                checked={color === "bruin"}
-                onChange={onRadioChange}
-                onClick={event => {
-                  changeHeadingBg("bruin")
-                  event.preventDefault()
-                }}
-                style={{ display: "none" }}
-              />
-              <div className={accountStyles.browntheme}>
-                <div className={accountStyles.brownlinks} />
-                <div className={accountStyles.brownlinks} />
-                <div className={accountStyles.brownlinks} />
-              </div>
-            </label>
-          </li>
-        </ul>
-        <br />
-        <br />
-      </div>
-
-      {/* LINK LINK LINK LINK LINK <--------------------------------------------------------------------------------> LINK LINK LINK LINK LINK */}
-
-      <div
-        className={`${accountStyles.Link}`}
-        style={{
-          margin: "10px",
-        }}
-      >
         <div
+          className={`${accountStyles.Link}`}
           style={{
-            textAlign: "center",
-            fontSize: "0.75em",
+            margin: "10px",
           }}
         >
-          <div className={accountStyles.usLinkNego}>
-            <b>Negoscan Profiel URL</b>
-          </div>
-          <div className={accountStyles.usLinkSite}>
-            <Link
-              className={accountStyles.userLink}
-              to={`/Negosite_${userId}`}
-            >{`${site.siteMetadata.siteUrl}/Negosite_${userId}`}</Link>
+          <div
+            style={{
+              textAlign: "center",
+              fontSize: "0.75em",
+            }}
+          >
+            <div className={accountStyles.usLinkNego}>
+              <b>Negoscan Profiel URL</b>
+            </div>
+            <div className={accountStyles.usLinkSite}>
+              <Link
+                className={accountStyles.userLink}
+                to={`/Negosite_${userId}`}
+              >{`${site.siteMetadata.siteUrl}/Negosite_${userId}`}</Link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

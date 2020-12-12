@@ -18,9 +18,6 @@ const Header = () => (
               <b>Store</b>
             </Link>
           </li>
-          {/* <li>
-            <Link to="/docs">Docs</Link>
-          </li> */}
           <li>
             <Link to="/admin/login">Login / Register</Link>
           </li>

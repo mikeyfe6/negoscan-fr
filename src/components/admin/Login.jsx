@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react"
 import axios from "axios"
 import { navigate } from "@reach/router"
 
-import SEO from "../seo"
+// import SEO from "../seo"
 import { setUser } from "../../services/auth"
 
 import loginStyles from "../../styles/modules/loginStyles.module.scss"
@@ -109,7 +109,6 @@ export default () => {
 
   return (
     <div>
-      <SEO title="Login" />
       <section
         className={`${loginStyles.docsHead} ${loginStyles.bgPrimary} ${loginStyles.py3}`}
       >

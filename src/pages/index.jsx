@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 
@@ -6,7 +7,6 @@ import SEO from "../components/seo"
 import loginStyles from "../styles/modules/loginStyles.module.scss"
 
 import servImage from "../images/server.png"
-import { Link } from "gatsby"
 
 const IndexPage = () => (
   <Layout>

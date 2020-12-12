@@ -826,6 +826,12 @@
       "Link";
   }
 
+  .Preview {
+    .iphone-frame {
+      transform: scale(0.875);
+    }
+  }
+
   .Sidebar {
     background: linear-gradient(to left, $primary-color, black);
     // background: linear-gradient(to bottom, black, white, white, white) no-repeat

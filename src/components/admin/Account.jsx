@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useLayoutEffect } from "react"
-import { Link } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import axios from "axios"
 import {
   FaLock,
@@ -39,6 +39,18 @@ const DoThis = ({ text }) => {
 }
 
 export default () => {
+  const { site } = useStaticQuery(
+    graphql`
+      query {
+        site {
+          siteMetadata {
+            siteUrl
+          }
+        }
+      }
+    `
+  )
+
   const [userId, setUserId] = useState("")
 
   const [image, setImage] = useState()
@@ -647,9 +659,12 @@ export default () => {
         }}
       >
         <h5
+          clasNname={accountStyles.userTitle}
           style={{
             textAlign: "center",
             fontSize: "0.9em",
+            margin: "auto",
+            color: "white",
           }}
         >
           Welkom {gatsbyUser.user.username}!
@@ -673,9 +688,9 @@ export default () => {
       </div>
 
       {/* NAVIGATION NAVIGATION NAVIGATION NAVIGATION NAVIGATION <--------------------------------------------------------------------------------> NAVIGATION NAVIGATION NAVIGATION NAVIGATION NAVIGATION */}
-      <div
+      {/* <div
         className={`${accountStyles.Navigation} ${accountStyles.card}`}
-      ></div>
+      ></div> */}
 
       {/* PREVIEW PREVIEW PREVIEW PREVIEW PREVIEW <--------------------------------------------------------------------------------> PREVIEW PREVIEW PREVIEW PREVIEW PREVIEW */}
       <div className={`${accountStyles.Preview} ${accountStyles.card}`}>
@@ -1002,7 +1017,6 @@ export default () => {
           </div>
         </div>
 
-        <br />
         {/* <hr
           style={{
             border: "1px solid #35748d",
@@ -1018,7 +1032,7 @@ export default () => {
                   size="1.1em"
                   className={accountStyles.socialIcons}
                 />
-                :
+
                 <input
                   onChange={setFbHandler}
                   value={fbLink}
@@ -1032,7 +1046,7 @@ export default () => {
             </div>
             <div className={accountStyles.socialButtons}>
               <button
-                className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+                className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.socialSpec} `}
                 type="submit"
                 style={{
                   paddingTop: "7.5px",
@@ -1048,19 +1062,21 @@ export default () => {
                 style={{
                   position: "relative",
                   top: "5px",
-                  left: "10px",
+                  left: "15px",
                   cursor: "pointer",
                 }}
                 onClick={() => setDisabledFbLink(false)}
               />
             </div>
+            <div style={{ clear: "both" }} />
             {error && <ErrorMessage text={error} />}
           </form>
+
           <form onSubmit={submitTW} className={accountStyles.socialForm}>
             <div>
               <label htmlFor="twlink">
                 <FaTwitter size="1.1em" className={accountStyles.socialIcons} />
-                :
+
                 <input
                   onChange={setTwHandler}
                   value={twLink}
@@ -1074,7 +1090,7 @@ export default () => {
             </div>
             <div className={accountStyles.socialButtons}>
               <button
-                className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+                className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.socialSpec}`}
                 type="submit"
                 style={{
                   paddingTop: "7.5px",
@@ -1090,7 +1106,7 @@ export default () => {
                 style={{
                   position: "relative",
                   top: "5px",
-                  left: "10px",
+                  left: "15px",
                   cursor: "pointer",
                 }}
                 onClick={() => setDisabledTwLink(false)}
@@ -1105,7 +1121,7 @@ export default () => {
                   size="1.1em"
                   className={accountStyles.socialIcons}
                 />
-                :
+
                 <input
                   onChange={setIgHandler}
                   value={igLink}
@@ -1119,7 +1135,7 @@ export default () => {
             </div>
             <div className={accountStyles.socialButtons}>
               <button
-                className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+                className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.socialSpec}`}
                 type="submit"
                 style={{
                   paddingTop: "7.5px",
@@ -1135,7 +1151,7 @@ export default () => {
                 style={{
                   position: "relative",
                   top: "5px",
-                  left: "10px",
+                  left: "15px",
                   cursor: "pointer",
                 }}
                 onClick={() => setDisabledIgLink(false)}
@@ -1144,10 +1160,9 @@ export default () => {
             {error && <ErrorMessage text={error} />}
           </form>
         </div>
-        {/* <hr style={{ border: "1px solid #d8e6d8" }} /> */}
+
         <br />
-        <br />
-        <br />
+        <hr style={{ border: "1px solid #d8e6d8", margin: "15px 50px" }} />
         <br />
         <div>
           <div className={accountStyles.linkCont}>
@@ -1166,13 +1181,16 @@ export default () => {
               className={accountStyles.linkInput}
               type="url"
               size="35"
-              placeholder="voer hyperlink in"
+              placeholder="voer hyperlink in, bijv. voorbeeld.nl"
               ref={hyperLink}
               minLength="5"
               required
             />
             <button
-              className={accountStyles.btn}
+              className={`${accountStyles.btn} ${accountStyles.btnPrimary} ${accountStyles.nextoClear} `}
+              style={{
+                float: "right",
+              }}
               onClick={event => {
                 createLink()
                 event.preventDefault()
@@ -1182,7 +1200,7 @@ export default () => {
             </button>
             <button
               className={accountStyles.btn}
-              style={{ background: "red" }}
+              style={{ background: "red", float: "right" }}
               onClick={event => {
                 linkTitle.current.value = ""
                 hyperLink.current.value = ""
@@ -1280,8 +1298,10 @@ export default () => {
             ))}
           </ul>
         </div>
-        <br />
-        <br />
+        <hr
+          style={{ border: "1px solid #d8e6d8", margin: "50px 50px 25px 50px" }}
+        />
+
         <br />
         <h2 style={{ textAlign: "center" }}>
           <b>
@@ -1409,13 +1429,27 @@ export default () => {
 
       {/* LINK LINK LINK LINK LINK <--------------------------------------------------------------------------------> LINK LINK LINK LINK LINK */}
 
-      <div className={`${accountStyles.Link} ${accountStyles.card}`}>
-        <div style={{ textAlign: "center" }}>
-          <b>JOUW Negosite: {""}</b>
-          <Link
-            className={accountStyles.userLink}
-            to={`/Negosite_${userId}`}
-          >{`${apiURL}/Negosite_${userId}`}</Link>
+      <div
+        className={`${accountStyles.Link}`}
+        style={{
+          margin: "10px",
+        }}
+      >
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: "0.75em",
+          }}
+        >
+          <div className={accountStyles.usLinkNego}>
+            <b>Negoscan Profiel URL</b>
+          </div>
+          <div className={accountStyles.usLinkSite}>
+            <Link
+              className={accountStyles.userLink}
+              to={`/Negosite_${userId}`}
+            >{`${site.siteMetadata.siteUrl}/Negosite_${userId}`}</Link>
+          </div>
         </div>
       </div>
     </div>

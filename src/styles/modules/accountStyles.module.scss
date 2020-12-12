@@ -23,12 +23,12 @@
 @mixin chooseUsername {
   position: absolute;
   top: 34%;
-  left: 37.5%;
+  left: 34%;
   z-index: 2;
   font-weight: bold;
   margin: 0 auto;
-  text-align: left;
-  width: 87.5px;
+  text-align: center;
+  width: 99.5px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -56,11 +56,11 @@
 .grid-container {
   display: grid;
   min-height: calc(100vh - 290px);
-  grid-template-columns: 0.5fr 2.6fr 0.1fr 1.5fr;
+  grid-template-columns: 0.3fr 1.3fr 1fr;
   grid-template-rows: 0.1fr 0.1fr 2.8fr;
   gap: 0px 0px;
   grid-template-areas:
-    "Sidebar Navigation Navigation Link"
+    "Sidebar Dashboard Dashboard Link"
     "Sidebar Dashboard Dashboard Preview"
     "Sidebar Dashboard Dashboard Preview";
   // background: linear-gradient(to top, white, #ededed);
@@ -73,17 +73,18 @@
 .Sidebar {
   grid-area: Sidebar;
   // background: linear-gradient(to bottom, white, #ededed);
-  background: linear-gradient(to top, white, $primary-color) no-repeat 0 0 /
-    cover;
+  background: linear-gradient(to bottom, black, white, white, white) no-repeat 0
+    0 / cover;
+  border: 2px solid $primary-color;
 }
 
 // NAVIGATION
-.Navigation {
-  grid-area: Navigation;
-  // background: linear-gradient(to bottom, white, #ededed);
-  background: linear-gradient(to left, white, $primary-color) no-repeat 0 0 /
-    cover;
-}
+// .Navigation {
+//   grid-area: Navigation;
+//   // background: linear-gradient(to bottom, white, #ededed);
+//   background: linear-gradient(to left, white, $primary-color) no-repeat 0 0 /
+//     cover;
+// }
 
 // PREVIEW
 .Preview {
@@ -95,15 +96,17 @@
   align-items: center;
 
   .iphone {
+    // overflow: hidden;
     &-frame {
+      position: -webkit-sticky;
       position: sticky;
       overflow: hidden;
       height: 675px;
+      margin: 25px;
       width: 325px;
       border-radius: 50px;
       border: solid #333 10px;
-      top: 10%;
-      bottom: 10%;
+      top: 0;
     }
 
     // &-bg {
@@ -137,6 +140,13 @@
       left: 50%;
       transform: translate(-50%, -50%);
       width: 250px;
+      font-size: 0.875em;
+
+      a {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
 
     &-socials {
@@ -159,13 +169,12 @@
 // DASHBOARD
 .Dashboard {
   grid-area: Dashboard;
-  background: linear-gradient(to bottom, white, #ededed);
-
+  background: linear-gradient(to top, white, #ededed) no-repeat 0 0 / cover;
+  // background: linear-gradient(to top, white, #ededed);
   .avatarformcont {
     display: flex;
     position: relative;
     padding-bottom: 2.5%;
-    margin-left: 2.5%;
 
     .loading-complete {
       color: white;
@@ -241,10 +250,6 @@
     }
   }
 
-  .link-input {
-    border-bottom: 1px solid $secondary-color !important;
-  }
-
   .updateLink {
     outline: none;
     border: none;
@@ -315,11 +320,13 @@
   }
 
   .profile-input {
-    width: 150px;
-    margin: 15px;
+    width: 175px;
+    margin: 10px 15px;
     opacity: 0.75;
     outline: none;
     border: none;
+    padding: 7.5px 10px;
+    border-bottom: 1px $secondary-color solid;
     margin-right: 5%;
   }
 
@@ -335,20 +342,23 @@
       opacity: 0.75;
       outline: none;
       border: none;
+      border-bottom: 1px solid $secondary-color !important;
 
       &::placeholder {
-        font-size: 1em;
+        font-size: 0.9em;
       }
     }
   }
 
   .social-cont {
     display: flex;
-    background: linear-gradient(to left, #d4eefb, #d8e6d8) no-repeat 0 0 / cover;
+    background: linear-gradient(to left, #16b7f23a, rgba(128, 128, 128, 0.192))
+      no-repeat 0 0 / cover;
     justify-content: space-around;
-    border: solid 3px #333;
+
     // border-bottom: solid 3px black;
-    padding: 50px 0;
+    border-radius: 10px;
+    padding: 45px 25px;
     margin: 15px 0;
     box-shadow: 3px 5px 7px rgba(167, 167, 167, 0.767);
 
@@ -356,6 +366,11 @@
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
+
+      &:nth-child(-n + 2) {
+        padding-right: 30px;
+        border-right: 1px solid black;
+      }
     }
 
     .social-icons {
@@ -364,18 +379,21 @@
       right: 2px;
       z-index: 3;
       opacity: 0.75;
+      margin-right: 5px;
     }
 
     .social-input {
       padding: 10px;
+      margin-right: 10px;
       opacity: 0.75;
       outline: none;
       border: none;
       text-align: center;
+      border-radius: 3px;
     }
 
     .social-buttons {
-      margin-top: 7.5px;
+      margin-top: 10px;
       justify-content: center;
       align-items: center;
     }
@@ -474,8 +492,14 @@
 // ----------- //
 
 .pickColor {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
+}
+
+.chooseColor {
+  align-self: center;
+  justify-self: center;
 }
 
 // ---------------------------------------------------------------------------------------- // YELLOW YELLOW YELLOW
@@ -750,7 +774,30 @@
 // LINK
 .Link {
   grid-area: Link;
-  background: linear-gradient(to bottom, white, #ededed);
+
+  .usLinkNego {
+    float: left;
+    width: 40%;
+    color: white;
+    background: $primary-color;
+    padding: 10px 10px;
+    border-radius: 10px 0 0px 10px;
+    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+  }
+
+  .usLinkSite {
+    float: right;
+    width: 60%;
+    background: black;
+    padding: 10px 10px;
+    border-radius: 0 10px 10px 0;
+    color: white;
+    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   .userLink {
     color: $primary-color;
@@ -770,26 +817,63 @@
 @media (max-width: 500px) {
   .grid-container {
     grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
     gap: 0px 0px;
     grid-template-areas:
       "Sidebar"
-      "Navigation"
       "Dashboard"
       "Preview"
       "Link";
   }
 
   .Sidebar {
-    grid-template-columns: 1fr;
+    background: linear-gradient(to left, $primary-color, black);
+    // background: linear-gradient(to bottom, black, white, white, white) no-repeat
+    //   0 0 / cover;
+    border: 2px solid #ededed;
+
+    h5 {
+      text-align: left !important;
+      padding: 15px;
+    }
+
+    button {
+    }
   }
 
-  .Navigation {
-    background: linear-gradient(to bottom, white, #ededed);
+  // .Navigation {
+  //   background: linear-gradient(to bottom, white, #ededed);
+  // }
+
+  .Link {
+    .usLinkNego {
+      color: black;
+      background: white;
+
+      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+    }
+
+    .usLinkSite {
+      background: black;
+
+      color: white;
+      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .userLink {
+      color: $primary-color;
+
+      &:hover {
+        color: $secondary-color;
+      }
+    }
   }
 
   .Dashboard {
-    grid-template-columns: 1fr;
-
     .avatarformcont {
       flex-direction: column !important;
     }
@@ -803,36 +887,62 @@
 
     .profile-input {
       width: 75%;
-      margin: 5% 2.5%;
+      margin: 6% 6% 7.5% 3%;
     }
 
     .social-cont {
       flex-direction: column;
-    }
-
-    .social-buttons {
-      margin: 15px 0px !important;
+      background: linear-gradient(to bottom, #16b7f23a, #f0efef) no-repeat 0 0 /
+        cover;
+      border-radius: 3px;
+      padding: 25px 3% !important;
+      margin-top: 25px;
+      box-shadow: none;
     }
 
     .social-form {
-      margin-left: 5%;
+      margin-left: 2%;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      border-right: none !important;
+      padding-right: 0px !important;
+      padding-bottom: 20px;
+      margin-bottom: 1%;
+
+      // &:nth-child(-n + 2)
     }
 
     .social-buttons {
+      margin-top: 20px !important;
       float: right;
-      width: 57.5%;
+
+      .socialSpec {
+        margin-left: 25px;
+      }
+      // &:nth-child(2) {
+      //   padding-right: 15px !important;
+      //   color: red !important;
+      //   background: red !important;
+      // }
     }
 
     .link-cont {
       display: block;
       margin: 20px 5px;
 
+      .nextoClear {
+        margin: 0 2.5%;
+      }
+
       h3 {
+        margin-top: 10px;
         margin-left: 15px;
       }
 
       .link-input {
-        margin: 15px 0 15px 22.5px;
+        margin: 5% 10%;
+        padding: 10px 15px;
       }
     }
 
@@ -859,7 +969,7 @@
     .inputCont {
       float: right;
       position: relative;
-      left: 95px;
+      left: 75px;
       bottom: 10px;
     }
 
@@ -867,13 +977,17 @@
       cursor: pointer;
       position: relative;
       float: right;
-      left: 90px;
+      left: 75px;
       bottom: 10px;
     }
 
     .pickColor {
       display: grid;
-      grid-gap: 15px;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .chooseColor {
+      transform: scale(0.75);
     }
   }
 }

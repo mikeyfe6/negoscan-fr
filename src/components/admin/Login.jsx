@@ -132,7 +132,7 @@ export default () => {
             className={`${loginStyles.formContainer} ${loginStyles.signUpContainer}`}
           >
             <form onSubmit={handleSubmitRegister}>
-              <h1> Maak een account aan</h1>
+              <h1 style={{ fontSize: "1.5em" }}> Maak een account aan</h1>
               {/* <div className={loginStyles.socialContainer}>
                 <a href="" className="social">
                   <i>icon</i>
@@ -167,7 +167,7 @@ export default () => {
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 title="Moet op z'n minst 1 nummer, 1 hoofdletter, 1 klein letter en 8 karakters lang zijn."
               />
-              <button>Sign Up</button>
+              <button style={{ cursor: "pointer" }}>Sign Up</button>
             </form>
           </div>
           <div
@@ -202,7 +202,7 @@ export default () => {
               {error && <ErrorMessage text={error} />}
               {loading && <LoadingMessage text={loading} />}
               <a href="#">Forget your password</a>
-              <button>Log in</button>
+              <button style={{ cursor: "pointer" }}>Log in</button>
             </form>
           </div>
           <div className={loginStyles.overlayContainer}>
@@ -210,9 +210,7 @@ export default () => {
               <div
                 className={`${loginStyles.overlayPanel} ${loginStyles.overlayLeft}`}
               >
-                <h1 className={loginStyles.signUpTitle}>
-                  Welkom bij Negoscan.me
-                </h1>
+                <h1 className={loginStyles.signUpTitle}>Welkom</h1>
                 <p className={loginStyles.signUpText}>
                   Hier kan je je registeren <br />
                   <br /> Lorem ipsum dolor, sit amet consectetur adipisicing
@@ -222,6 +220,7 @@ export default () => {
                 </p>
 
                 <button
+                  style={{ cursor: "pointer" }}
                   className={loginStyles.ghost}
                   id="signIn"
                   onClick={signInHandler}
@@ -242,6 +241,7 @@ export default () => {
                   Nog geen account? Klik hieronder..
                 </p>
                 <button
+                  style={{ cursor: "pointer" }}
                   className={loginStyles.ghost}
                   id="signUp"
                   onClick={signUpHandler}

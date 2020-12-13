@@ -97,7 +97,7 @@ export default () => {
         }
       )
 
-      await axios.post(
+      axios.post(
         "https://api.netlify.com/build_hooks/5fa20c6490bf4b2b591bf2e1",
         {
           headers: {
@@ -176,6 +176,8 @@ export default () => {
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 title="Moet op z'n minst 1 nummer, 1 hoofdletter, 1 klein letter en 8 karakters lang zijn."
               />
+              {error && <ErrorMessage text={error} />}
+              {loading && <LoadingMessage text={loading} />}
               <button style={{ cursor: "pointer" }}>Sign Up</button>
             </form>
           </div>

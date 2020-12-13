@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useLayoutEffect, useState } from "react"
 import { graphql, Link } from "gatsby"
 // import Reactmarkdown from "react-markdown"
 import axios from "axios"
@@ -13,6 +13,8 @@ import profStyles from "../styles/modules/profStyles.module.scss"
 import "../styles/themes.scss"
 
 import negoLogo from "../../static/Negoscan-logo.png"
+
+import noavatar from "../images/noavatar.png"
 
 const apiURL = process.env.GATSBY_BASE_URL
 
@@ -35,18 +37,23 @@ const NegositeTemplate = ({ data }) => {
   const [twLink, setTwLink] = useState("")
   const [igLink, setIgLink] = useState("")
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const getLinks = async () => {
       const res = await axios.get(
         `${apiURL}/users/${data.strapiNegosite.website.id}`
       )
       setColor(res.data.gebruiker.bgfree)
       setLinks(res.data.connections)
-      setAvatar(res.data.gebruiker.avatar.url)
       setUsername(res.data.gebruiker.profiel)
       setFbLink(res.data.gebruiker.facebooklink)
       setTwLink(res.data.gebruiker.twitterlink)
       setIgLink(res.data.gebruiker.instagramlink)
+
+      if (!res.data.gebruiker.avatar) {
+        return setAvatar(noavatar)
+      } else {
+        setAvatar(res.data.gebruiker.avatar.url)
+      }
     }
     getLinks()
   }, [data.strapiNegosite.website.id])

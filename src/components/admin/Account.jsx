@@ -108,8 +108,10 @@ export default () => {
 
   // AVATAR CHANGE <--------------------------------------------------------------------------------> AVATAR CHANGE //
   const removeHeading = () => {
-    document.getElementById("avatar-image").src = noavatar
-    document.getElementById("iphone-avatar").src = noavatar
+    // document.getElementById("avatar-image").src = noavatar
+    // document.getElementById("iphone-avatar").src = noavatar
+    setImage("")
+    setPreview(noavatar)
   }
 
   // SEND AVATAR <--------------------------------------------------------------------------------> SEND AVATAR //
@@ -131,8 +133,8 @@ export default () => {
         },
       })
       console.log("Geupload!", res)
+      setPreview(res.data[0].url)
       setTimeout(() => setLoading(false), 5000)
-      setPreview(image)
     } catch (error) {
       console.log("Niet gelukt!", error)
     }
@@ -155,8 +157,8 @@ export default () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      if (res.data.avatar == null) {
-        return setPreview(noavatar)
+      if (!res.data.avatar) {
+        setPreview(noavatar)
       } else {
         setPreview(res.data.avatar.url)
       }
@@ -240,7 +242,12 @@ export default () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      setUsername(res.data.profiel)
+
+      if (!res.data.profiel) {
+        setUsername("")
+      } else {
+        setUsername(res.data.profiel)
+      }
     }
     getUsername()
   }, [userId, token])
@@ -429,7 +436,7 @@ export default () => {
     ) {
       return [
         setLinkError("Posten mislukt, voer de titel of link correct door.."),
-        setTimeout(() => setLinkError(null), 5000),
+        setTimeout(() => setLinkError(null), 7500),
       ]
     }
 
@@ -487,7 +494,7 @@ export default () => {
     if (!editLink || /^\s*$/.test(editLink)) {
       return [
         setLinkError("Updaten mislukt, voer de titel correct door.."),
-        setTimeout(() => setLinkError(null), 5000),
+        setTimeout(() => setLinkError(null), 7500),
       ]
     }
 
@@ -556,18 +563,17 @@ export default () => {
     const params = {
       bgfree: e.target.value,
     }
-    await axios
-      .put(`${apiURL}/negosites/${userId}`, params, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error.response.data.message)
-      })
+    await axios.put(`${apiURL}/negosites/${userId}`, params, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    // .then(response => {
+    //   console.log(response)
+    // })
+    // .catch(error => {
+    //   console.log(error.response.data.message)
+    // })
   }
 
   const changeHeadingBg = color => {
@@ -663,7 +669,7 @@ export default () => {
           }}
         >
           <h5
-            clasNname={accountStyles.userTitle}
+            className={accountStyles.userTitle}
             style={{
               textAlign: "center",
               fontSize: "0.9em",
@@ -1175,7 +1181,7 @@ export default () => {
           <br />
           <hr style={{ border: "1px solid #d8e6d8", margin: "15px 50px" }} />
           <br />
-          <div>
+          <div style={{ position: "relative" }}>
             <div className={accountStyles.linkCont}>
               <h3>Title:</h3>
               <input
@@ -1220,9 +1226,10 @@ export default () => {
               >
                 Clear
               </button>
+              <div style={{ clear: "both" }} />
+              {linkError && <DoThis text={linkError} />}
             </div>
-            {linkError && <DoThis text={linkError} />}
-            <br />
+
             <br />
             <ul>
               {links.map(link => (

@@ -1053,6 +1053,7 @@ export default () => {
                     type="text"
                     disabled={disabledFbLink}
                     name="fblink"
+                    size="25"
                     id="fblink"
                     className={accountStyles.socialInput}
                   />
@@ -1100,6 +1101,7 @@ export default () => {
                     type="text"
                     disabled={disabledTwLink}
                     name="twlink"
+                    size="25"
                     id="twlink"
                     className={accountStyles.socialInput}
                   />
@@ -1143,6 +1145,7 @@ export default () => {
                     onChange={setIgHandler}
                     value={igLink}
                     type="text"
+                    size="25"
                     disabled={disabledIgLink}
                     name="iglink"
                     id="iglink"
@@ -1188,7 +1191,7 @@ export default () => {
                 className={accountStyles.linkInput}
                 type="text"
                 size="35"
-                placeholder="vul titel in"
+                placeholder="voer een titel in"
                 ref={linkTitle}
                 minLength="5"
                 required
@@ -1198,7 +1201,7 @@ export default () => {
                 className={accountStyles.linkInput}
                 type="url"
                 size="35"
-                placeholder="voer hyperlink in, bijv. voorbeeld.nl"
+                placeholder="voer hyperlink in, bijv: voorbeeld.nl"
                 ref={hyperLink}
                 minLength="5"
                 required
@@ -1213,7 +1216,7 @@ export default () => {
                   event.preventDefault()
                 }}
               >
-                Create a link
+                Maak een link
               </button>
               <button
                 className={accountStyles.btn}
@@ -1224,7 +1227,7 @@ export default () => {
                   event.preventDefault()
                 }}
               >
-                Clear
+                Reset
               </button>
               <div style={{ clear: "both" }} />
               {linkError && <DoThis text={linkError} />}
@@ -1261,7 +1264,7 @@ export default () => {
                       event.preventDefault()
                     }}
                   >
-                    Update Link
+                    Update Titel
                   </button>
                   <div>
                     <b>

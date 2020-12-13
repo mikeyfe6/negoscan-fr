@@ -3,6 +3,8 @@ import { graphql, Link } from "gatsby"
 // import Reactmarkdown from "react-markdown"
 import axios from "axios"
 
+import SEO from "../components/seo"
+
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa"
 
 // NEGO TEMPLATE
@@ -60,6 +62,7 @@ const NegositeTemplate = ({ data }) => {
 
   return (
     <ProfLayout>
+      <SEO title={username} />
       {/* <Img
         fluid={data.strapiNegosite.background.childImageSharp.fluid}
         style={{

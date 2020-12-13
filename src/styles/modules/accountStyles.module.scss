@@ -367,7 +367,7 @@
       align-items: center;
 
       &:nth-child(-n + 2) {
-        padding-right: 30px;
+        padding-right: 50px;
         border-right: 1px solid black;
       }
     }
@@ -383,7 +383,7 @@
 
     .social-input {
       padding: 10px;
-      margin-right: 10px;
+
       opacity: 0.75;
       outline: none;
       border: none;

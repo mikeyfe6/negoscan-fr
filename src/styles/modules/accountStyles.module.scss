@@ -303,7 +303,7 @@
     display: inline-block;
     position: absolute;
     background-color: red;
-    top: 15%;
+    top: 10% !important;
     width: 95%;
     text-align: center;
     font-weight: bold;
@@ -907,7 +907,7 @@
 
     .linkErrorStyle {
       width: 95% !important;
-      top: 34% !important;
+      top: 24% !important;
       left: 2.5%;
     }
 

@@ -85,17 +85,28 @@ export default () => {
       // formData.append("key1", "value1")
       // formData.append("key2", "value2")
 
-      await axios.post(
-        `${apiURL}/negosites`,
-        {
-          profiel: usernameRegRef.current.value,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${data.jwt}`,
+      await axios.all(
+        axios.post(
+          `${apiURL}/negosites`,
+          {
+            profiel: usernameRegRef.current.value,
           },
-        }
+          {
+            headers: {
+              Authorization: `Bearer ${data.jwt}`,
+            },
+          }
+        ),
+        axios.post(
+          "https://api.netlify.com/build_hooks/5fa20c6490bf4b2b591bf2e1",
+          {
+            headers: {
+              Authorization: `Bearer ${data.jwt}`,
+            },
+          }
+        )
       )
+
       setUser(data)
       setLoading("Aan het laden")
       setError(null)

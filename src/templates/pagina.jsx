@@ -163,8 +163,8 @@ const NegositeTemplate = ({ data }) => {
 export default NegositeTemplate
 
 export const query = graphql`
-  query NegositeTemplate($id: String!) {
-    strapiNegosite(id: { eq: $id }) {
+  query NegositeTemplate($slug: String!) {
+    strapiNegosite(slug: { eq: $slug }) {
       profiel
       biografie
       # background {

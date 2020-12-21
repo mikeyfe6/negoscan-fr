@@ -34,7 +34,7 @@ exports.createPages = ({ actions, graphql }) => {
       allStrapiNegosite {
         edges {
           node {
-            id
+            slug
           }
         }
       }
@@ -44,10 +44,10 @@ exports.createPages = ({ actions, graphql }) => {
     // Create pages for each article.
     result.data.allStrapiNegosite.edges.forEach(({ node }) => {
       createPage({
-        path: `/${node.id}`,
+        path: `/${node.slug}`,
         component: path.resolve(`src/templates/pagina.jsx`),
         context: {
-          id: node.id,
+          slug: node.slug,
         },
       })
     })

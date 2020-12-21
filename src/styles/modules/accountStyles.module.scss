@@ -102,7 +102,7 @@
       position: sticky;
       overflow: hidden;
       height: 675px;
-      margin: 25px;
+      margin: 1%;
       width: 325px;
       border-radius: 50px;
       border: solid #333 10px;
@@ -492,7 +492,8 @@
 
 .pickColor {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  // grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   grid-template-rows: auto;
 }
 
@@ -815,7 +816,7 @@
 
 @media (max-width: 500px) {
   .grid-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-template-rows: 1fr;
     gap: 0px 0px;
     grid-template-areas:
@@ -962,8 +963,8 @@
       }
 
       .link-input {
-        margin: 5% 10%;
-        padding: 10px 15px;
+        margin: 5% 0%;
+        // padding: 10px 15px;
       }
     }
 
@@ -1004,7 +1005,7 @@
 
     .pickColor {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
 
     .chooseColor {

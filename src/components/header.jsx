@@ -19,7 +19,7 @@ const Header = () => (
             </Link>
           </li>
           <li>
-            <Link to="/admin/login">Login / Register</Link>
+            <Link to="/admin/account">Login / Account</Link>
           </li>
         </ul>
       </nav>

@@ -125,10 +125,6 @@ export default () => {
         <div className={`${loginStyles.container} ${loginStyles.grid}`}>
           <div>
             <h1 className={loginStyles.xl}>Login / Register</h1>
-            <p className={loginStyles.lead}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quo
-              quae assumenda.
-            </p>
           </div>
           <img src={servImage} alt="" />
         </div>

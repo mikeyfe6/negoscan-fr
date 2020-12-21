@@ -33,7 +33,7 @@
     // border: 1px solid red;
     background: #000000;
     color: white;
-    font-size: 12px;
+
     font-weight: bold;
     padding: 12px 45px;
     letter-spacing: 1px;
@@ -43,7 +43,7 @@
   }
 
   button {
-    transform: scale(0.95);
+    transform: scale(0.75);
   }
 
   button:focus {
@@ -325,7 +325,7 @@ p {
     margin-right: auto;
     left: 0;
     right: 0;
-    top: 22.5%;
+    top: 27.5%;
 
     .container {
       width: 97%;

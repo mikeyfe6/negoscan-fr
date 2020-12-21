@@ -794,16 +794,17 @@
     color: white;
     box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+    .userLink {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 200px;
+      color: $primary-color;
 
-  .userLink {
-    color: $primary-color;
-
-    &:hover {
-      color: $secondary-color;
+      &:hover {
+        color: $secondary-color;
+      }
     }
   }
 }
@@ -866,14 +867,11 @@
 
       color: white;
       box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .userLink {
       color: $primary-color;
+      width: 150px !important;
 
       &:hover {
         color: $secondary-color;

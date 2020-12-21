@@ -5,6 +5,7 @@ import {
   FaLock,
   FaAt,
   FaUser,
+  FaGlobe,
   FaFacebookF,
   FaInstagram,
   FaTwitter,
@@ -68,11 +69,13 @@ export default () => {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [slug, setSlug] = useState("")
 
   const [disabledProfile, setDisabledProfile] = useState(true)
   const [disabledUsername, setDisabledUsername] = useState(true)
   const [disabledEmail, setDisabledEmail] = useState(true)
   const [disabledPassword, setDisabledPassword] = useState(true)
+  const [disabledSlug, setDisabledSlug] = useState(true)
 
   const [fbLink, setFbLink] = useState("")
   const [twLink, setTwLink] = useState("")
@@ -427,6 +430,60 @@ export default () => {
       // setTimeout(() => setError(null), 5000)
     }
   }
+
+  // UPDATE SLUG <--------------------------------------------------------------------------------> UPDATE SLUG //
+  const setSlugHandler = e => {
+    setSlug(e.target.value)
+  }
+
+  const submitSlug = async e => {
+    e.preventDefault()
+
+    const params = {
+      negourl: slug,
+    }
+    try {
+      const res = await axios.put(`${apiURL}/negosites/${userId}`, params, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      axios.post(
+        "https://api.netlify.com/build_hooks/5fa20c6490bf4b2b591bf2e1",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      setError(null)
+      setSlug(res.data.slug)
+      setDisabledSlug(true)
+    } catch (err) {
+      console.log(err.message)
+      setError("Errorrrr B")
+      setTimeout(() => setError(null), 5000)
+    }
+  }
+
+  useEffect(() => {
+    const getSlug = async () => {
+      const res = await axios.get(`${apiURL}/negosites/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      // if (!res.data.profiel) {
+      //   setSlug("")
+      // } else {
+      //
+      // }
+      setSlug(res.data.slug)
+    }
+    getSlug()
+  }, [userId, token])
 
   // CREATE LINKS <--------------------------------------------------------------------------------> CREATE LINKS //
   const createLink = async () => {
@@ -1028,6 +1085,55 @@ export default () => {
                   {error && <ErrorMessage text={error} />}
                 </div>
               </form>
+
+              <form onSubmit={submitSlug}>
+                <div>
+                  <label htmlFor="slug">
+                    <FaGlobe
+                      size="1.25em"
+                      style={{
+                        position: "relative",
+                        top: "5px",
+                        marginRight: "5px",
+                      }}
+                    />
+                    <input
+                      onChange={setSlugHandler}
+                      value={slug}
+                      // placeholder="*********"
+                      type="text"
+                      disabled={disabledSlug}
+                      name="slug"
+                      id="slug"
+                      maxLength="15"
+                      className={accountStyles.profileInput}
+                      pattern="[^\s]+"
+                      title="geen spaties, alleen '-'"
+                    />
+                  </label>
+                  <FaRegEdit
+                    size="1.1em"
+                    style={{
+                      position: "relative",
+                      top: "5px",
+                      right: "10px",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setDisabledSlug(false)}
+                  />
+                  <button
+                    className={`${accountStyles.btn} ${accountStyles.btnLight} ${accountStyles.submitBtn}`}
+                    type="submit"
+                    style={{
+                      paddingTop: "7.5px",
+                      paddingBottom: "7.5px",
+                    }}
+                  >
+                    Update Profiel URL
+                  </button>
+                  {error && <ErrorMessage text={error} />}
+                </div>
+              </form>
             </div>
           </div>
 
@@ -1462,17 +1568,18 @@ export default () => {
           <div
             style={{
               textAlign: "center",
-              fontSize: "0.75em",
+              fontSize: "0.7em",
             }}
           >
             <div className={accountStyles.usLinkNego}>
               <b>Negoscan Profiel URL</b>
             </div>
+
             <div className={accountStyles.usLinkSite}>
               <Link
                 className={accountStyles.userLink}
-                to={`/Negosite_${userId}`}
-              >{`${site.siteMetadata.siteUrl}/Negosite_${userId}`}</Link>
+                to={`/${slug}`}
+              >{`${site.siteMetadata.siteUrl}/${slug}`}</Link>
             </div>
           </div>
         </div>

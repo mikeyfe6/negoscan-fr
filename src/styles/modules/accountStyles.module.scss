@@ -57,7 +57,7 @@
   display: grid;
   min-height: calc(100vh - 290px);
   grid-template-columns: 0.3fr 1.3fr 1fr;
-  grid-template-rows: 0.1fr 0.1fr 2.8fr;
+  grid-template-rows: 0fr 2.8fr;
   gap: 0px 0px;
   grid-template-areas:
     "Sidebar Dashboard Dashboard Link"
@@ -93,7 +93,6 @@
 
   display: flex;
   justify-content: center;
-  align-items: center;
 
   .iphone {
     // overflow: hidden;
@@ -102,11 +101,11 @@
       position: sticky;
       overflow: hidden;
       height: 675px;
-      margin: 1%;
+      margin: 5% 1%;
       width: 325px;
       border-radius: 50px;
       border: solid #333 10px;
-      top: 0;
+      top: 150px;
     }
 
     // &-bg {

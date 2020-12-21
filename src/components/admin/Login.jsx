@@ -137,7 +137,10 @@ export default () => {
           <div
             className={`${loginStyles.formContainer} ${loginStyles.signUpContainer}`}
           >
-            <form onSubmit={handleSubmitRegister}>
+            <form
+              onSubmit={handleSubmitRegister}
+              style={{ visibility: "hidden" }}
+            >
               <h1 style={{ fontSize: "1.5em" }}> Maak een account aan</h1>
               {/* <div className={loginStyles.socialContainer}>
                 <a href="" className="social">

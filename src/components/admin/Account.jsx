@@ -440,7 +440,7 @@ export default () => {
     e.preventDefault()
 
     const params = {
-      negourl: slug,
+      slug: slug,
     }
     try {
       const res = await axios.put(`${apiURL}/negosites/${userId}`, params, {

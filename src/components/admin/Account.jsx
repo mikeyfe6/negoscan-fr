@@ -449,6 +449,10 @@ export default () => {
         },
       })
 
+      setError(null)
+      setSlug(res.data.slug)
+      setDisabledSlug(true)
+
       axios.post(
         "https://api.netlify.com/build_hooks/5fa20c6490bf4b2b591bf2e1",
         {
@@ -457,9 +461,6 @@ export default () => {
           },
         }
       )
-      setError(null)
-      setSlug(res.data.slug)
-      setDisabledSlug(true)
     } catch (err) {
       console.log(err.message)
       setError("Errorrrr B")

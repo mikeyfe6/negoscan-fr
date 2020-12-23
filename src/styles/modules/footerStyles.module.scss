@@ -2,10 +2,13 @@
 @import "../customs/utilities";
 
 .footerCont {
+  font-size: 0.75em;
   margin-top: 200px;
   display: flex;
   gap: 5px;
   justify-content: center;
+  align-items: center;
+  color: #8c8c8c;
 
   a {
     filter: grayscale(100%);
@@ -35,5 +38,6 @@
 @media (max-width: 500px) {
   .footerCont {
     margin-top: 425px;
+    font-size: 0.675em;
   }
 }

@@ -3,8 +3,12 @@
 
 @mixin profileLinks {
   display: inline-block;
-  width: 100%;
-  padding: 10px 250px;
+
+  padding: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 750px;
 
   &:hover {
     opacity: 0.875;
@@ -197,6 +201,45 @@
         margin: 0 15px;
         bottom: 10px;
         color: brown;
+
+        &:hover {
+          opacity: 0.75;
+        }
+      }
+    }
+  }
+  // ---------------------------------------------------------------------------------------- // GROEN GROEN GROEN
+  &-groen {
+    background: linear-gradient(to bottom, green, white);
+    @include fullBG;
+
+    h1 {
+      color: white;
+      margin: 25px 0 50px;
+    }
+
+    &-links {
+      margin: 15px 0;
+
+      a {
+        background: white;
+
+        color: green;
+        border: 1px solid green;
+        border-radius: 3px;
+        box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+        @include profileLinks;
+      }
+    }
+
+    &-icons {
+      position: relative;
+      top: 50px;
+
+      a {
+        margin: 0 15px;
+        bottom: 10px;
+        color: green;
 
         &:hover {
           opacity: 0.75;

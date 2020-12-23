@@ -287,7 +287,7 @@ export default () => {
 
               {error && <ErrorMessage text={error} />}
               {loading && <LoadingMessage text={loading} />}
-              <a href="#">Forget your password</a>
+              {/* <a href="#">Forget your password</a> */}
               <button style={{ cursor: "pointer" }}>Log in</button>
             </form>
           </div>

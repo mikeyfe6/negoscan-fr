@@ -692,6 +692,17 @@ export default () => {
           c[i].className = accountStyles.brownstyleLinks
         }
         break
+      case "groen":
+        document.getElementById("iphone-username").className =
+          accountStyles.greenstyleUsername
+        document.getElementById("iphone-iconlook").className =
+          accountStyles.greenstyleIcons
+        document.getElementById("iphone-bg").className =
+          accountStyles.greenstyle
+        for (i = 0; i < c.length; i++) {
+          c[i].className = accountStyles.greenstyleLinks
+        }
+        break
       default:
     }
   }
@@ -1550,6 +1561,27 @@ export default () => {
                   <div className={accountStyles.brownlinks} />
                   <div className={accountStyles.brownlinks} />
                   <div className={accountStyles.brownlinks} />
+                </div>
+              </label>
+            </li>
+
+            <li className={accountStyles.chooseColor}>
+              <label>
+                <input
+                  type="radio"
+                  value="groen"
+                  checked={color === "groen"}
+                  onChange={onRadioChange}
+                  onClick={event => {
+                    changeHeadingBg("groen")
+                    event.preventDefault()
+                  }}
+                  style={{ display: "none" }}
+                />
+                <div className={accountStyles.greentheme}>
+                  <div className={accountStyles.greenlinks} />
+                  <div className={accountStyles.greenlinks} />
+                  <div className={accountStyles.greenlinks} />
                 </div>
               </label>
             </li>

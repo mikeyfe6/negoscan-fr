@@ -116,7 +116,7 @@ const NegositeTemplate = ({ data }) => {
               rel="noopener noreferrer"
               target="_blank"
             >
-              <FaFacebookF size="2.25em" />
+              <FaFacebookF size="2em" />
             </a>
 
             <a
@@ -124,7 +124,7 @@ const NegositeTemplate = ({ data }) => {
               rel="noopener noreferrer"
               target="_blank"
             >
-              <FaTwitter size="2.25em" />
+              <FaTwitter size="2em" />
             </a>
 
             <a
@@ -132,7 +132,7 @@ const NegositeTemplate = ({ data }) => {
               rel="noopener noreferrer"
               target="_blank"
             >
-              <FaInstagram size="2.25em" />
+              <FaInstagram size="2em" />
             </a>
           </div>
 

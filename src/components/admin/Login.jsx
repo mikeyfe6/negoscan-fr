@@ -1,6 +1,9 @@
 import React, { useState, useRef } from "react"
+import { useStaticQuery, graphql } from "gatsby"
 import axios from "axios"
 import { navigate } from "@reach/router"
+
+import useDigitInput from "react-digit-input"
 
 // import SEO from "../seo"
 import { setUser } from "../../services/auth"
@@ -8,6 +11,8 @@ import { setUser } from "../../services/auth"
 import loginStyles from "../../styles/modules/loginStyles.module.scss"
 
 import servImage from "../../images/server.png"
+
+import negoLogo from "../../../static/Negoscan-logo.png"
 
 const apiURL = process.env.GATSBY_BASE_URL
 
@@ -28,16 +33,36 @@ const LoadingMessage = ({ text }) => {
 }
 
 export default () => {
+  const vericode = useStaticQuery(graphql`
+    query NegoCode {
+      allStrapiNegosite {
+        edges {
+          node {
+            negocode
+          }
+        }
+      }
+    }
+  `)
+
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(null)
 
   const usernameRef = useRef()
   const passwordRef = useRef()
-  const storecodeRef = useRef()
+  // const storecodeRef = useRef()
 
   const usernameRegRef = useRef()
   const emailRegRef = useRef()
   const passwordRegRef = useRef()
+
+  const [value, onChange] = useState("")
+  const digits = useDigitInput({
+    acceptedCharacters: /^[0-9]$/,
+    length: 7,
+    value,
+    onChange,
+  })
 
   // const signUpButton = document.getElementById("signUp")
   // const signInButton = document.getElementById("signIn")
@@ -57,20 +82,29 @@ export default () => {
   const handleSubmitLogin = async e => {
     e.preventDefault()
 
-    try {
-      const { data } = await axios.post(`${apiURL}/auth/local`, {
-        identifier: usernameRef.current.value,
-        password: passwordRef.current.value,
-      })
-      setUser(data)
-      setLoading("Aan het laden")
-      setError(null)
-      navigate("/admin/account")
-    } catch {
-      setLoading(null)
-      setError("Verkeerde invoer, probeer 't opnieuw")
-      setTimeout(() => setError(null), 5000)
+    let negocodes = vericode.allStrapiNegosite.edges.map(
+      edge => edge.node.negocode
+    )
+
+    if (negocodes.includes(parseInt(value))) {
+      try {
+        const { data } = await axios.post(`${apiURL}/auth/local`, {
+          identifier: usernameRef.current.value,
+          password: passwordRef.current.value,
+        })
+
+        setUser(data)
+        setLoading("Aan het laden")
+        setError(null)
+        navigate("/admin/account")
+      } catch {
+        setLoading(null)
+        setError("Verkeerde invoer, probeer 't opnieuw")
+        setTimeout(() => setError(null), 5000)
+      }
     }
+    setError("Onjuist invoer!")
+    setTimeout(() => setError(null), 5000)
   }
 
   const handleSubmitRegister = async e => {
@@ -137,10 +171,16 @@ export default () => {
           <div
             className={`${loginStyles.formContainer} ${loginStyles.signUpContainer}`}
           >
-            <form
-              onSubmit={handleSubmitRegister}
-              style={{ visibility: "hidden" }}
-            >
+            <img
+              src={negoLogo}
+              alt=""
+              style={{
+                width: "50%",
+                display: "block",
+                margin: "50% auto",
+              }}
+            />
+            <form onSubmit={handleSubmitRegister} style={{ display: "none" }}>
               <h1 style={{ fontSize: "1.5em" }}> Maak een account aan</h1>
               {/* <div className={loginStyles.socialContainer}>
                 <a href="" className="social">
@@ -212,13 +252,39 @@ export default () => {
                 placeholder="wachtwoord"
                 required
               />
-              <input
+              {/* <input
                 ref={storecodeRef}
                 type="text"
                 name="storecode"
                 placeholder="storecode"
                 pattern="\d{1,9}"
-              />
+              /> */}
+
+              <div
+                className={loginStyles.storeCode}
+                style={{
+                  display: "flex",
+                  // flexWrap: "wrap",
+                  gap: "7.5px",
+                }}
+              >
+                <input inputMode="decimal" {...digits[0]} />
+                <input inputMode="decimal" {...digits[1]} />
+                <input inputMode="decimal" {...digits[2]} />
+                <input inputMode="decimal" {...digits[3]} />
+                <input inputMode="decimal" {...digits[4]} />
+                <input inputMode="decimal" {...digits[5]} />
+                <input inputMode="decimal" {...digits[6]} />
+              </div>
+              <b>
+                {" "}
+                <span>store code</span>
+              </b>
+              <br />
+              {/* <pre>
+                <code>"{value}"</code>
+              </pre> */}
+
               {error && <ErrorMessage text={error} />}
               {loading && <LoadingMessage text={loading} />}
               <a href="#">Forget your password</a>

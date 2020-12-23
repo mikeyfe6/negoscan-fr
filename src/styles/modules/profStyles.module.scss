@@ -27,14 +27,19 @@
   }
 
   .avatar {
-    width: 175px;
-    height: 175px;
+    width: 150px;
+    height: 150px;
   }
 
   .prof-center {
+    h1 {
+      font-size: 1.5em;
+    }
+
     ul li a {
-      padding: 10px;
       width: 300px;
+      padding: 7.5px;
+      font-size: 0.9em;
     }
   }
 }

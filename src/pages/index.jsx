@@ -19,8 +19,14 @@ const IndexPage = () => (
           <h1 className={loginStyles.xl}>Negoscan.me</h1>
           <p className={loginStyles.lead}>
             Klik{" "}
-            <Link to="/admin/login" className={loginStyles.link}>
-              hier
+            <Link to="/admin/login">
+              <button
+                className={`${loginStyles.btn} ${loginStyles.addBtn}`}
+                type="button"
+                style={{ padding: "3.5px 20px 2.5px 20px", float: "none" }}
+              >
+                hier
+              </button>
             </Link>{" "}
             om in te loggen..
           </p>

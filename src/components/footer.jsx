@@ -6,17 +6,9 @@ import footerStyles from "../styles/modules/footerStyles.module.scss"
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const Footer = () => (
-  <footer
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      alignSelf: "center",
-    }}
-  >
+  <footer>
     <div className={footerStyles.footerCont}>
-      Copyright {new Date().getFullYear()} © All rights Reserved. Powered by
-      {` `}
+      Copyright {new Date().getFullYear()} ©, powered by{" "}
       <a href="https://gimmix.nl" rel="noopener noreferrer" target="_blank">
         {""}
         <b> Gimmix </b>

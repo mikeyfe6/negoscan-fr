@@ -103,7 +103,7 @@ export default () => {
         setTimeout(() => setError(null), 5000)
       }
     }
-    setError("Onjuist invoer!")
+    setError("Onjuiste invoer!")
     setTimeout(() => setError(null), 5000)
   }
 

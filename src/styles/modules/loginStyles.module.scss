@@ -319,6 +319,7 @@ p {
 
   .docs-head {
     text-align: center;
+    padding: 1rem 0 0 0 !important;
 
     img {
       justify-self: center;
@@ -328,14 +329,10 @@ p {
     h1 {
       display: none;
     }
-
-    p {
-      // display: none;
-    }
   }
 
   .indexBg {
-    height: 100px;
+    height: 500px;
   }
 
   .superContainer {
@@ -346,7 +343,7 @@ p {
     }
 
     position: absolute;
-    top: 27.5%;
+    top: 150px;
 
     // span {
     //   font-size: 10px;

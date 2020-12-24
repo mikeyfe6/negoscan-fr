@@ -20,7 +20,7 @@ module.exports = {
         apiURL: process.env.DEPLOY_URL
           ? "https://negoscan-database.herokuapp.com"
           : "http://localhost:1337",
-        contentTypes: [`negosite`, `user`],
+        contentTypes: [`negosite`, `user`, `negocode`],
         markdownImages: {
           typesToParse: {
             negosite: ["biografie"],
@@ -42,6 +42,24 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Negoscan`,
+        short_name: `Negoscan`,
+        description: `Een veilige en duurzame oplossing voor het delen van contactinformatie, ook op anderhalve meter afstand.`,
+        start_url: `/`,
+        background_color: `#a9a9a9`,
+        lang: `nl`,
+        theme_color: `#16b7f2`,
+        display: `standalone`,
+        icon: "src/images/Negoscan-logo.png",
+        icon_options: {
+          purpose: `any maskable`,
+        },
+        crossOrigin: `use-credentials`,
+      },
+    },
     `gatsby-plugin-catch-links`,
     {
       resolve: `gatsby-plugin-manifest`,

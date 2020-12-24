@@ -12,7 +12,7 @@ import loginStyles from "../../styles/modules/loginStyles.module.scss"
 
 import servImage from "../../images/server.png"
 
-import negoLogo from "../../../static/Negoscan-logo.png"
+// import negoLogo from "../../../static/Negoscan-logo.png"
 
 const apiURL = process.env.GATSBY_BASE_URL
 
@@ -35,10 +35,10 @@ const LoadingMessage = ({ text }) => {
 export default () => {
   const vericode = useStaticQuery(graphql`
     query NegoCode {
-      allStrapiNegosite {
+      allStrapiNegocode {
         edges {
           node {
-            negocode
+            storecode
           }
         }
       }
@@ -82,64 +82,11 @@ export default () => {
   const handleSubmitLogin = async e => {
     e.preventDefault()
 
-    let negocodes = vericode.allStrapiNegosite.edges.map(
-      edge => edge.node.negocode
-    )
-
-    if (negocodes.includes(parseInt(value))) {
-      try {
-        const { data } = await axios.post(`${apiURL}/auth/local`, {
-          identifier: usernameRef.current.value,
-          password: passwordRef.current.value,
-        })
-
-        setUser(data)
-        setLoading("Aan het laden")
-        setError(null)
-        navigate("/admin/account")
-      } catch {
-        setLoading(null)
-        setError("Verkeerde invoer, probeer 't opnieuw")
-        setTimeout(() => setError(null), 5000)
-      }
-    }
-    setError("Onjuiste invoer!")
-    setTimeout(() => setError(null), 5000)
-  }
-
-  const handleSubmitRegister = async e => {
-    e.preventDefault()
-
     try {
-      const { data } = await axios.post(`${apiURL}/auth/local/register`, {
-        username: usernameRegRef.current.value,
-        email: emailRegRef.current.value,
-        password: passwordRegRef.current.value,
+      const { data } = await axios.post(`${apiURL}/auth/local`, {
+        identifier: usernameRef.current.value,
+        password: passwordRef.current.value,
       })
-      // let negoData = new FormData()
-      // formData.append("key1", "value1")
-      // formData.append("key2", "value2")
-
-      await axios.post(
-        `${apiURL}/negosites`,
-        {
-          profiel: usernameRegRef.current.value,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${data.jwt}`,
-          },
-        }
-      )
-
-      axios.post(
-        "https://api.netlify.com/build_hooks/5fa20c6490bf4b2b591bf2e1",
-        {
-          headers: {
-            Authorization: `Bearer ${data.jwt}`,
-          },
-        }
-      )
 
       setUser(data)
       setLoading("Aan het laden")
@@ -150,6 +97,56 @@ export default () => {
       setError("Verkeerde invoer, probeer 't opnieuw")
       setTimeout(() => setError(null), 5000)
     }
+  }
+
+  const handleSubmitRegister = async e => {
+    e.preventDefault()
+
+    let negocodes = vericode.allStrapiNegocode.edges.map(
+      edge => edge.node.storecode
+    )
+
+    if (negocodes.includes(value)) {
+      try {
+        const { data } = await axios.post(`${apiURL}/auth/local/register`, {
+          username: usernameRegRef.current.value,
+          email: emailRegRef.current.value,
+          password: passwordRegRef.current.value,
+        })
+
+        await axios.post(
+          `${apiURL}/negosites`,
+          {
+            profiel: data.user.username,
+            slug: data.user.username,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${data.jwt}`,
+            },
+          }
+        )
+
+        // axios.post(
+        //   "https://api.netlify.com/build_hooks/5fa20c6490bf4b2b591bf2e1",
+        //   {
+        //     headers: {
+        //       Authorization: `Bearer ${data.jwt}`,
+        //     },
+        //   }
+        // )
+        setUser(data)
+        setLoading("Aan het laden")
+        setError(null)
+        navigate("/admin/account")
+      } catch {
+        setLoading(null)
+        setError("Verkeerde invoer, probeer 't opnieuw")
+        setTimeout(() => setError(null), 5000)
+      }
+    }
+    setError("Vul alle velden correct in!")
+    setTimeout(() => setError(null), 5000)
   }
 
   return (
@@ -171,7 +168,7 @@ export default () => {
           <div
             className={`${loginStyles.formContainer} ${loginStyles.signUpContainer}`}
           >
-            <img
+            {/* <img
               src={negoLogo}
               alt=""
               style={{
@@ -179,8 +176,8 @@ export default () => {
                 display: "block",
                 margin: "50% auto",
               }}
-            />
-            <form onSubmit={handleSubmitRegister} style={{ display: "none" }}>
+            /> */}
+            <form onSubmit={handleSubmitRegister}>
               <h1 style={{ fontSize: "1.5em" }}> Maak een account aan</h1>
               {/* <div className={loginStyles.socialContainer}>
                 <a href="" className="social">
@@ -216,6 +213,29 @@ export default () => {
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 title="Moet op z'n minst 1 nummer, 1 hoofdletter, 1 klein letter en 8 karakters lang zijn."
               />
+
+              <div
+                className={loginStyles.storeCode}
+                style={{
+                  display: "flex",
+                  gap: "7.5px",
+                }}
+              >
+                <input inputMode="decimal" {...digits[0]} />
+                <input inputMode="decimal" {...digits[1]} />
+                <input inputMode="decimal" {...digits[2]} />
+                <input inputMode="decimal" {...digits[3]} />
+                <input inputMode="decimal" {...digits[4]} />
+                <input inputMode="decimal" {...digits[5]} />
+                <input inputMode="decimal" {...digits[6]} />
+              </div>
+              <b>
+                <span>* storecode verplicht</span>
+              </b>
+
+              {/* <pre>
+                <code>"{value}"</code>
+              </pre> */}
               {error && <ErrorMessage text={error} />}
               {loading && <LoadingMessage text={loading} />}
               <button style={{ cursor: "pointer" }}>Sign Up</button>
@@ -237,7 +257,7 @@ export default () => {
                   <i>icon</i>
                 </a>
               </div> */}
-              <span>gebruik je account</span>
+              <span>met jouw account</span>
               <input
                 ref={usernameRef}
                 type="text"
@@ -259,36 +279,12 @@ export default () => {
                 placeholder="storecode"
                 pattern="\d{1,9}"
               /> */}
-
-              <div
-                className={loginStyles.storeCode}
-                style={{
-                  display: "flex",
-                  // flexWrap: "wrap",
-                  gap: "7.5px",
-                }}
-              >
-                <input inputMode="decimal" {...digits[0]} />
-                <input inputMode="decimal" {...digits[1]} />
-                <input inputMode="decimal" {...digits[2]} />
-                <input inputMode="decimal" {...digits[3]} />
-                <input inputMode="decimal" {...digits[4]} />
-                <input inputMode="decimal" {...digits[5]} />
-                <input inputMode="decimal" {...digits[6]} />
-              </div>
-              <b>
-                {" "}
-                <span>store code</span>
-              </b>
-              <br />
-              {/* <pre>
-                <code>"{value}"</code>
-              </pre> */}
-
               {error && <ErrorMessage text={error} />}
               {loading && <LoadingMessage text={loading} />}
               {/* <a href="#">Forget your password</a> */}
               <button style={{ cursor: "pointer" }}>Log in</button>
+              <br />
+              <br />
             </form>
           </div>
           <div className={loginStyles.overlayContainer}>

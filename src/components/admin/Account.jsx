@@ -171,7 +171,7 @@ export default () => {
 
   // UPDATE PROFILENAME <--------------------------------------------------------------------------------> UPDATE PROFILENAME //
   const setProfileHandler = e => {
-    setProfile(e.target.value)
+    setProfile(e.target.value.toLowerCase())
   }
 
   const submitProfile = async e => {
@@ -190,11 +190,12 @@ export default () => {
           },
         }
       )
+      setError(null)
       setProfile(res.data.username)
       setDisabledProfile(true)
     } catch (err) {
-      console.log(err.message)
-      // setTimeout(() => setError(null), 5000)
+      setError("Er is iets misgegaan, probeer het opnieuw!")
+      setTimeout(() => setError(null), 5000)
     }
   }
 
@@ -233,7 +234,7 @@ export default () => {
       setDisabledUsername(true)
     } catch (err) {
       console.log(err.message)
-      setError("Errorrrr B")
+      setError("Er is iets misgegaan, probeer het opnieuw!")
       setTimeout(() => setError(null), 5000)
     }
   }
@@ -276,11 +277,13 @@ export default () => {
           },
         }
       )
+      setError(null)
       setEmail(res.data.email)
       setDisabledEmail(true)
     } catch (err) {
       console.log(err.message)
-      // setTimeout(() => setError(null), 5000)
+      setError("Er is iets misgegaan, probeer het opnieuw!")
+      setTimeout(() => setError(null), 5000)
     }
   }
 
@@ -298,7 +301,7 @@ export default () => {
 
   // UPDATE FBLINK <--------------------------------------------------------------------------------> UPDATE FBLINK //
   const setFbHandler = e => {
-    setFbLink(e.target.value)
+    setFbLink(e.target.value.toLowerCase())
   }
 
   const submitFB = async e => {
@@ -313,11 +316,13 @@ export default () => {
           Authorization: `Bearer ${token}`,
         },
       })
+      setError(null)
       setFbLink(res.data.facebooklink)
       setDisabledFbLink(true)
     } catch (err) {
       console.log(err.message)
-      // setTimeout(() => setError(null), 5000)
+      setError("Er is iets misgegaan, probeer het opnieuw!")
+      setTimeout(() => setError(null), 5000)
     }
   }
 
@@ -335,7 +340,7 @@ export default () => {
 
   // UPDATE TWLINK <--------------------------------------------------------------------------------> UPDATE TWLINK //
   const setTwHandler = e => {
-    setTwLink(e.target.value)
+    setTwLink(e.target.value.toLowerCase())
   }
 
   const submitTW = async e => {
@@ -350,11 +355,13 @@ export default () => {
           Authorization: `Bearer ${token}`,
         },
       })
+      setError(null)
       setTwLink(res.data.twitterlink)
       setDisabledTwLink(true)
     } catch (err) {
       console.log(err.message)
-      // setTimeout(() => setError(null), 5000)
+      setError("Er is iets misgegaan, probeer het opnieuw!")
+      setTimeout(() => setError(null), 5000)
     }
   }
 
@@ -372,7 +379,7 @@ export default () => {
 
   // UPDATE IGLINK <--------------------------------------------------------------------------------> UPDATE IGLINK //
   const setIgHandler = e => {
-    setIgLink(e.target.value)
+    setIgLink(e.target.value.toLowerCase())
   }
 
   const submitIG = async e => {
@@ -387,11 +394,13 @@ export default () => {
           Authorization: `Bearer ${token}`,
         },
       })
+      setError(null)
       setIgLink(res.data.instagramlink)
       setDisabledIgLink(true)
     } catch (err) {
       console.log(err.message)
-      // setTimeout(() => setError(null), 5000)
+      setError("Er is iets misgegaan, probeer het opnieuw!")
+      setTimeout(() => setError(null), 5000)
     }
   }
 
@@ -424,16 +433,18 @@ export default () => {
           Authorization: `Bearer ${token}`,
         },
       })
+      setError(null)
       setDisabledPassword(true)
     } catch (err) {
       console.log(err.message)
-      // setTimeout(() => setError(null), 5000)
+      setError("Er is iets misgegaan, probeer het opnieuw!")
+      setTimeout(() => setError(null), 5000)
     }
   }
 
   // UPDATE SLUG <--------------------------------------------------------------------------------> UPDATE SLUG //
   const setSlugHandler = e => {
-    setSlug(e.target.value)
+    setSlug(e.target.value.toLowerCase())
   }
 
   const submitSlug = async e => {
@@ -463,7 +474,7 @@ export default () => {
       )
     } catch (err) {
       console.log(err.message)
-      setError("Errorrrr B")
+      setError("Er is iets misgegaan, probeer het opnieuw!")
       setTimeout(() => setError(null), 5000)
     }
   }
@@ -475,12 +486,6 @@ export default () => {
           Authorization: `Bearer ${token}`,
         },
       })
-
-      // if (!res.data.profiel) {
-      //   setSlug("")
-      // } else {
-      //
-      // }
       setSlug(res.data.slug)
     }
     getSlug()
@@ -915,6 +920,7 @@ export default () => {
               <form onSubmit={submitUsername}>
                 <label htmlFor="username">
                   <FaRegUserCircle
+                    color="black"
                     size="1.25em"
                     style={{
                       position: "relative",
@@ -926,7 +932,7 @@ export default () => {
                     onChange={setUsernameHandler}
                     value={username}
                     type="text"
-                    maxLength="15"
+                    maxLength="25"
                     disabled={disabledUsername}
                     name="username"
                     id="username"
@@ -934,6 +940,7 @@ export default () => {
                   />
                 </label>
                 <FaRegEdit
+                  color="black"
                   size="1.1em"
                   style={{
                     position: "relative",
@@ -953,14 +960,13 @@ export default () => {
                 >
                   Save Profile Name
                 </button>
-
-                {error && <ErrorMessage text={error} />}
               </form>
 
               <form onSubmit={submitProfile}>
-                <p>
-                  <label htmlFor="email">
+                <div>
+                  <label htmlFor="profile">
                     <FaUser
+                      color="black"
                       size="1.25em"
                       style={{
                         position: "relative",
@@ -972,6 +978,7 @@ export default () => {
                       onChange={setProfileHandler}
                       value={profile}
                       type="text"
+                      maxLength="20"
                       disabled={disabledProfile}
                       pattern="[^\s]+"
                       title="Geen spaties"
@@ -981,6 +988,7 @@ export default () => {
                     />
                   </label>
                   <FaRegEdit
+                    color="black"
                     size="1.1em"
                     style={{
                       position: "relative",
@@ -1000,14 +1008,14 @@ export default () => {
                   >
                     Save Username
                   </button>
-                  {error && <ErrorMessage text={error} />}
-                </p>
+                </div>
               </form>
 
               <form onSubmit={submitEmail}>
-                <p>
+                <div>
                   <label htmlFor="email">
                     <FaAt
+                      color="black"
                       size="1.25em"
                       style={{
                         position: "relative",
@@ -1021,12 +1029,14 @@ export default () => {
                       type="email"
                       disabled={disabledEmail}
                       name="email"
+                      maxLength="35"
                       id="email"
                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                       className={accountStyles.profileInput}
                     />
                   </label>
                   <FaRegEdit
+                    color="black"
                     size="1.1em"
                     style={{
                       position: "relative",
@@ -1046,14 +1056,14 @@ export default () => {
                   >
                     Save Email
                   </button>
-                  {error && <ErrorMessage text={error} />}
-                </p>
+                </div>
               </form>
 
               <form onSubmit={submitPassword}>
                 <div>
                   <label htmlFor="password">
                     <FaLock
+                      color="black"
                       size="1.25em"
                       style={{
                         position: "relative",
@@ -1075,6 +1085,7 @@ export default () => {
                     />
                   </label>
                   <FaRegEdit
+                    color="black"
                     size="1.1em"
                     style={{
                       position: "relative",
@@ -1094,7 +1105,6 @@ export default () => {
                   >
                     Update Password
                   </button>
-                  {error && <ErrorMessage text={error} />}
                 </div>
               </form>
 
@@ -1102,6 +1112,7 @@ export default () => {
                 <div>
                   <label htmlFor="slug">
                     <FaGlobe
+                      color="black"
                       size="1.25em"
                       style={{
                         position: "relative",
@@ -1112,11 +1123,11 @@ export default () => {
                     <input
                       onChange={setSlugHandler}
                       value={slug}
-                      // placeholder="*********"
                       type="text"
                       disabled={disabledSlug}
                       name="slug"
                       id="slug"
+                      placeholder="*verplicht, bijv: 'jouw-profiel'"
                       maxLength="15"
                       className={accountStyles.profileInput}
                       pattern="[^\s]+"
@@ -1124,6 +1135,7 @@ export default () => {
                     />
                   </label>
                   <FaRegEdit
+                    color="black"
                     size="1.1em"
                     style={{
                       position: "relative",
@@ -1134,19 +1146,20 @@ export default () => {
                     onClick={() => setDisabledSlug(false)}
                   />
                   <button
-                    className={`${accountStyles.btn} ${accountStyles.btnLight} ${accountStyles.submitBtn}`}
+                    className={accountStyles.btn}
                     type="submit"
                     style={{
                       paddingTop: "7.5px",
                       paddingBottom: "7.5px",
+                      background: "red",
                     }}
                   >
                     Update Profiel URL
                   </button>
-                  {error && <ErrorMessage text={error} />}
                 </div>
               </form>
             </div>
+            {error && <ErrorMessage text={error} />}
           </div>
 
           {/* <hr
@@ -1163,6 +1176,7 @@ export default () => {
                   <FaFacebookF
                     size="1.1em"
                     className={accountStyles.socialIcons}
+                    color="#4867AA"
                   />
 
                   <input
@@ -1191,6 +1205,7 @@ export default () => {
                   Save Facebook
                 </button>
                 <FaRegEdit
+                  color="black"
                   size="1.1em"
                   style={{
                     position: "relative",
@@ -1202,7 +1217,6 @@ export default () => {
                 />
               </div>
               <div style={{ clear: "both" }} />
-              {error && <ErrorMessage text={error} />}
             </form>
 
             <form onSubmit={submitTW} className={accountStyles.socialForm}>
@@ -1211,6 +1225,7 @@ export default () => {
                   <FaTwitter
                     size="1.1em"
                     className={accountStyles.socialIcons}
+                    color="#1FA1F1"
                   />
 
                   <input
@@ -1239,6 +1254,7 @@ export default () => {
                   Save Twitter
                 </button>
                 <FaRegEdit
+                  color="black"
                   size="1.1em"
                   style={{
                     position: "relative",
@@ -1249,7 +1265,6 @@ export default () => {
                   onClick={() => setDisabledTwLink(false)}
                 />
               </div>
-              {error && <ErrorMessage text={error} />}
             </form>
             <form onSubmit={submitIG} className={accountStyles.socialForm}>
               <div>
@@ -1257,6 +1272,7 @@ export default () => {
                   <FaInstagram
                     size="1.1em"
                     className={accountStyles.socialIcons}
+                    color="#F81F58"
                   />
 
                   <input
@@ -1285,6 +1301,7 @@ export default () => {
                   Save Instagram
                 </button>
                 <FaRegEdit
+                  color="black"
                   size="1.1em"
                   style={{
                     position: "relative",
@@ -1295,7 +1312,6 @@ export default () => {
                   onClick={() => setDisabledIgLink(false)}
                 />
               </div>
-              {error && <ErrorMessage text={error} />}
             </form>
           </div>
 
@@ -1304,7 +1320,7 @@ export default () => {
           <br />
           <div style={{ position: "relative" }}>
             <div className={accountStyles.linkCont}>
-              <h3>Title:</h3>
+              <h3 style={{ color: "black" }}>Title:</h3>
               <input
                 className={accountStyles.linkInput}
                 type="text"
@@ -1314,13 +1330,14 @@ export default () => {
                 minLength="5"
                 required
               />
-              <h3>Hyperlink:</h3>
+              <h3 style={{ color: "black" }}>Hyperlink:</h3>
               <input
                 className={accountStyles.linkInput}
                 type="url"
                 size="35"
                 placeholder="voer hyperlink in, bijv: voorbeeld.nl"
                 ref={hyperLink}
+                style={{ textTransform: "lowercase" }}
                 minLength="5"
                 required
               />
@@ -1367,7 +1384,7 @@ export default () => {
                       size="25"
                       value={editLink[link]}
                       onChange={handleEditLink}
-                      placeholder="edit title"
+                      placeholder="bewerk titel"
                       minLength="5"
                       required
                     />
@@ -1395,9 +1412,10 @@ export default () => {
                       id={`hyperlink${link.id}`}
                       type="url"
                       size="25"
+                      style={{ textTransform: "lowercase" }}
                       value={editHyperLink[link]}
                       onChange={handleEditHyperLink}
-                      placeholder="edit hyperlink"
+                      placeholder="bewerk hyperlink"
                       minLength="5"
                       required
                     />
@@ -1415,6 +1433,7 @@ export default () => {
                     Update Hyperlink
                   </button>
                   <FaTrash
+                    color="black"
                     style={{ cursor: "pointer" }}
                     className={accountStyles.trashBtn}
                     onClick={event => {
@@ -1449,11 +1468,12 @@ export default () => {
             <b>
               <u
                 style={{
+                  color: "black",
                   textDecoration: "underline",
                   textDecorationColor: "#35748d",
                 }}
               >
-                Kies Thema
+                Thema's
               </u>
             </b>
           </h2>

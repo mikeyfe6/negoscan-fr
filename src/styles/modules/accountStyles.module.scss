@@ -173,18 +173,18 @@
   .avatarformcont {
     display: flex;
     position: relative;
-    padding-bottom: 2.5%;
+    padding-bottom: 5%;
 
     .loading-complete {
       color: white;
       background-color: green;
       display: inline-block;
       position: absolute;
-      bottom: 10px;
+      bottom: 60px;
       padding: 1px 7.5px;
       border-radius: 2.5px;
       opacity: 0.9;
-      left: 40px;
+      left: 45px;
     }
   }
 
@@ -288,13 +288,17 @@
     background-color: red;
     font-weight: bold;
     color: white;
-    padding: 0.3rem 0.7rem;
+    padding: 0.3rem 0.5rem;
     display: table;
     margin: 0 auto;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 3px;
     margin-bottom: 1rem;
     opacity: 0.9;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    font-size: 0.7em;
   }
 
   .linkErrorStyle {
@@ -302,7 +306,7 @@
     display: inline-block;
     position: absolute;
     background-color: red;
-    top: 10% !important;
+    top: 60px;
     width: 95%;
     text-align: center;
     font-weight: bold;
@@ -317,7 +321,7 @@
   }
 
   .profile-input {
-    width: 175px;
+    width: 250px;
     margin: 10px 15px;
     opacity: 0.75;
     outline: none;
@@ -350,7 +354,7 @@
 
   .social-cont {
     display: flex;
-    background: linear-gradient(to left, #16b7f23a, rgba(128, 128, 128, 0.192))
+    background: linear-gradient(to left, #16b7f214, rgba(128, 128, 128, 0.192))
       no-repeat 0 0 / cover;
     justify-content: space-around;
 
@@ -367,7 +371,7 @@
 
       &:nth-child(-n + 2) {
         padding-right: 50px;
-        border-right: 1px solid black;
+        border-right: 1px solid rgba(128, 128, 128, 0.404);
       }
     }
 
@@ -934,13 +938,14 @@
   .Dashboard {
     .avatarformcont {
       flex-direction: column !important;
+      padding-bottom: 10%;
 
       .loading-complete {
-        top: 25%;
+        top: 21.5%;
         padding: 1px 7.5px;
         border-radius: 2.5px;
         opacity: 0.9;
-        left: 5%;
+        left: 2%;
         bottom: initial;
       }
     }
@@ -958,9 +963,14 @@
       margin: 6% 6% 7.5% 3%;
     }
 
+    .logerror {
+      bottom: -20px;
+    }
+
     .linkErrorStyle {
       width: 95% !important;
-      top: 24% !important;
+      // bottom: 500px !important;
+      top: 267.5px;
       left: 2.5%;
     }
 

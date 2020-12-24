@@ -14,9 +14,13 @@ const Header = () => (
       <nav>
         <ul>
           <li>
-            <Link to="#">
+            <a
+              href="https://negoscan.store"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <b>Store</b>
-            </Link>
+            </a>
           </li>
           <li>
             <Link to="/admin/login">Login</Link>

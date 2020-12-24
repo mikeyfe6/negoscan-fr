@@ -196,6 +196,7 @@ export default () => {
                 type="text"
                 name="usernameReg"
                 pattern="[^\s]+"
+                style={{ textTransform: "lowercase" }}
                 placeholder="gebruikersnaam"
               />
               <input
@@ -203,6 +204,7 @@ export default () => {
                 type="email"
                 name="emailReg"
                 placeholder="email"
+                style={{ textTransform: "lowercase" }}
                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
               />
               <input
@@ -263,6 +265,7 @@ export default () => {
                 type="text"
                 name="username"
                 placeholder="email / gebruikersnaam"
+                style={{ textTransform: "lowercase" }}
                 required
               />
               <input

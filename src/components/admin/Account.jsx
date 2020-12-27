@@ -171,14 +171,61 @@ export default () => {
 
   // UPDATE PROFILENAME <--------------------------------------------------------------------------------> UPDATE PROFILENAME //
   const setProfileHandler = e => {
-    setProfile(e.target.value.toLowerCase())
+    setProfile(e.target.value)
   }
 
   const submitProfile = async e => {
     e.preventDefault()
 
     const params = {
-      username: profile,
+      profiel: profile,
+    }
+    try {
+      const res = await axios.put(`${apiURL}/negosites/${userId}`, params, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      setError(null)
+      setProfile(res.data.profiel)
+      setDisabledProfile(true)
+    } catch (err) {
+      console.log(err.message)
+      setError("Er is iets misgegaan, probeer het opnieuw!")
+      setTimeout(() => setError(null), 5000)
+    }
+  }
+
+  useEffect(() => {
+    const getProfile = async () => {
+      const res = await axios.get(`${apiURL}/negosites/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      // if (!res.data.profiel) {
+      //   setProfile("")
+      // } else {
+      //   setProfile(res.data.profiel)
+      // }
+
+      setProfile(res.data.profiel)
+    }
+    getProfile()
+  }, [userId, token])
+
+  // UPDATE USERNAME <--------------------------------------------------------------------------------> UPDATE USERNAME //
+
+  const setUsernameHandler = e => {
+    setUsername(e.target.value.toLowerCase().replace(/\s+/g, ""))
+  }
+
+  const submitUsername = async e => {
+    e.preventDefault()
+
+    const params = {
+      username: username,
     }
     try {
       const res = await axios.put(
@@ -191,49 +238,9 @@ export default () => {
         }
       )
       setError(null)
-      setProfile(res.data.username)
-      setDisabledProfile(true)
-    } catch (err) {
-      setError("Er is iets misgegaan, probeer het opnieuw!")
-      setTimeout(() => setError(null), 5000)
-    }
-  }
-
-  useEffect(() => {
-    const getProfile = async () => {
-      const res = await axios.get(`${apiURL}/users/${gatsbyUser.user.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      setProfile(res.data.username)
-    }
-    getProfile()
-  }, [gatsbyUser.user.id, token])
-
-  // UPDATE USERNAME <--------------------------------------------------------------------------------> UPDATE USERNAME //
-
-  const setUsernameHandler = e => {
-    setUsername(e.target.value)
-  }
-
-  const submitUsername = async e => {
-    e.preventDefault()
-
-    const params = {
-      profiel: username,
-    }
-    try {
-      const res = await axios.put(`${apiURL}/negosites/${userId}`, params, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      setError(null)
-      setUsername(res.data.profiel)
+      setUsername(res.data.username)
       setDisabledUsername(true)
     } catch (err) {
-      console.log(err.message)
       setError("Er is iets misgegaan, probeer het opnieuw!")
       setTimeout(() => setError(null), 5000)
     }
@@ -241,20 +248,15 @@ export default () => {
 
   useEffect(() => {
     const getUsername = async () => {
-      const res = await axios.get(`${apiURL}/negosites/${userId}`, {
+      const res = await axios.get(`${apiURL}/users/${gatsbyUser.user.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-
-      if (!res.data.profiel) {
-        setUsername("")
-      } else {
-        setUsername(res.data.profiel)
-      }
+      setUsername(res.data.username)
     }
     getUsername()
-  }, [userId, token])
+  }, [gatsbyUser.user.id, token])
 
   // UPDATE EMAIL <--------------------------------------------------------------------------------> UPDATE EMAIL //
   const setEmailHandler = e => {
@@ -787,7 +789,7 @@ export default () => {
               id="iphone-avatar"
             />
             <p id="iphone-username" className={accountStyles.iphoneUsername}>
-              {username}
+              {profile}
             </p>
             <div
               id="iphone-bg"
@@ -917,55 +919,10 @@ export default () => {
             </form>
 
             <div className={accountStyles.profileInfo}>
-              <form onSubmit={submitUsername}>
-                <label htmlFor="username">
-                  <FaRegUserCircle
-                    color="black"
-                    size="1.25em"
-                    style={{
-                      position: "relative",
-                      top: "5px",
-                      marginRight: "5px",
-                    }}
-                  />
-                  <input
-                    onChange={setUsernameHandler}
-                    value={username}
-                    type="text"
-                    maxLength="25"
-                    disabled={disabledUsername}
-                    name="username"
-                    id="username"
-                    className={accountStyles.profileInput}
-                  />
-                </label>
-                <FaRegEdit
-                  color="black"
-                  size="1.1em"
-                  style={{
-                    position: "relative",
-                    top: "5px",
-                    right: "10px",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setDisabledUsername(false)}
-                />
-                <button
-                  className={`${accountStyles.btn}`}
-                  type="submit"
-                  style={{
-                    paddingTop: "7.5px",
-                    paddingBottom: "7.5px",
-                  }}
-                >
-                  Save Profile Name
-                </button>
-              </form>
-
               <form onSubmit={submitProfile}>
                 <div>
                   <label htmlFor="profile">
-                    <FaUser
+                    <FaRegUserCircle
                       color="black"
                       size="1.25em"
                       style={{
@@ -978,10 +935,8 @@ export default () => {
                       onChange={setProfileHandler}
                       value={profile}
                       type="text"
-                      maxLength="20"
+                      maxLength="35"
                       disabled={disabledProfile}
-                      pattern="[^\s]+"
-                      title="Geen spaties"
                       name="text"
                       id="profile"
                       className={accountStyles.profileInput}
@@ -999,16 +954,63 @@ export default () => {
                     onClick={() => setDisabledProfile(false)}
                   />
                   <button
-                    className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+                    className={`${accountStyles.btn}`}
                     type="submit"
                     style={{
                       paddingTop: "7.5px",
                       paddingBottom: "7.5px",
                     }}
                   >
-                    Save Username
+                    Save Profile Name
                   </button>
                 </div>
+              </form>
+
+              <form onSubmit={submitUsername}>
+                <label htmlFor="username">
+                  <FaUser
+                    color="black"
+                    size="1.25em"
+                    style={{
+                      position: "relative",
+                      top: "5px",
+                      marginRight: "5px",
+                    }}
+                  />
+                  <input
+                    onChange={setUsernameHandler}
+                    value={username}
+                    type="text"
+                    maxLength="25"
+                    disabled={disabledUsername}
+                    name="username"
+                    id="username"
+                    pattern="[^\s]+"
+                    title="Geen spaties"
+                    className={accountStyles.profileInput}
+                  />
+                </label>
+                <FaRegEdit
+                  color="black"
+                  size="1.1em"
+                  style={{
+                    position: "relative",
+                    top: "5px",
+                    right: "10px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setDisabledUsername(false)}
+                />
+                <button
+                  className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.submitBtn}`}
+                  type="submit"
+                  style={{
+                    paddingTop: "7.5px",
+                    paddingBottom: "7.5px",
+                  }}
+                >
+                  Save Username
+                </button>
               </form>
 
               <form onSubmit={submitEmail}>

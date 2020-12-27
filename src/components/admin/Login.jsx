@@ -84,7 +84,7 @@ export default () => {
 
     try {
       const { data } = await axios.post(`${apiURL}/auth/local`, {
-        identifier: usernameRef.current.value,
+        identifier: usernameRef.current.value.toLowerCase(),
         password: passwordRef.current.value,
       })
 
@@ -109,8 +109,10 @@ export default () => {
     if (negocodes.includes(value)) {
       try {
         const { data } = await axios.post(`${apiURL}/auth/local/register`, {
-          username: usernameRegRef.current.value,
-          email: emailRegRef.current.value,
+          username: usernameRegRef.current.value
+            .toLowerCase()
+            .replace(/\s+/g, ""),
+          email: emailRegRef.current.value.toLowerCase().replace(/\s+/g, ""),
           password: passwordRegRef.current.value,
         })
 

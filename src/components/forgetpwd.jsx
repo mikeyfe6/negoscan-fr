@@ -52,7 +52,7 @@ export default () => {
         <input
           ref={emailResetRef}
           type="email"
-          name="emailReg"
+          name="emailRes"
           placeholder="email"
           style={{ textTransform: "lowercase" }}
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"

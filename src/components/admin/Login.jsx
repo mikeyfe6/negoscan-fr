@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql, Link } from "gatsby"
 import axios from "axios"
 import { navigate } from "@reach/router"
 
@@ -284,8 +284,9 @@ export default () => {
               /> */}
               {error && <ErrorMessage text={error} />}
               {loading && <LoadingMessage text={loading} />}
-              {/* <a href="#">Forget your password</a> */}
+              <Link to="/forget-password">Wachtwoord vergeten</Link>
               <button style={{ cursor: "pointer" }}>Log in</button>
+              <br />
               <br />
               <br />
             </form>

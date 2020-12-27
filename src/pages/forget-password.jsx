@@ -14,7 +14,7 @@ import ForgetPassword from "../components/forgetpwd"
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Forget Password" />
+    <SEO title="Wachtwoord vergeten" />
     <section
       className={`${loginStyles.docsHead} ${loginStyles.bgPrimary} ${loginStyles.py3}`}
     >

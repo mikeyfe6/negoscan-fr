@@ -14,7 +14,7 @@ import ResetPassword from "../components/resetpwd"
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Reset Password" />
+    <SEO title="Nieuw wachtwoord" />
     <section
       className={`${loginStyles.docsHead} ${loginStyles.bgPrimary} ${loginStyles.py3}`}
     >

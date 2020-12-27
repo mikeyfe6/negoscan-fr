@@ -232,7 +232,7 @@ fieldset {
 
 .logerror {
   position: absolute;
-  bottom: 90px;
+  bottom: 75px;
   background-color: #ff0102;
   font-weight: bold;
   color: white;
@@ -306,7 +306,7 @@ p {
 @media (max-width: 500px) {
   .logerror {
     position: absolute;
-    bottom: 100px;
+    bottom: 80px;
     font-size: 9px !important;
     padding: 0.1rem 0.3rem;
   }

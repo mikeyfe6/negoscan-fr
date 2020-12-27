@@ -144,9 +144,10 @@ export default () => {
         setError("Verkeerde invoer, probeer 't opnieuw")
         setTimeout(() => setError(null), 5000)
       }
+    } else {
+      setError("Vul alle velden correct in!")
+      setTimeout(() => setError(null), 5000)
     }
-    setError("Vul alle velden correct in!")
-    setTimeout(() => setError(null), 5000)
   }
 
   return (

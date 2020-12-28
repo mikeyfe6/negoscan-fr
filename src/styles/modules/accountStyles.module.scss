@@ -495,9 +495,10 @@
 
 .pickColor {
   display: grid;
-  // grid-template-columns: repeat(5, 1fr);
+
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   grid-template-rows: auto;
+  gap: 25px;
 }
 
 .chooseColor {
@@ -865,13 +866,218 @@
   }
 }
 
-@media (max-width: 768px) {
-  // .grid-container {
-  //   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  // }
+@media screen and (max-width: 1680px) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "Sidebar"
+      "Dashboard"
+      "Preview"
+      "Link";
+  }
+
+  .Sidebar {
+    background: linear-gradient(to left, $primary-color, black);
+    // background: linear-gradient(to bottom, black, white, white, white) no-repeat
+    //   0 0 / cover;
+    border: 2px solid #ededed;
+
+    h5 {
+      text-align: left !important;
+      padding: 15px;
+    }
+
+    button {
+    }
+  }
+
+  .Link {
+    // font-size: 0.8em;
+
+    .usLinkNego {
+      color: black;
+      background: white;
+
+      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+    }
+
+    .usLinkSite {
+      background: black;
+
+      color: white;
+      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+    }
+
+    .userLink {
+      color: $primary-color;
+      width: 100% !important;
+
+      &:hover {
+        color: $secondary-color;
+      }
+    }
+  }
 }
 
-@media (max-width: 500px) {
+@media screen and (max-width: 1112px) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "Sidebar"
+      "Dashboard"
+      "Preview"
+      "Link";
+
+    .Dashboard {
+      .avatarformcont {
+        flex-direction: column !important;
+
+        .profile-info {
+          margin-top: 10%;
+          margin-left: 17.5%;
+          align-self: auto;
+        }
+
+        .profile-input {
+          width: 350px;
+        }
+
+        .loading-complete {
+          top: 33%;
+          padding: 1px 7.5px;
+          border-radius: 2.5px;
+          opacity: 0.9;
+          left: 8.75%;
+          bottom: initial;
+        }
+
+        .link-cont {
+          padding: 1%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 812px) {
+  .Dashboard {
+    .avatarformcont {
+      flex-direction: column;
+
+      .profile-input {
+        width: 200px;
+      }
+
+      .profile-info {
+        margin-top: 10%;
+        margin-left: 5%;
+        align-self: auto;
+      }
+
+      .loading-complete {
+        top: 33%;
+        padding: 1px 7.5px;
+        border-radius: 2.5px;
+        opacity: 0.9;
+        left: 8.75%;
+        bottom: initial;
+      }
+    }
+
+    .social-cont {
+      flex-direction: column;
+      background: linear-gradient(to bottom, #16b7f23a, #f0efef) no-repeat 0 0 /
+        cover;
+      border-radius: 3px;
+      padding: 25px 7%;
+      margin-top: 25px;
+      box-shadow: none;
+    }
+
+    .social-form {
+      border-right: none !important;
+
+      &:nth-child(-n + 2) {
+        padding-right: 0px !important;
+      }
+    }
+
+    .social-buttons {
+      margin-top: 20px;
+      float: right;
+
+      .socialSpec {
+        margin-left: 25px;
+      }
+      // &:nth-child(2) {
+      //   padding-right: 15px !important;
+      //   color: red !important;
+      //   background: red !important;
+      // }
+    }
+
+    .link-cont {
+      display: block;
+      margin: 20px 5px 35px 5px;
+
+      .nextoClear {
+        margin: 0 2.5%;
+      }
+
+      h3 {
+        margin-top: 10px;
+        margin-left: 15px;
+      }
+
+      .link-input {
+        margin: 5% 7.5%;
+        // padding: 10px 15px;
+      }
+    }
+
+    .links-cont {
+      display: block;
+      padding: 15px 10px 30px 15px;
+      padding: 3%;
+    }
+
+    .updateLink {
+      float: right;
+      bottom: 47.5px;
+      right: 10px;
+      position: relative;
+    }
+
+    .updateLinkShow {
+      margin-bottom: 5px;
+    }
+
+    .updateUpdateLinkShow {
+      margin-top: 15px;
+    }
+
+    .inputCont {
+      float: right;
+      position: relative;
+      left: 75px;
+      bottom: 10px;
+    }
+
+    .trashBtn {
+      cursor: pointer;
+      position: relative;
+      float: right;
+      left: 75px;
+      bottom: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
   .grid-container {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-template-rows: 1fr;
@@ -896,7 +1102,7 @@
     border: 2px solid #ededed;
 
     h5 {
-      text-align: left !important;
+      text-align: left;
       padding: 15px;
     }
 
@@ -927,7 +1133,7 @@
 
     .userLink {
       color: $primary-color;
-      width: 175px !important;
+      width: 175px;
 
       &:hover {
         color: $secondary-color;
@@ -937,7 +1143,7 @@
 
   .Dashboard {
     .avatarformcont {
-      flex-direction: column !important;
+      flex-direction: column;
       padding-bottom: 10%;
 
       .loading-complete {
@@ -954,12 +1160,12 @@
     }
 
     .profile-info {
-      margin-left: 1.5%;
-      margin-top: 2.5%;
+      margin-left: 3% !important;
+      margin-top: 5% !important;
     }
 
     .profile-input {
-      width: 75%;
+      width: 250px !important;
       margin: 6% 6% 7.5% 3%;
     }
 
@@ -968,7 +1174,7 @@
     }
 
     .linkErrorStyle {
-      width: 95% !important;
+      width: 95%;
       // bottom: 500px !important;
       top: 267.5px;
       left: 2.5%;
@@ -979,26 +1185,19 @@
       background: linear-gradient(to bottom, #16b7f23a, #f0efef) no-repeat 0 0 /
         cover;
       border-radius: 3px;
-      padding: 25px 3% !important;
+      padding: 25px 3%;
       margin-top: 25px;
       box-shadow: none;
     }
 
     .social-form {
-      margin-left: 2%;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      border-right: none !important;
-      padding-right: 0px !important;
-      padding-bottom: 20px;
-      margin-bottom: 1%;
-
-      // &:nth-child(-n + 2)
+      &:nth-child(-n + 2) {
+        padding-right: 0px !important;
+      }
     }
 
     .social-buttons {
-      margin-top: 20px !important;
+      margin-top: 20px;
       float: right;
 
       .socialSpec {
@@ -1013,7 +1212,7 @@
 
     .link-cont {
       display: block;
-      margin: 20px 5px 35px 5px !important;
+      margin: 20px 5px 35px 5px;
 
       .nextoClear {
         margin: 0 2.5%;
@@ -1066,7 +1265,6 @@
     }
 
     .pickColor {
-      display: grid;
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
 

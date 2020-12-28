@@ -34,10 +34,6 @@ export default () => {
   const handleSubmitRegister = async e => {
     e.preventDefault()
 
-    // if (passwordResetRef !== confPasswordResetRef) {
-    //   setError("Wachtwoorden zijn niet gelijk, probeer 't opnieuw")
-    //   setTimeout(() => setError(null), 5000)
-    // } else {
     try {
       await axios.post(`${apiURL}/auth/reset-password`, {
         code: confCodeRef.current.value,
@@ -52,22 +48,6 @@ export default () => {
       setError("Verkeerde invoer, probeer 't opnieuw")
       setTimeout(() => setError(null), 5000)
     }
-    // }
-
-    // try {
-    //   await axios.post(`${apiURL}/auth/reset-password`, {
-    //     code: confCodeRef.current.value,
-    //     password: passwordResetRef.current.value,
-    //     passwordConfirmation: confPasswordResetRef.current.value,
-    //   })
-    //   setLoading("Aan het laden")
-    //   setError(null)
-    //   navigate("/admin/login")
-    // } catch {
-    //   setLoading(null)
-    //   setError("Verkeerde invoer, probeer 't opnieuw")
-    //   setTimeout(() => setError(null), 5000)
-    // }
   }
 
   return (
@@ -78,8 +58,6 @@ export default () => {
           type="text"
           name="code"
           placeholder="Verificatiecode"
-          //   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-          //   title="Moet op z'n minst 1 nummer, 1 hoofdletter, 1 klein letter en 8 karakters lang zijn."
         />{" "}
         <br />
         <input
@@ -98,8 +76,6 @@ export default () => {
           type="password"
           name="confirmpassword"
           placeholder="Voer jouw nieuwe wachtwoord opnieuw in"
-          //   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-          //   title="Moet op z'n minst 1 nummer, 1 hoofdletter, 1 klein letter en 8 karakters lang zijn."
         />{" "}
         <br />
         <button

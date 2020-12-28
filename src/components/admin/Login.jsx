@@ -50,7 +50,6 @@ export default () => {
 
   const usernameRef = useRef()
   const passwordRef = useRef()
-  // const storecodeRef = useRef()
 
   const usernameRegRef = useRef()
   const emailRegRef = useRef()
@@ -278,13 +277,6 @@ export default () => {
                 placeholder="wachtwoord"
                 required
               />
-              {/* <input
-                ref={storecodeRef}
-                type="text"
-                name="storecode"
-                placeholder="storecode"
-                pattern="\d{1,9}"
-              /> */}
               {error && <ErrorMessage text={error} />}
               {loading && <LoadingMessage text={loading} />}
               <Link to="/forget-password">Wachtwoord vergeten</Link>

@@ -354,6 +354,7 @@
 
   .social-cont {
     display: flex;
+    border: 1px solid rgba(128, 128, 128, 0.192);
     background: linear-gradient(to left, #16b7f2b0, rgba(128, 128, 128, 0.192))
       no-repeat 0 0 / cover;
     justify-content: space-around;

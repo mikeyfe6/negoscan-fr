@@ -34,25 +34,25 @@ export default () => {
   const handleSubmitRegister = async e => {
     e.preventDefault()
 
-    if (passwordResetRef !== confPasswordResetRef) {
-      setError("Wachtwoorden zijn niet gelijk, probeer 't opnieuw")
+    // if (passwordResetRef !== confPasswordResetRef) {
+    //   setError("Wachtwoorden zijn niet gelijk, probeer 't opnieuw")
+    //   setTimeout(() => setError(null), 5000)
+    // } else {
+    try {
+      await axios.post(`${apiURL}/auth/reset-password`, {
+        code: confCodeRef.current.value,
+        password: passwordResetRef.current.value,
+        passwordConfirmation: confPasswordResetRef.current.value,
+      })
+      setLoading("Aan het laden")
+      setError(null)
+      navigate("/admin/login")
+    } catch {
+      setLoading(null)
+      setError("Verkeerde invoer, probeer 't opnieuw")
       setTimeout(() => setError(null), 5000)
-    } else {
-      try {
-        await axios.post(`${apiURL}/auth/reset-password`, {
-          code: confCodeRef.current.value,
-          password: passwordResetRef.current.value,
-          passwordConfirmation: confPasswordResetRef.current.value,
-        })
-        setLoading("Aan het laden")
-        setError(null)
-        navigate("/admin/login")
-      } catch {
-        setLoading(null)
-        setError("Verkeerde invoer, probeer 't opnieuw")
-        setTimeout(() => setError(null), 5000)
-      }
     }
+    // }
 
     // try {
     //   await axios.post(`${apiURL}/auth/reset-password`, {

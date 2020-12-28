@@ -75,7 +75,6 @@ export default () => {
       <form onSubmit={handleSubmitRegister} className={resetStyles.inputRes}>
         <input
           ref={confCodeRef}
-          size="35"
           type="text"
           name="code"
           placeholder="Verificatiecode"

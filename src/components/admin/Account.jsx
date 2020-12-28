@@ -519,6 +519,7 @@ export default () => {
     setLinks(newLinks)
   }
 
+  // TOGGLE LINKS <--------------------------------------------------------------------------------> TOGGLE LINKS //
   const toggleLink = async (link, checked) => {
     const params = {
       visible: checked,
@@ -538,6 +539,7 @@ export default () => {
     setLinks(newLinks)
   }
 
+  // DELETE LINKS <--------------------------------------------------------------------------------> DELETE LINKS //
   const deleteLink = async link => {
     await axios.delete(`${apiURL}/connections/${link.id}`, {
       headers: {
@@ -555,6 +557,7 @@ export default () => {
     setEditHyperLink(e.target.value)
   }
 
+  // EDIT LINKS <--------------------------------------------------------------------------------> EDIT LINKS //
   const editTheLink = async link => {
     if (!editLink || /^\s*$/.test(editLink)) {
       return [
@@ -579,9 +582,9 @@ export default () => {
       return el
     })
     setLinks(newLinks)
-    setEditLink("")
   }
 
+  // EDIT HYPERLINKS <--------------------------------------------------------------------------------> EDIT HYPERLINKS //
   const editTheHyperLink = async link => {
     if (!editHyperLink || /^\s*$/.test(editHyperLink)) {
       return [
@@ -621,7 +624,7 @@ export default () => {
     getLinks()
   }, [token])
 
-  // CHANGE BACKGROUND <--------------------------------------------------------------------------------> CHANGE BACKGROUND //
+  // CHANGE THEME <--------------------------------------------------------------------------------> CHANGE THEME //
   const onRadioChange = async e => {
     setColor(e.target.value)
 

@@ -21,9 +21,8 @@ const IndexPage = () => (
       <div className={`${loginStyles.container} ${loginStyles.grid}`}>
         <div>
           <h1 className={loginStyles.md}>Nieuw wachtwoord</h1>
-          <p className={loginStyles.lead}>
-            Voer hier je nieuwe wachtwoord in <ResetPassword />
-          </p>
+          <p className={loginStyles.lead}>Voer hier je nieuwe wachtwoord in</p>
+          <ResetPassword />
         </div>
         <img src={servImage} alt="" />
       </div>

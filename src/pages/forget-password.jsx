@@ -21,9 +21,8 @@ const IndexPage = () => (
       <div className={`${loginStyles.container} ${loginStyles.grid}`}>
         <div>
           <h1 className={loginStyles.md}>Wachtwoord vergeten</h1>
-          <p className={loginStyles.lead}>
-            Voer hier je emailadress in <ForgetPassword />
-          </p>
+          <p className={loginStyles.lead}>Voer hier je emailadress in</p>
+          <ForgetPassword />
         </div>
         <img src={servImage} alt="" />
       </div>

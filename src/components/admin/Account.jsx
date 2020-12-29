@@ -756,7 +756,9 @@ export default () => {
               color: "white",
             }}
           >
-            Welkom {gatsbyUser.user.username}!
+            Welkom{" "}
+            <span style={{ color: "#16b7f2" }}>{gatsbyUser.user.username}</span>{" "}
+            !
           </h5>
 
           <button
@@ -1174,6 +1176,20 @@ export default () => {
           }}
         /> */}
 
+          <h2 style={{ textAlign: "center" }}>
+            <b>
+              <u
+                style={{
+                  color: "black",
+                  textDecoration: "underline",
+                  textDecorationColor: "#35748d",
+                }}
+              >
+                Social Links
+              </u>
+            </b>
+          </h2>
+
           <div className={accountStyles.socialCont}>
             <form onSubmit={submitFB} className={accountStyles.socialForm}>
               <div>
@@ -1223,7 +1239,6 @@ export default () => {
               </div>
               <div style={{ clear: "both" }} />
             </form>
-
             <form onSubmit={submitTW} className={accountStyles.socialForm}>
               <div>
                 <label htmlFor="twlink">

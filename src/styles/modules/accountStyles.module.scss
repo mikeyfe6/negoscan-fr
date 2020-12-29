@@ -1056,6 +1056,17 @@
     .links-cont {
       display: block;
       padding: 15px 10px 30px 15px !important;
+      background: linear-gradient(
+          to right,
+          white,
+          white,
+          white,
+          white,
+          #16b7f225,
+          // rgba(128, 128, 128, 0.087)
+          #16b7f230
+        )
+        no-repeat 0 0 / cover;
     }
 
     .updateLink {
@@ -1181,9 +1192,9 @@
       margin: 6% 6% 7.5% 3%;
     }
 
-    .logerror {
-      bottom: -20px;
-    }
+    // .logerror {
+    //   bottom: 0px;
+    // }
 
     .linkErrorStyle {
       width: 95%;

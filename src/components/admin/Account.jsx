@@ -1336,7 +1336,13 @@ export default () => {
           </div>
 
           <br />
-          <hr style={{ border: "1px solid #d8e6d8", margin: "15px 50px" }} />
+          <hr
+            style={{
+              border: "1px solid black",
+              margin: "15px 50px",
+              opacity: "0.1",
+            }}
+          />
           <br />
           <div style={{ position: "relative" }}>
             <div className={accountStyles.linkCont}>
@@ -1478,8 +1484,9 @@ export default () => {
           </div>
           <hr
             style={{
-              border: "1px solid #d8e6d8",
+              border: "1px solid black",
               margin: "50px 50px 25px 50px",
+              opacity: "0.1",
             }}
           />
 

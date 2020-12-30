@@ -1056,8 +1056,8 @@
     .links-cont {
       display: block;
       padding: 15px 10px 30px 15px !important;
-      background: linear-gradient(to right, white, #16b7f213) no-repeat 0 0 /
-        cover;
+      background: linear-gradient(to right, white, rgba(0, 0, 0, 0.05))
+        no-repeat 0 0 / cover;
     }
 
     .updateLink {

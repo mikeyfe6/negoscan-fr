@@ -355,7 +355,7 @@
 
   .social-cont {
     display: flex;
-    border: 1px solid rgba(128, 128, 128, 0.192);
+    // border: 1px solid rgba(128, 128, 128, 0.192);
     background: linear-gradient(to left, #16b7f275, rgba(128, 128, 128, 0.192))
       no-repeat 0 0 / cover;
     justify-content: space-around;
@@ -371,10 +371,19 @@
       justify-content: center;
       align-items: center;
 
-      &:nth-child(-n + 2) {
-        padding-right: 50px;
-        border-right: 1px solid rgba(128, 128, 128, 0.404);
-      }
+      // &:nth-child(-n + 2) {
+      //   padding-right: 50px;
+      //   border-right: 1px solid rgba(128, 128, 128, 0.404);
+      // }
+    }
+
+    .vl {
+      border-left: 3px solid black;
+      height: 75%;
+      position: absolute;
+      left: 50%;
+      top: 12.5%;
+      opacity: 0.1;
     }
 
     .social-icons {
@@ -405,7 +414,7 @@
 }
 
 .links-cont {
-  border: 1px solid rgba(128, 128, 128, 0.192);
+  // border: 3px solid rgba(128, 128, 128, 0.192);
   background: linear-gradient(
       to right,
       white,
@@ -1013,11 +1022,7 @@
     }
 
     .social-form {
-      border-right: none !important;
-
-      &:nth-child(-n + 2) {
-        padding-right: 0px !important;
-      }
+      // border-right: none !important;
     }
 
     .social-buttons {
@@ -1056,8 +1061,7 @@
     .links-cont {
       display: block;
       padding: 15px 10px 30px 15px !important;
-      background: linear-gradient(to right, white, rgba(0, 0, 0, 0.05))
-        no-repeat 0 0 / cover;
+      background: white;
     }
 
     .updateLink {
@@ -1202,12 +1206,6 @@
       padding: 25px 4%;
       margin-top: 25px;
       box-shadow: none;
-    }
-
-    .social-form {
-      &:nth-child(-n + 2) {
-        padding-right: 0px !important;
-      }
     }
 
     .social-buttons {

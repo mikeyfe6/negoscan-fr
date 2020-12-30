@@ -1239,6 +1239,11 @@ export default () => {
               </div>
               <div style={{ clear: "both" }} />
             </form>
+
+            <div style={{ position: "relative" }}>
+              <div className={accountStyles.vl}></div>
+            </div>
+
             <form onSubmit={submitTW} className={accountStyles.socialForm}>
               <div>
                 <label htmlFor="twlink">
@@ -1286,6 +1291,11 @@ export default () => {
                 />
               </div>
             </form>
+
+            <div style={{ position: "relative" }}>
+              <div className={accountStyles.vl}></div>
+            </div>
+
             <form onSubmit={submitIG} className={accountStyles.socialForm}>
               <div>
                 <label htmlFor="iglink">

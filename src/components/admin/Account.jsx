@@ -1360,7 +1360,6 @@ export default () => {
               <input
                 className={accountStyles.linkInput}
                 type="text"
-                size="35"
                 placeholder="voer een titel in"
                 ref={linkTitle}
                 minLength="5"
@@ -1370,7 +1369,6 @@ export default () => {
               <input
                 className={accountStyles.linkInput}
                 type="url"
-                size="35"
                 placeholder="voer hyperlink in, bijv: voorbeeld.nl"
                 ref={hyperLink}
                 style={{ textTransform: "lowercase" }}
@@ -1439,7 +1437,7 @@ export default () => {
                   </button>
                   <div>
                     <b>
-                      <p className={accountStyles.updateUpdateLinkShow}>
+                      <p className={accountStyles.updateHyperLinkShow}>
                         {link.hyperlink}
                       </p>{" "}
                     </b>

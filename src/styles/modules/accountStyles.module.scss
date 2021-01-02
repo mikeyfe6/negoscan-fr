@@ -266,7 +266,7 @@
     color: $secondary-color;
   }
 
-  .updateUpdateLinkShow {
+  .updateHyperLinkShow {
     width: 200px;
     white-space: nowrap;
     overflow: hidden;
@@ -346,6 +346,7 @@
       outline: none;
       border: none;
       border-bottom: 1px solid $secondary-color !important;
+      width: 25%;
 
       &::placeholder {
         font-size: 0.9em;
@@ -981,6 +982,10 @@
 
         .link-cont {
           padding: 1%;
+
+          .link-input {
+            width: 100% !important;
+          }
         }
       }
     }
@@ -993,7 +998,7 @@
       flex-direction: column;
 
       .profile-input {
-        width: 200px;
+        width: 70% !important;
       }
 
       .profile-info {
@@ -1022,7 +1027,7 @@
     }
 
     .social-form {
-      // border-right: none !important;
+      margin-bottom: 5%;
     }
 
     .social-buttons {
@@ -1043,6 +1048,10 @@
       display: block;
       margin: 20px 5px 35px 5px;
 
+      .link-input {
+        width: 50%;
+      }
+
       .nextoClear {
         margin: 0 2.5%;
       }
@@ -1051,17 +1060,16 @@
         margin-top: 10px;
         margin-left: 15px;
       }
-
-      .link-input {
-        margin: 5% 7.5%;
-        // padding: 10px 15px;
-      }
     }
 
     .links-cont {
       display: block;
       padding: 15px 10px 30px 15px !important;
       background: white;
+    }
+
+    .edit-input {
+      width: 50%;
     }
 
     .updateLink {
@@ -1075,7 +1083,7 @@
       margin-bottom: 5px;
     }
 
-    .updateUpdateLinkShow {
+    .updateHyperLinkShow {
       margin-top: 15px;
     }
 
@@ -1183,7 +1191,6 @@
     }
 
     .profile-input {
-      width: 250px !important;
       margin: 6% 6% 7.5% 3%;
     }
 
@@ -1237,7 +1244,7 @@
 
       .link-input {
         margin: 5% 7.5%;
-        // padding: 10px 15px;
+        width: 75%;
       }
     }
 
@@ -1250,10 +1257,12 @@
 
     .updateLinkShow {
       margin-bottom: 5px;
+      width: 150px;
     }
 
-    .updateUpdateLinkShow {
+    .updateHyperLinkShow {
       margin-top: 15px;
+      width: 150px;
     }
 
     .inputCont {

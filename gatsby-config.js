@@ -37,6 +37,15 @@ module.exports = {
       resolve: `gatsby-plugin-create-client-paths`,
       options: { prefixes: [`/admin/*`] },
     },
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        // Setting a color is optional.
+        color: `white`,
+        // Disable the loading spinner.
+        // showSpinner: false,
+      },
+    },
     `gatsby-plugin-netlify`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-sass`,

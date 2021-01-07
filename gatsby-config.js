@@ -48,11 +48,16 @@ module.exports = {
     },
     `gatsby-plugin-netlify`,
     `gatsby-plugin-styled-components`,
-    `gatsby-plugin-sass`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-catch-links`,
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        implementation: require("sass"),
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

@@ -25,7 +25,7 @@ Die zich inzet en gespecialiseerd is in het uitdenken en ontwikkelen van website
 
 **Deze webapp is gebouwd met GatsbyJS, ReactJS, Strapi, GraphQl, Heroku & Netlify.**
 
-Powered by [Gimmix](https://https://gimmix.nl/) ✨
+Powered by [Gimmix](https://gimmix.nl/) ✨
 
 ## Licence ✒️
 

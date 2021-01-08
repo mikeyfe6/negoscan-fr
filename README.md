@@ -19,17 +19,17 @@
 
 Die zich inzet en gespecialiseerd is in het uitdenken en ontwikkelen van websites en webapplicaties. Wij zorgen dat de ambities van de klant en het eindproduct tot één komen. -->
 
-- _Bekijk ook onze website / Also check our website: [Negoscan](https://https://negoscan.netlify.app/)_
+- _Bekijk ook de website / Also check the website: [Negoscan](https://negoscan.netlify.app/)_
 
 ---
 
-**Deze site is gebouwd met GatsbyJS, ReactJS, Strapi, GraphQl, Heroku & Netlify.**
+**Deze webapp is gebouwd met GatsbyJS, ReactJS, Strapi, GraphQl, Heroku & Netlify.**
 
-🙋🏾‍♂️ Powered by [Gimmix](https://https://gimmix.nl/)
+Powered by [Gimmix](https://https://gimmix.nl/) ✨
 
 ## Licence ✒️
 
-GNU AGPLv3, all rights reserved, Negoscan 2020 ©
+0BSD, all rights reserved, Negoscan 2020 ©
 
 ---
 

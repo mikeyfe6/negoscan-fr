@@ -166,7 +166,7 @@ export const query = graphql`
   query NegositeTemplate($slug: String!) {
     strapiNegosite(slug: { eq: $slug }) {
       profiel
-      biografie
+      # biografie
       # background {
       #   childImageSharp {
       #     fluid(maxWidth: 1200) {

@@ -1134,7 +1134,9 @@ export default () => {
                       disabled={disabledSlug}
                       name="slug"
                       id="slug"
-                      placeholder="*verplicht, bijv: 'jouw-profiel'"
+                      readOnly
+                      // placeholder="*verplicht, bijv: 'jouw-profiel'"
+                      placeholder="*verplicht, de beheerder maakt deze voor u aan"
                       maxLength="15"
                       className={accountStyles.profileInput}
                       pattern="[^\s]+"
@@ -1155,10 +1157,12 @@ export default () => {
                   <button
                     className={accountStyles.btn}
                     type="submit"
+                    disabled
                     style={{
                       paddingTop: "7.5px",
                       paddingBottom: "7.5px",
                       background: "red",
+                      opacity: "0.3",
                     }}
                   >
                     Update Profiel URL

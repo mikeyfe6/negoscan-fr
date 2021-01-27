@@ -19,7 +19,7 @@
 
 Die zich inzet en gespecialiseerd is in het uitdenken en ontwikkelen van websites en webapplicaties. Wij zorgen dat de ambities van de klant en het eindproduct tot één komen. -->
 
-- _Bekijk ook de website / Also check the website: [Negoscan](https://negoscan.netlify.app/)_
+- _Bekijk ook de webapp / Also check the webapp: [Negoscan](https://negoscan.netlify.app/)_
 
 ---
 

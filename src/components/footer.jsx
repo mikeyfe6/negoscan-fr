@@ -8,7 +8,7 @@ import footerStyles from "../styles/modules/footerStyles.module.scss"
 const Footer = () => (
   <footer>
     <div className={footerStyles.footerCont}>
-      Copyright {new Date().getFullYear()} ©, powered by{" "}
+      Copyright {new Date().getFullYear()} © ・ Powered by{" "}
       <a href="https://gimmix.nl" rel="noopener noreferrer" target="_blank">
         {""}
         <b> Gimmix </b>

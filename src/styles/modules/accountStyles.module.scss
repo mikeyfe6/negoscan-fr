@@ -15,7 +15,7 @@
 
   &:hover {
     opacity: 0.9;
-    border: solid 5px $primary-color;
+    border: solid 5px $secondary-color;
     transition: all 0.6s ease-in-out;
   }
 }
@@ -75,7 +75,7 @@
   // background: linear-gradient(to bottom, white, #ededed);
   background: linear-gradient(to bottom, black, white, white, white) no-repeat 0
     0 / cover;
-  border: 2px solid $primary-color;
+  border: 2px solid black;
 }
 
 // NAVIGATION
@@ -89,7 +89,9 @@
 // PREVIEW
 .Preview {
   grid-area: Preview;
-  background: linear-gradient(to bottom, white, #ededed);
+  // background: linear-gradient(to bottom, white, #ededed);
+  background: #1616167e;
+  border: 2px solid black;
 
   display: flex;
   justify-content: center;
@@ -168,7 +170,10 @@
 // DASHBOARD
 .Dashboard {
   grid-area: Dashboard;
-  background: linear-gradient(to top, white, #ededed) no-repeat 0 0 / cover;
+  // background: linear-gradient(to bottom, black, #1616167e) no-repeat 0 0 / cover;
+  background: #1616167e;
+
+  border: 2px solid black;
   // background: linear-gradient(to top, white, #ededed);
   .avatarformcont {
     display: flex;
@@ -237,6 +242,7 @@
   .edit-input {
     border: 0;
     border-bottom: 1px solid #b4becb;
+    color: white;
     padding: 3px;
     font-size: 14px;
     background: transparent;
@@ -285,8 +291,10 @@
   }
 
   .logerror {
-    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+    // box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+    border: black 1px solid;
     background-color: red;
+    opacity: 0.75;
     font-weight: bold;
     color: white;
     padding: 0.3rem 0.5rem;
@@ -295,7 +303,7 @@
     text-align: center;
     border-radius: 3px;
     margin-bottom: 1rem;
-    opacity: 0.9;
+
     width: 100%;
     position: absolute;
     bottom: 0px;
@@ -303,10 +311,12 @@
   }
 
   .linkErrorStyle {
-    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
+    // box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
     display: inline-block;
     position: absolute;
     background-color: red;
+    opacity: 0.75;
+    border: black 1px solid;
     top: 60px;
     width: 95%;
     text-align: center;
@@ -318,10 +328,10 @@
     margin: 0 auto;
     text-align: center;
     border-radius: 3px;
-    opacity: 0.9;
   }
 
   .profile-input {
+    color: black;
     width: 250px;
     margin: 10px 15px;
     opacity: 0.75;
@@ -330,6 +340,7 @@
     padding: 7.5px 10px;
     border-bottom: 1px $secondary-color solid;
     margin-right: 5%;
+    border-radius: 3px;
   }
 
   .link-cont {
@@ -347,6 +358,7 @@
       border: none;
       border-bottom: 1px solid $secondary-color !important;
       width: 25%;
+      border-radius: 3px;
 
       &::placeholder {
         font-size: 0.9em;
@@ -357,15 +369,15 @@
   .social-cont {
     display: flex;
     // border: 1px solid rgba(128, 128, 128, 0.192);
-    background: linear-gradient(to left, #16b7f275, rgba(128, 128, 128, 0.192))
-      no-repeat 0 0 / cover;
+    background: linear-gradient(to left, $primary-color, black) no-repeat 0 0 /
+      cover;
     justify-content: space-around;
+    border: 2px solid black;
 
     // border-bottom: solid 3px black;
     border-radius: 10px;
     padding: 45px 25px;
     margin: 15px 0;
-    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
 
     .social-form {
       flex-wrap: wrap;
@@ -392,13 +404,13 @@
       top: 5px;
       right: 2px;
       z-index: 3;
-      opacity: 0.875;
+
       margin-right: 5px;
     }
 
     .social-input {
       padding: 10px;
-
+      color: black;
       opacity: 0.75;
       outline: none;
       border: none;
@@ -416,6 +428,17 @@
 
 .links-cont {
   // border: 3px solid rgba(128, 128, 128, 0.192);
+  // background: linear-gradient(
+  //     to right,
+  //     white,
+  //     white,
+  //     white,
+  //     white,
+  //     white,
+  //     // rgba(128, 128, 128, 0.087)
+  //     #16b7f275
+  //   )
+  //   no-repeat 0 0 / cover;
   background: linear-gradient(
       to right,
       white,
@@ -423,15 +446,15 @@
       white,
       white,
       white,
+      white,
       // rgba(128, 128, 128, 0.087)
-      #16b7f275
+      $primary-color
     )
     no-repeat 0 0 / cover;
   display: flex;
   justify-content: space-between;
   align-items: center;
   align-content: center;
-  box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767) !important;
 }
 
 // ----------- //
@@ -851,6 +874,59 @@
   }
 }
 
+// ---------------------------------------------------------------------------------------- // NEGO THEME NEGO THEME NEGO THEME
+
+.negospecstyle {
+  background: linear-gradient(to bottom, #e6541b, black);
+
+  &-username {
+    @include chooseUsername;
+    color: white;
+  }
+
+  &-links {
+    margin: 10px 0;
+
+    a {
+      background: white;
+      color: black;
+      border: 1px solid #e6541b;
+      border-radius: 3px;
+
+      @include chooseLinks;
+
+      &:hover {
+        opacity: 0.75;
+      }
+    }
+  }
+
+  &-icons {
+    @include chooseIcon;
+
+    &:nth-child(n) {
+      a {
+        color: #e6541b;
+
+        &:hover {
+          opacity: 0.75;
+        }
+      }
+    }
+  }
+}
+.negospectheme {
+  background: linear-gradient(to bottom, #e6541b, black);
+  @include chooseDisplay;
+
+  .negospeclinks {
+    background: white;
+    border: 1px solid #e6541b;
+    border-radius: 2px;
+    @include chooseStrokes;
+  }
+}
+
 // ---------------------------------------------------------------------------------------- // COLORS
 
 // LINK
@@ -907,7 +983,6 @@
     background: linear-gradient(to left, $primary-color, black);
     // background: linear-gradient(to bottom, black, white, white, white) no-repeat
     //   0 0 / cover;
-    border: 2px solid #ededed;
 
     h5 {
       text-align: left !important;
@@ -924,15 +999,12 @@
     .usLinkNego {
       color: black;
       background: white;
-
-      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
     }
 
     .usLinkSite {
       background: black;
 
       color: white;
-      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
     }
 
     .userLink {
@@ -1126,7 +1198,6 @@
     background: linear-gradient(to left, $primary-color, black);
     // background: linear-gradient(to bottom, black, white, white, white) no-repeat
     //   0 0 / cover;
-    border: 2px solid #ededed;
 
     h5 {
       text-align: left;

@@ -247,6 +247,45 @@
       }
     }
   }
+  // ---------------------------------------------------------------------------------------- // NEGO THEME NEGO THEME
+  &-negotheme {
+    background: linear-gradient(to bottom, #e6541b, black);
+    @include fullBG;
+
+    h1 {
+      color: white;
+      margin: 25px 0 50px;
+    }
+
+    &-links {
+      margin: 15px 0;
+
+      a {
+        background: white;
+
+        color: black;
+        border: 1px solid #e6541b;
+        border-radius: 3px;
+
+        @include profileLinks;
+      }
+    }
+
+    &-icons {
+      position: relative;
+      top: 50px;
+
+      a {
+        margin: 0 15px;
+        bottom: 10px;
+        color: #e6541b;
+
+        &:hover {
+          opacity: 0.75;
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 768px) {

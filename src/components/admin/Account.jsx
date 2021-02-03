@@ -713,6 +713,17 @@ export default () => {
           c[i].className = accountStyles.greenstyleLinks
         }
         break
+      case "negotheme":
+        document.getElementById("iphone-username").className =
+          accountStyles.negospecstyleUsername
+        document.getElementById("iphone-iconlook").className =
+          accountStyles.negospecstyleIcons
+        document.getElementById("iphone-bg").className =
+          accountStyles.negospecstyle
+        for (i = 0; i < c.length; i++) {
+          c[i].className = accountStyles.negospecstyleLinks
+        }
+        break
       default:
     }
   }
@@ -1184,9 +1195,9 @@ export default () => {
             <b>
               <u
                 style={{
-                  color: "black",
+                  color: "white",
                   textDecoration: "underline",
-                  textDecorationColor: "#35748d",
+                  textDecorationColor: "#e6541b",
                 }}
               >
                 Social Links
@@ -1218,7 +1229,7 @@ export default () => {
               </div>
               <div className={accountStyles.socialButtons}>
                 <button
-                  className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.socialSpec} `}
+                  className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.btnSecondary} ${accountStyles.socialSpec} `}
                   type="submit"
                   style={{
                     paddingTop: "7.5px",
@@ -1230,7 +1241,7 @@ export default () => {
                   Save Facebook
                 </button>
                 <FaRegEdit
-                  color="black"
+                  color="white"
                   size="1.1em"
                   style={{
                     position: "relative",
@@ -1271,7 +1282,7 @@ export default () => {
               </div>
               <div className={accountStyles.socialButtons}>
                 <button
-                  className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.socialSpec}`}
+                  className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.btnSecondary} ${accountStyles.socialSpec}`}
                   type="submit"
                   style={{
                     paddingTop: "7.5px",
@@ -1283,7 +1294,7 @@ export default () => {
                   Save Twitter
                 </button>
                 <FaRegEdit
-                  color="black"
+                  color="white"
                   size="1.1em"
                   style={{
                     position: "relative",
@@ -1323,7 +1334,7 @@ export default () => {
               </div>
               <div className={accountStyles.socialButtons}>
                 <button
-                  className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.socialSpec}`}
+                  className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.btnSecondary} ${accountStyles.socialSpec}`}
                   type="submit"
                   style={{
                     paddingTop: "7.5px",
@@ -1335,7 +1346,7 @@ export default () => {
                   Save Instagram
                 </button>
                 <FaRegEdit
-                  color="black"
+                  color="white"
                   size="1.1em"
                   style={{
                     position: "relative",
@@ -1360,7 +1371,9 @@ export default () => {
           <br />
           <div style={{ position: "relative" }}>
             <div className={accountStyles.linkCont}>
-              <h3 style={{ color: "black" }}>Title:</h3>
+              <h3 style={{ color: "white" }}>
+                Titel<span style={{ color: "#e6541b" }}>:</span>
+              </h3>
               <input
                 className={accountStyles.linkInput}
                 type="text"
@@ -1369,7 +1382,9 @@ export default () => {
                 minLength="5"
                 required
               />
-              <h3 style={{ color: "black" }}>Hyperlink:</h3>
+              <h3 style={{ color: "white" }}>
+                Hyperlink<span style={{ color: "#e6541b" }}>:</span>{" "}
+              </h3>
               <input
                 className={accountStyles.linkInput}
                 type="url"
@@ -1380,7 +1395,7 @@ export default () => {
                 required
               />
               <button
-                className={`${accountStyles.btn} ${accountStyles.btnPrimary} ${accountStyles.nextoClear} `}
+                className={`${accountStyles.btn} ${accountStyles.btnSecondary} ${accountStyles.nextoClear} `}
                 style={{
                   float: "right",
                 }}
@@ -1507,9 +1522,9 @@ export default () => {
             <b>
               <u
                 style={{
-                  color: "black",
+                  color: "white",
                   textDecoration: "underline",
-                  textDecorationColor: "#35748d",
+                  textDecorationColor: "#e6541b",
                 }}
               >
                 Thema's
@@ -1641,6 +1656,27 @@ export default () => {
                   <div className={accountStyles.greenlinks} />
                   <div className={accountStyles.greenlinks} />
                   <div className={accountStyles.greenlinks} />
+                </div>
+              </label>
+            </li>
+
+            <li className={accountStyles.chooseColor}>
+              <label>
+                <input
+                  type="radio"
+                  value="negotheme"
+                  checked={color === "negotheme"}
+                  onChange={onRadioChange}
+                  onClick={event => {
+                    changeHeadingBg("negotheme")
+                    event.preventDefault()
+                  }}
+                  style={{ display: "none" }}
+                />
+                <div className={accountStyles.negospectheme}>
+                  <div className={accountStyles.negospeclinks} />
+                  <div className={accountStyles.negospeclinks} />
+                  <div className={accountStyles.negospeclinks} />
                 </div>
               </label>
             </li>

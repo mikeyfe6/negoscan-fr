@@ -15,6 +15,13 @@
   }
 }
 
+@mixin iconCenter {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 50px;
+}
+
 .theme {
   // ---------------------------------------------------------------------------------------- // YELLOW YELLOW YELLOW
   &-geel {
@@ -41,8 +48,7 @@
     }
 
     &-icons {
-      position: relative;
-      top: 50px;
+      @include iconCenter;
 
       a {
         margin: 0 15px;
@@ -79,8 +85,7 @@
     }
 
     &-icons {
-      position: relative;
-      top: 50px;
+      @include iconCenter;
 
       a {
         margin: 0 15px;
@@ -117,8 +122,7 @@
     }
 
     &-icons {
-      position: relative;
-      top: 50px;
+      @include iconCenter;
 
       a {
         margin: 0 15px;
@@ -155,8 +159,7 @@
     }
 
     &-icons {
-      position: relative;
-      top: 50px;
+      @include iconCenter;
 
       a {
         margin: 0 15px;
@@ -194,8 +197,7 @@
     }
 
     &-icons {
-      position: relative;
-      top: 50px;
+      @include iconCenter;
 
       a {
         margin: 0 15px;
@@ -233,8 +235,7 @@
     }
 
     &-icons {
-      position: relative;
-      top: 50px;
+      @include iconCenter;
 
       a {
         margin: 0 15px;
@@ -272,8 +273,7 @@
     }
 
     &-icons {
-      position: relative;
-      top: 50px;
+      @include iconCenter;
 
       a {
         margin: 0 15px;

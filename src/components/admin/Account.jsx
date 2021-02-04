@@ -306,6 +306,15 @@ export default () => {
     setFbLink(e.target.value.toLowerCase())
   }
 
+  useEffect(() => {
+    var fbhideme = document.getElementById("fbhide")
+    if (fbLink < 1) {
+      fbhideme.style.display = "none"
+    } else {
+      fbhideme.style.display = "block"
+    }
+  }, [fbLink])
+
   const submitFB = async e => {
     e.preventDefault()
 
@@ -345,6 +354,15 @@ export default () => {
     setTwLink(e.target.value.toLowerCase())
   }
 
+  useEffect(() => {
+    var twhideme = document.getElementById("twhide")
+    if (twLink < 1) {
+      twhideme.style.display = "none"
+    } else {
+      twhideme.style.display = "block"
+    }
+  }, [twLink])
+
   const submitTW = async e => {
     e.preventDefault()
 
@@ -383,6 +401,15 @@ export default () => {
   const setIgHandler = e => {
     setIgLink(e.target.value.toLowerCase())
   }
+
+  useEffect(() => {
+    var ighideme = document.getElementById("ighide")
+    if (igLink < 1) {
+      ighideme.style.display = "none"
+    } else {
+      ighideme.style.display = "block"
+    }
+  }, [igLink])
 
   const submitIG = async e => {
     e.preventDefault()
@@ -841,6 +868,7 @@ export default () => {
                 href={`https://${fbLink}`}
                 rel="noopener noreferrer"
                 target="_blank"
+                id="fbhide"
               >
                 <FaFacebookF size="1.75em" />
               </a>
@@ -849,6 +877,7 @@ export default () => {
                 href={`https://${twLink}`}
                 rel="noopener noreferrer"
                 target="_blank"
+                id="twhide"
               >
                 <FaTwitter size="1.75em" />
               </a>
@@ -857,6 +886,7 @@ export default () => {
                 href={`https://${igLink}`}
                 rel="noopener noreferrer"
                 target="_blank"
+                id="ighide"
               >
                 <FaInstagram size="1.75em" />
               </a>

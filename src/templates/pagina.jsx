@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react"
+import React, { useLayoutEffect, useState, useEffect } from "react"
 import { graphql, Link } from "gatsby"
 // import Reactmarkdown from "react-markdown"
 import axios from "axios"
@@ -60,6 +60,27 @@ const NegositeTemplate = ({ data }) => {
     getLinks()
   }, [data.strapiNegosite.website.id])
 
+  useEffect(() => {
+    var fbhideman = document.getElementById("fbhidesm")
+    if (fbLink < 9) {
+      fbhideman.style.display = "none"
+    } else {
+      fbhideman.style.display = "block"
+    }
+    var twhideman = document.getElementById("twhidesm")
+    if (twLink < 9) {
+      twhideman.style.display = "none"
+    } else {
+      twhideman.style.display = "block"
+    }
+    var ighideman = document.getElementById("ighidesm")
+    if (igLink < 9) {
+      ighideman.style.display = "none"
+    } else {
+      ighideman.style.display = "block"
+    }
+  }, [fbLink, twLink, igLink])
+
   return (
     <ProfLayout>
       <SEO title={username} />
@@ -115,6 +136,7 @@ const NegositeTemplate = ({ data }) => {
               href={`https://${fbLink}`}
               rel="noopener noreferrer"
               target="_blank"
+              id="fbhidesm"
             >
               <FaFacebookF size="2em" />
             </a>
@@ -123,6 +145,7 @@ const NegositeTemplate = ({ data }) => {
               href={`https://${twLink}`}
               rel="noopener noreferrer"
               target="_blank"
+              id="twhidesm"
             >
               <FaTwitter size="2em" />
             </a>
@@ -131,6 +154,7 @@ const NegositeTemplate = ({ data }) => {
               href={`https://${igLink}`}
               rel="noopener noreferrer"
               target="_blank"
+              id="ighidesm"
             >
               <FaInstagram size="2em" />
             </a>

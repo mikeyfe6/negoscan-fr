@@ -5,7 +5,8 @@ import axios from "axios"
 
 import SEO from "../components/seo"
 
-import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa"
+import { FaFacebookF, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa"
+import { SiTiktok } from "react-icons/si"
 
 // NEGO TEMPLATE
 import ProfLayout from "../components/proflayout"
@@ -38,6 +39,8 @@ const NegositeTemplate = ({ data }) => {
   const [fbLink, setFbLink] = useState("")
   const [twLink, setTwLink] = useState("")
   const [igLink, setIgLink] = useState("")
+  const [waLink, setWaLink] = useState("")
+  const [tkLink, setTkLink] = useState("")
 
   useLayoutEffect(() => {
     const getLinks = async () => {
@@ -50,6 +53,8 @@ const NegositeTemplate = ({ data }) => {
       setFbLink(res.data.gebruiker.facebooklink)
       setTwLink(res.data.gebruiker.twitterlink)
       setIgLink(res.data.gebruiker.instagramlink)
+      setWaLink(res.data.gebruiker.whatsapplink)
+      setTkLink(res.data.gebruiker.tiktoklink)
 
       if (!res.data.gebruiker.avatar) {
         return setAvatar(noavatar)
@@ -79,7 +84,19 @@ const NegositeTemplate = ({ data }) => {
     } else {
       ighideman.style.display = "block"
     }
-  }, [fbLink, twLink, igLink])
+    var wahideman = document.getElementById("wahidesm")
+    if (waLink < 9) {
+      wahideman.style.display = "none"
+    } else {
+      wahideman.style.display = "block"
+    }
+    var tkhideman = document.getElementById("tkhidesm")
+    if (tkLink < 9) {
+      tkhideman.style.display = "none"
+    } else {
+      tkhideman.style.display = "block"
+    }
+  }, [fbLink, twLink, igLink, waLink, tkLink])
 
   return (
     <ProfLayout>
@@ -157,6 +174,24 @@ const NegositeTemplate = ({ data }) => {
               id="ighidesm"
             >
               <FaInstagram size="2em" />
+            </a>
+
+            <a
+              href={`https://wa.me/${waLink}`}
+              rel="noopener noreferrer"
+              target="_blank"
+              id="wahidesm"
+            >
+              <FaWhatsapp size="2em" />
+            </a>
+
+            <a
+              href={`https://${tkLink}`}
+              rel="noopener noreferrer"
+              target="_blank"
+              id="tkhidesm"
+            >
+              <SiTiktok size="2em" />
             </a>
           </div>
 

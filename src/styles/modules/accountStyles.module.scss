@@ -37,8 +37,11 @@
 @mixin chooseIcon {
   display: flex;
   position: absolute;
+  flex-wrap: wrap;
+  gap: 6px;
   top: 87.5%;
-  left: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @mixin chooseLinks {
@@ -153,16 +156,6 @@
     &-socials {
       display: flex;
       position: absolute;
-      top: 82.5%;
-      left: 25%;
-    }
-
-    &-link {
-      margin: 5px 0;
-    }
-
-    &-icons {
-      margin: 7.5px;
     }
   }
 }
@@ -940,7 +933,6 @@
     background: $primary-color;
     padding: 10px 10px;
     border-radius: 10px 0 0px 10px;
-    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
   }
 
   .usLinkSite {
@@ -950,7 +942,6 @@
     padding: 10px 10px;
     border-radius: 0 10px 10px 0;
     color: white;
-    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
 
     .userLink {
       display: block;
@@ -1090,8 +1081,8 @@
 
     .social-cont {
       flex-direction: column;
-      background: linear-gradient(to bottom, #16b7f23a, #f0efef) no-repeat 0 0 /
-        cover;
+      background: linear-gradient(to bottom, black, $primary-color) no-repeat 0
+        0 / cover;
       border-radius: 3px;
       padding: 25px 7%;
       margin-top: 25px;
@@ -1218,15 +1209,12 @@
     .usLinkNego {
       color: black;
       background: white;
-
-      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
     }
 
     .usLinkSite {
       background: black;
 
       color: white;
-      box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
     }
 
     .userLink {
@@ -1278,8 +1266,8 @@
 
     .social-cont {
       flex-direction: column;
-      background: linear-gradient(to bottom, #16b7f23a, #f0efef) no-repeat 0 0 /
-        cover;
+      background: linear-gradient(to bottom, black, $primary-color) no-repeat 0
+        0 / cover;
       border-radius: 3px;
       padding: 25px 4%;
       margin-top: 25px;

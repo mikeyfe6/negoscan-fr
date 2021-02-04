@@ -12,7 +12,10 @@ import {
   FaTrash,
   FaRegEdit,
   FaRegUserCircle,
+  FaWhatsapp,
 } from "react-icons/fa"
+
+import { SiTiktok } from "react-icons/si"
 
 import SEO from "../../components/seo"
 
@@ -80,10 +83,14 @@ export default () => {
   const [fbLink, setFbLink] = useState("")
   const [twLink, setTwLink] = useState("")
   const [igLink, setIgLink] = useState("")
+  const [waLink, setWaLink] = useState("")
+  const [tkLink, setTkLink] = useState("")
 
   const [disabledFbLink, setDisabledFbLink] = useState(true)
   const [disabledTwLink, setDisabledTwLink] = useState(true)
   const [disabledIgLink, setDisabledIgLink] = useState(true)
+  const [disabledWaLink, setDisabledWaLink] = useState(true)
+  const [disabledTkLink, setDisabledTkLink] = useState(true)
 
   const linkTitle = useRef()
   const hyperLink = useRef()
@@ -443,6 +450,102 @@ export default () => {
       setIgLink(res.data.instagramlink)
     }
     getIgLink()
+  }, [userId, token])
+
+  // UPDATE WHATSAPP <--------------------------------------------------------------------------------> UPDATE WHATSAPP //
+  const setWaHandler = e => {
+    setWaLink(e.target.value.toLowerCase())
+  }
+
+  useEffect(() => {
+    var wahideme = document.getElementById("wahide")
+    if (waLink < 1) {
+      wahideme.style.display = "none"
+    } else {
+      wahideme.style.display = "block"
+    }
+  }, [waLink])
+
+  const submitWA = async e => {
+    e.preventDefault()
+
+    const params = {
+      whatsapplink: waLink,
+    }
+    try {
+      const res = await axios.put(`${apiURL}/negosites/${userId}`, params, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      setError(null)
+      setWaLink(res.data.whatsapplink)
+      setDisabledWaLink(true)
+    } catch (err) {
+      console.log(err.message)
+      setError("Er is iets misgegaan, probeer het opnieuw!")
+      setTimeout(() => setError(null), 5000)
+    }
+  }
+
+  useEffect(() => {
+    const getWaLink = async () => {
+      const res = await axios.get(`${apiURL}/negosites/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      setWaLink(res.data.whatsapplink)
+    }
+    getWaLink()
+  }, [userId, token])
+
+  // UPDATE TIKTOK <--------------------------------------------------------------------------------> UPDATE TIKTOK //
+  const setTkHandler = e => {
+    setTkLink(e.target.value.toLowerCase())
+  }
+
+  useEffect(() => {
+    var tkhideme = document.getElementById("tkhide")
+    if (tkLink < 1) {
+      tkhideme.style.display = "none"
+    } else {
+      tkhideme.style.display = "block"
+    }
+  }, [tkLink])
+
+  const submitTK = async e => {
+    e.preventDefault()
+
+    const params = {
+      tiktoklink: tkLink,
+    }
+    try {
+      const res = await axios.put(`${apiURL}/negosites/${userId}`, params, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      setError(null)
+      setTkLink(res.data.tiktoklink)
+      setDisabledTkLink(true)
+    } catch (err) {
+      console.log(err.message)
+      setError("Er is iets misgegaan, probeer het opnieuw!")
+      setTimeout(() => setError(null), 5000)
+    }
+  }
+
+  useEffect(() => {
+    const getTkLink = async () => {
+      const res = await axios.get(`${apiURL}/negosites/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      setTkLink(res.data.tiktoklink)
+    }
+    getTkLink()
   }, [userId, token])
 
   // UPDATE PASSWORD <--------------------------------------------------------------------------------> UPDATE PASSWORD //
@@ -870,25 +973,43 @@ export default () => {
                 target="_blank"
                 id="fbhide"
               >
-                <FaFacebookF size="1.75em" />
+                <FaFacebookF size="1.5em" />
               </a>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
               <a
                 href={`https://${twLink}`}
                 rel="noopener noreferrer"
                 target="_blank"
                 id="twhide"
               >
-                <FaTwitter size="1.75em" />
+                <FaTwitter size="1.5em" />
               </a>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
               <a
                 href={`https://${igLink}`}
                 rel="noopener noreferrer"
                 target="_blank"
                 id="ighide"
               >
-                <FaInstagram size="1.75em" />
+                <FaInstagram size="1.5em" />
+              </a>
+
+              <a
+                href={`https://wa.me/${waLink}`}
+                rel="noopener noreferrer"
+                target="_blank"
+                id="wahide"
+              >
+                <FaWhatsapp size="1.5em" />
+              </a>
+
+              <a
+                href={`https://${tkLink}`}
+                rel="noopener noreferrer"
+                target="_blank"
+                id="tkhide"
+              >
+                <SiTiktok size="1.5em" />
               </a>
             </div>
             {/* <img
@@ -1251,8 +1372,8 @@ export default () => {
                     type="text"
                     disabled={disabledFbLink}
                     name="fblink"
-                    size="25"
                     id="fblink"
+                    placeholder="facebook.com/jouwprofiel"
                     className={accountStyles.socialInput}
                   />
                 </label>
@@ -1304,8 +1425,8 @@ export default () => {
                     type="text"
                     disabled={disabledTwLink}
                     name="twlink"
-                    size="25"
                     id="twlink"
+                    placeholder="twitter.com/jouwprofiel"
                     className={accountStyles.socialInput}
                   />
                 </label>
@@ -1354,10 +1475,10 @@ export default () => {
                     onChange={setIgHandler}
                     value={igLink}
                     type="text"
-                    size="25"
                     disabled={disabledIgLink}
                     name="iglink"
                     id="iglink"
+                    placeholder="instagram.com/jouwprofiel"
                     className={accountStyles.socialInput}
                   />
                 </label>
@@ -1385,6 +1506,111 @@ export default () => {
                     cursor: "pointer",
                   }}
                   onClick={() => setDisabledIgLink(false)}
+                />
+              </div>
+            </form>
+
+            <div style={{ position: "relative" }}>
+              <div className={accountStyles.vl}></div>
+            </div>
+
+            <form onSubmit={submitWA} className={accountStyles.socialForm}>
+              <div>
+                <label htmlFor="walink">
+                  <FaWhatsapp
+                    size="1.1em"
+                    className={accountStyles.socialIcons}
+                    color="#3FD252"
+                  />
+
+                  <input
+                    onChange={setWaHandler}
+                    value={waLink}
+                    type="text"
+                    disabled={disabledWaLink}
+                    name="walink"
+                    id="walink"
+                    maxLength="15"
+                    placeholder="bijv.: 31601234567"
+                    className={accountStyles.socialInput}
+                  />
+                </label>
+              </div>
+              <div className={accountStyles.socialButtons}>
+                <button
+                  className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.btnSecondary} ${accountStyles.socialSpec}`}
+                  type="submit"
+                  style={{
+                    paddingTop: "7.5px",
+                    paddingBottom: "7.5px",
+                    paddingLeft: "20px",
+                    paddingRight: "20px",
+                  }}
+                >
+                  Save Whatsapp
+                </button>
+                <FaRegEdit
+                  color="white"
+                  size="1.1em"
+                  style={{
+                    position: "relative",
+                    top: "5px",
+                    left: "15px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setDisabledWaLink(false)}
+                />
+              </div>
+            </form>
+
+            <div style={{ position: "relative" }}>
+              <div className={accountStyles.vl}></div>
+            </div>
+
+            <form onSubmit={submitTK} className={accountStyles.socialForm}>
+              <div>
+                <label htmlFor="tklink">
+                  <SiTiktok
+                    size="1.1em"
+                    className={accountStyles.socialIcons}
+                    color="#4BE1EB"
+                  />
+
+                  <input
+                    onChange={setTkHandler}
+                    value={tkLink}
+                    type="text"
+                    disabled={disabledTkLink}
+                    name="tklink"
+                    id="tklink"
+                    placeholder="tiktok.com/jouwprofiel"
+                    className={accountStyles.socialInput}
+                  />
+                </label>
+              </div>
+              <div className={accountStyles.socialButtons}>
+                <button
+                  className={`${accountStyles.btn} ${accountStyles.submitBtn} ${accountStyles.btnSecondary} ${accountStyles.socialSpec}`}
+                  type="submit"
+                  style={{
+                    paddingTop: "7.5px",
+                    paddingBottom: "7.5px",
+                    paddingLeft: "20px",
+                    paddingRight: "20px",
+                  }}
+                >
+                  Save Tiktok
+                </button>
+                <FaRegEdit
+                  color="white"
+                  size="1.1em"
+                  style={{
+                    position: "relative",
+                    top: "5px",
+                    left: "15px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setDisabledTkLink(false)}
                 />
               </div>
             </form>

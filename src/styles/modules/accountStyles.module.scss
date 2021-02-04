@@ -37,8 +37,7 @@
 @mixin chooseIcon {
   display: flex;
   position: absolute;
-  flex-wrap: wrap;
-  gap: 6px;
+  gap: 17.5px;
   top: 87.5%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -192,7 +191,6 @@
     border-radius: 50%;
     object-fit: cover;
     background: white;
-    box-shadow: 1px 3px 5px rgba(167, 167, 167, 0.767);
   }
 
   .progress {

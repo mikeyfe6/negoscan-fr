@@ -973,7 +973,7 @@ export default () => {
                 target="_blank"
                 id="fbhide"
               >
-                <FaFacebookF size="1.5em" />
+                <FaFacebookF size="1.75em" />
               </a>
 
               <a
@@ -982,7 +982,7 @@ export default () => {
                 target="_blank"
                 id="twhide"
               >
-                <FaTwitter size="1.5em" />
+                <FaTwitter size="1.75em" />
               </a>
 
               <a
@@ -991,7 +991,7 @@ export default () => {
                 target="_blank"
                 id="ighide"
               >
-                <FaInstagram size="1.5em" />
+                <FaInstagram size="1.75em" />
               </a>
 
               <a
@@ -1000,7 +1000,7 @@ export default () => {
                 target="_blank"
                 id="wahide"
               >
-                <FaWhatsapp size="1.5em" />
+                <FaWhatsapp size="1.75em" />
               </a>
 
               <a
@@ -1009,7 +1009,7 @@ export default () => {
                 target="_blank"
                 id="tkhide"
               >
-                <SiTiktok size="1.5em" />
+                <SiTiktok size="1.75em" />
               </a>
             </div>
             {/* <img

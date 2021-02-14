@@ -907,6 +907,8 @@ export default () => {
               position: "absolute",
               bottom: "10px",
               right: "10px",
+              color: "white",
+              backgroundColor: "#e6541b",
             }}
             className={accountStyles.btn}
             href="#"
@@ -1090,7 +1092,7 @@ export default () => {
                 <div>
                   <label htmlFor="profile">
                     <FaRegUserCircle
-                      color="black"
+                      color="white"
                       size="1.25em"
                       style={{
                         position: "relative",
@@ -1110,7 +1112,7 @@ export default () => {
                     />
                   </label>
                   <FaRegEdit
-                    color="black"
+                    color="white"
                     size="1.1em"
                     style={{
                       position: "relative",
@@ -1136,7 +1138,7 @@ export default () => {
               <form onSubmit={submitUsername}>
                 <label htmlFor="username">
                   <FaUser
-                    color="black"
+                    color="white"
                     size="1.25em"
                     style={{
                       position: "relative",
@@ -1158,7 +1160,7 @@ export default () => {
                   />
                 </label>
                 <FaRegEdit
-                  color="black"
+                  color="white"
                   size="1.1em"
                   style={{
                     position: "relative",
@@ -1184,7 +1186,7 @@ export default () => {
                 <div>
                   <label htmlFor="email">
                     <FaAt
-                      color="black"
+                      color="white"
                       size="1.25em"
                       style={{
                         position: "relative",
@@ -1205,7 +1207,7 @@ export default () => {
                     />
                   </label>
                   <FaRegEdit
-                    color="black"
+                    color="white"
                     size="1.1em"
                     style={{
                       position: "relative",
@@ -1232,7 +1234,7 @@ export default () => {
                 <div>
                   <label htmlFor="password">
                     <FaLock
-                      color="black"
+                      color="white"
                       size="1.25em"
                       style={{
                         position: "relative",
@@ -1254,7 +1256,7 @@ export default () => {
                     />
                   </label>
                   <FaRegEdit
-                    color="black"
+                    color="white"
                     size="1.1em"
                     style={{
                       position: "relative",
@@ -1281,7 +1283,7 @@ export default () => {
                 <div>
                   <label htmlFor="slug">
                     <FaGlobe
-                      color="black"
+                      color="white"
                       size="1.25em"
                       style={{
                         position: "relative",
@@ -1306,7 +1308,7 @@ export default () => {
                     />
                   </label>
                   <FaRegEdit
-                    color="black"
+                    color="white"
                     size="1.1em"
                     style={{
                       position: "relative",

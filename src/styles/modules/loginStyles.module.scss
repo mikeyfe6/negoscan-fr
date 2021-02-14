@@ -29,9 +29,9 @@
 
   button {
     // border-radius: 20px;
-    // border: 1px solid red;
-    background: #000000;
-    color: white;
+    border: 1px solid black;
+    // background: #000000;
+    // color: white;
 
     font-weight: bold;
     padding: 12px 45px;
@@ -159,7 +159,9 @@
   }
 
   .overlay {
-    background: linear-gradient(to left, gray, white) no-repeat 0 0 / cover;
+    // background: linear-gradient(to left, gray, white) no-repeat 0 0 / cover;
+    background: linear-gradient(to left, rgba(255, 255, 255, 1), white)
+      no-repeat 0 0 / cover;
     color: black;
     position: relative;
     left: -100%;
@@ -268,11 +270,9 @@ fieldset {
 .indexBg {
   height: 675px;
   z-index: -100;
-  background: linear-gradient(to bottom, $primary-color, black, black);
+  // background: linear-gradient(to bottom, $primary-color, black, black);
   display: block;
 }
-
-// linear-gradient(to bottom, $primary-color, white, white);
 
 @media (max-width: 768px) {
   .docs-head {
@@ -298,9 +298,9 @@ fieldset {
   }
 }
 
-p {
-  color: black;
-}
+// p {
+//   color: black;
+// }
 
 // --> MQ: Mobile !
 @media (max-width: 600px) {

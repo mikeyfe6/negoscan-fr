@@ -23,7 +23,12 @@ const IndexPage = () => (
               <button
                 className={`${loginStyles.btn} ${loginStyles.addBtn}`}
                 type="button"
-                style={{ padding: "3.5px 20px 2.5px 20px", float: "none" }}
+                style={{
+                  padding: "3.5px 20px 2.5px 20px",
+                  float: "none",
+                  color: "black",
+                  backgroundColor: "#e6541b",
+                }}
               >
                 hier
               </button>

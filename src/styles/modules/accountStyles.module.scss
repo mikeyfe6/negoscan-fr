@@ -67,7 +67,7 @@
     "Sidebar Dashboard Dashboard Preview";
   // background: linear-gradient(to top, white, #ededed);
 
-  background: linear-gradient(to bottom, white, $primary-color) no-repeat 0 0 /
+  background: linear-gradient(to bottom, black, $primary-color) no-repeat 0 0 /
     cover;
 }
 
@@ -75,9 +75,10 @@
 .Sidebar {
   grid-area: Sidebar;
   // background: linear-gradient(to bottom, white, #ededed);
-  background: linear-gradient(to bottom, black, white, white, white) no-repeat 0
-    0 / cover;
-  border: 2px solid black;
+  // background: linear-gradient(to bottom, black, white, white, white) no-repeat 0
+  //   0 / cover;
+  border: 2px solid $primary-color;
+  background: rgba(0, 0, 0, 0.9);
 }
 
 // NAVIGATION
@@ -92,8 +93,9 @@
 .Preview {
   grid-area: Preview;
   // background: linear-gradient(to bottom, white, #ededed);
-  background: #1616167e;
-  border: 2px solid black;
+  // background: #1616167e;
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid $primary-color;
 
   display: flex;
   justify-content: center;
@@ -163,9 +165,10 @@
 .Dashboard {
   grid-area: Dashboard;
   // background: linear-gradient(to bottom, black, #1616167e) no-repeat 0 0 / cover;
-  background: #1616167e;
+  // background: #1616167e;
+  background: rgba(0, 0, 0, 0.9);
 
-  border: 2px solid black;
+  border: 2px solid $primary-color;
   // background: linear-gradient(to top, white, #ededed);
   .avatarformcont {
     display: flex;
@@ -925,6 +928,7 @@
   grid-area: Link;
 
   .usLinkNego {
+    border: 2px solid $primary-color;
     float: left;
     width: 40%;
     color: white;
@@ -934,6 +938,7 @@
   }
 
   .usLinkSite {
+    border: 2px solid $primary-color;
     float: right;
     width: 60%;
     background: black;
@@ -969,7 +974,7 @@
   }
 
   .Sidebar {
-    background: linear-gradient(to left, $primary-color, black);
+    background: linear-gradient(to right, $primary-color, black);
     // background: linear-gradient(to bottom, black, white, white, white) no-repeat
     //   0 0 / cover;
 
@@ -1184,7 +1189,7 @@
   }
 
   .Sidebar {
-    background: linear-gradient(to left, $primary-color, black);
+    background: linear-gradient(to right, $primary-color, black);
     // background: linear-gradient(to bottom, black, white, white, white) no-repeat
     //   0 0 / cover;
 
